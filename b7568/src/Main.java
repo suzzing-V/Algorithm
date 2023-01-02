@@ -16,8 +16,6 @@ public class Main {
             wnhStr = bf.readLine().split(" ");
             wnh[i][0] = Integer.parseInt(wnhStr[0]);
             wnh[i][1] = Integer.parseInt(wnhStr[1]);
-        }
-
-        
+        }    
     }
 }
