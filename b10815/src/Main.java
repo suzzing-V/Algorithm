@@ -4,26 +4,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         int n = Integer.parseInt(bf.readLine());
-        
-        String[] sangStr = new String[n];
+        StringTokenizer sangStr = new StringTokenizer(bf.readLine());
         int[] sang = new int[n];
-        sangStr = bf.readLine().split(" ");
         for(int i = 0; i < n; i++) {
-            sang[i] = Integer.parseInt(sangStr[i]);
+            sang[i] = Integer.parseInt(sangStr.nextToken());
+            System.out.println(sang[i]);
         }
 
         int m = Integer.parseInt(bf.readLine());
-        String[] cardsStr = new String[m];
+        StringTokenizer cardsStr = new StringTokenizer(bf.readLine());
         int[] cards = new int[m];
-        cardsStr = bf.readLine().split(" ");
         for(int i = 0; i < m; i++) {
-            cards[i] = Integer.parseInt(cardsStr[i]);
+            cards[i] = Integer.parseInt(cardsStr.nextToken());
         }
         
         int[] exist = new int[m];
