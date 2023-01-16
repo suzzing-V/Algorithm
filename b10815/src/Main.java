@@ -16,7 +16,6 @@ public class Main {
         int[] sang = new int[n];
         for(int i = 0; i < n; i++) {
             sang[i] = Integer.parseInt(sangStr.nextToken());
-            System.out.println(sang[i]);
         }
 
         int m = Integer.parseInt(bf.readLine());
