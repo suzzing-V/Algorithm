@@ -36,10 +36,11 @@ public class Main {
     public static void compareCards(int[] sang, int[] cards, int n, int m, int[] exist) {
         Arrays.fill(exist, 0); //Arrays.fill(배열이름, 초기화할 수) : 채움
 
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(sang[i] == cards[j]) {
-                    exist[j] = 1;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(sang[j] == cards[i]) {
+                    exist[i] = 1;
+                    break;
                 }
             }
         }
