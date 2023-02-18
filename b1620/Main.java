@@ -11,22 +11,21 @@ public class Main {
         String[] num = bf.readLine().split(" ");
         int n = Integer.parseInt(num[0]);
         int m = Integer.parseInt(num[1]);
-        HashMap<String, String> pokemon = new HashMap<>(n);
+        HashMap<Integer, String> pokemonInt = new HashMap<>(n);
+        HashMap<String, Integer> pokemonStr = new HashMap<>(m);
 
         for(int i = 1; i <= n; i++) {
-            pokemon.put(String.valueOf(i), bf.readLine());
+            String value = bf.readLine();
+            pokemonInt.put(i, value);
+            pokemonStr.put(value, i);
         }
-        Set<Entry<String, String>> entrySet = pokemon.entrySet();
+
         for(int i = 0; i < m; i++) {
             String quiz = bf.readLine();
             if(isNum(quiz)) {
-                bw.write(pokemon.get(quiz));
+                bw.write(pokemonInt.get(Integer.parseInt(quiz)));
             } else {
-                for(Entry<String, String> entry : entrySet) {
-                    if(entry.getValue().equals(quiz)) {
-                        bw.write(entry.getKey());
-                    }
-                }
+                bw.write(String.valueOf(pokemonStr.get(quiz)));
             }
             bw.write("\n");
         }
