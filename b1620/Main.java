@@ -1,6 +1,8 @@
 package b1620;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.Map.Entry;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -9,18 +11,22 @@ public class Main {
         String[] num = bf.readLine().split(" ");
         int n = Integer.parseInt(num[0]);
         int m = Integer.parseInt(num[1]);
-        HashMap<Integer, String> pokemon = new HashMap<>(n);
+        HashMap<String, String> pokemon = new HashMap<>(n);
 
         for(int i = 1; i <= n; i++) {
-            pokemon.put(i, bf.readLine());
+            pokemon.put(String.valueOf(i), bf.readLine());
         }
-
+        Set<Entry<String, String>> entrySet = pokemon.entrySet();
         for(int i = 0; i < m; i++) {
             String quiz = bf.readLine();
             if(isNum(quiz)) {
-                bw.write(pokemon.get(Integer.parseInt(quiz)));
+                bw.write(pokemon.get(quiz));
             } else {
-                bw.write(String.valueOf(getKey(pokemon, quiz)));
+                for(Entry<String, String> entry : entrySet) {
+                    if(entry.getValue().equals(quiz)) {
+                        bw.write(entry.getKey());
+                    }
+                }
             }
             bw.write("\n");
         }
@@ -35,14 +41,5 @@ public class Main {
             }
         }
         return true;
-    }
-
-    public static <K, V> K getKey(HashMap<K, V> map, String value) {
-        for(K key : map.keySet()) {
-            if(map.get(key).equals(value)) {
-                return key;
-            }
-        }
-        return null;
     }
 }
