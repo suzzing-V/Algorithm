@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        HashMap<Integer, String> pokemon = new HashMap<>();
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String[] num = bf.readLine().split(" ");
         int n = Integer.parseInt(num[0]);
         int m = Integer.parseInt(num[1]);
+        HashMap<Integer, String> pokemon = new HashMap<>(n);
 
         for(int i = 1; i <= n; i++) {
             pokemon.put(i, bf.readLine());
