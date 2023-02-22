@@ -24,10 +24,20 @@ public class Main {
         }
         Arrays.sort(hear);
 
+        int count = 0;
+        String[] result = new String[m];
+        int k = 0;
         for(String name : see) {
             if(BSearch(hear, name, 0, n - 1)) {
-                bw.write(name + "\n");
+                count ++;
+                result[k] = name;
+                k++;
             }
+        }
+        bw.write(String.valueOf(count) + "\n");
+        
+        for(int i = 0; i < k; i++) {
+            bw.write(result[i] + "\n");
         }
         bw.close();
     }
