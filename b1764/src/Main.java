@@ -23,7 +23,7 @@ public class Main {
             see[i] = bf.readLine();
         }
         Arrays.sort(hear);
-
+        
         int count = 0;
         String[] result = new String[m];
         int k = 0;
@@ -35,7 +35,8 @@ public class Main {
             }
         }
         bw.write(String.valueOf(count) + "\n");
-        
+
+        Arrays.sort(result);
         for(int i = 0; i < k; i++) {
             bw.write(result[i] + "\n");
         }
