@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,6 +16,7 @@ public class Main {
         String[] arrA = bf.readLine().split(" ");
         String[] arrB = bf.readLine().split(" ");
 
+        Arrays.sort(arrB);
         int count = 0;
         for(String num : arrA) {
             if(BSearch(arrB, num, 0, b - 1)) {
