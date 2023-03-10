@@ -29,7 +29,6 @@ public class Main {
         int b = 0;
         int i;
         int w, x, y, z;
-        int a = 0;
         while(true) {
             i = b;
             if(move[i][0] == repeat[0] || move[i][0] == repeat[1]) {
@@ -54,7 +53,7 @@ public class Main {
             b++;
         }
 
-        int area = move[w][1] * move[x][1] + move[y][1] * move[z][1] + move[w][1] * move[z][1];
+        int area = (move[w][1] * move[x][1]) + (move[y][1] * move[z][1]) + (move[w][1] * move[z][1]);
         bw.write(Integer.toString(area * n));
         bw.close();
     }
