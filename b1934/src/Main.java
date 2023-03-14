@@ -13,7 +13,7 @@ public class Main {
             int min = a < b ? a : b;
             int mcm = 1;
             int d = 2;
-            while(d <= min / 2) {
+            while(d <= min) {
                 if(a % d == 0 && b % d == 0) {
                     mcm *= d;
                     a /= d;
