@@ -21,7 +21,7 @@ public class Main {
                     pr = Integer.parseInt(planet[2]);
                 double startDis = Math.sqrt(Math.pow(px - x1, 2) + Math.pow(py - y1, 2));
                 double endDis = Math.sqrt(Math.pow(px - x2, 2) + Math.pow(py - y2, 2));
-                if(startDis < pr || endDis < pr) {
+                if((startDis < pr && endDis > pr) || (startDis > pr && endDis < pr)) {
                     count++;
                 }
             }
