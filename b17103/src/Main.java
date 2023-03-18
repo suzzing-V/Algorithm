@@ -11,7 +11,8 @@ public class Main {
             int n = Integer.parseInt(bf.readLine());
             count = 0;
             for(int j = 2; j <= n / 2; j++) {
-                if(isPrime(j) && isPrime(n - j)) {
+                if(j % 2 != 0 && (n - j) % 2 != 0 && isPrime(j) && isPrime(n - j)) {
+                    //System.out.println("Åë°ú");
                     count ++;
                 }
             }
