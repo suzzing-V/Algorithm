@@ -8,13 +8,16 @@ public class Main {
         
         for(int i = 0; i < t; i++) {
             long n = Long.parseLong(bf.readLine());
-            while(true) {
+            if(n == 0 || n == 1) { bw.write(Integer.toString(2) + "\n"); }
+            else {
+                while(true) {
                 if(isPrime(n)) {
                     bw.write(Long.toString(n) + "\n");
                     break;
                 }
                 n++;
             }
+        }
         }
         bw.close();
     }
