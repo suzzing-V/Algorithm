@@ -1,11 +1,12 @@
 import java.util.*;
 
 public class Solution {
-    public void main(String[] args) {
+    /*
+    public static void main(String[] args) {
         int[] nums = {3, 3, 3, 2, 2, 2};
         System.out.println(solution(nums));
     }
-
+    */
     public int solution(int[] nums) {
         int answer = 0;
         int[] pokemon = new int[200001];
