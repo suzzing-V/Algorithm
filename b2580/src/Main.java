@@ -18,44 +18,33 @@ public class Main {
         bw.close();
     }
 
-    public static void DFS(int[][] sdoku, int i, int j, BufferedWriter bw) throws IOException {
-        if(i == 8 && j == 9) {
+    public static boolean DFS(int[][] sdoku, int i, int j, BufferedWriter bw) throws IOException {
+        if(j >= 9) {
+            j = 0; i++;
+        }
+        if(i == 9 && j == 0) {
             for(int a = 0; a < 9; a++) {
                 for(int b = 0; b < 9; b++) {
                     bw.write(Integer.toString(sdoku[a][b]) + " ");
                 }
                 bw.write("\n");
             }
-            return;
+            return true;
         }
-        if(j >= 9) {
-            i++; j++;
-        }
-        while(i < 9) {
-            while(j < 9) {
-                if(sdoku[i][j] == 0) {
-                    for(int k = 1; k <= 9; k++) {
-                        if(!isExist(sdoku, k, i, j)) {
-                            sdoku[i][j] = k;
-                            DFS(sdoku, i, j + 1, bw);
-                            sdoku[i][j] = 0;
-                        }
-                    }
-                    return;
+        
+        if(sdoku[i][j] == 0) {
+            for(int k = 1; k <= 9; k++) {
+                if(!isExist(sdoku, k, i, j)) {
+                    sdoku[i][j] = k;
+                    if(DFS(sdoku, i, j + 1, bw)) {
+                        return true;
+                    };
+                    sdoku[i][j] = 0;
                 }
-                j++;
             }
-            j = 0;
-            i++;
+            return false;
         }
-
-        for(int a = 0; a < 9; a++) {
-            for(int b = 0; b < 9; b++) {
-                bw.write(Integer.toString(sdoku[a][b]) + " ");
-            }
-            bw.write("\n");
-        }
-        return;
+        return DFS(sdoku, i, j + 1, bw);
     }
 
     public static boolean isExist(int[][] sdoku, int k, int i, int j) {
