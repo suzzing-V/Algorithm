@@ -48,6 +48,14 @@ public class Main {
             j = 0;
             i++;
         }
+
+        for(int a = 0; a < 9; a++) {
+            for(int b = 0; b < 9; b++) {
+                bw.write(Integer.toString(sdoku[a][b]) + " ");
+            }
+            bw.write("\n");
+        }
+        return;
     }
 
     public static boolean isExist(int[][] sdoku, int k, int i, int j) {
