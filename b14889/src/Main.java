@@ -17,6 +17,7 @@ public class Main {
             }
         }
 
+
         int[] start = new int[n / 2];
         int[] link = new int[n / 2];
         boolean[] visit = new boolean[n];
@@ -36,11 +37,11 @@ public class Main {
             return;
         }
 
-        for(int i = 0; i < visit.length; i++) {
+        for(int i = value; i < visit.length; i++) {
             if(!visit[value]) {
                 start[s] = value;
                 visit[value] = true;
-                DFS(start, link, visit, s + 1, i, ability);
+                DFS(start, link, visit, s + 1, i + 1, ability);
                 visit[value] = false;
             }
         }
