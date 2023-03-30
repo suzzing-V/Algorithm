@@ -13,7 +13,7 @@ public class Main {
                 tileCount[i] = tileCount[i - 1] + tileCount[i - 2];
             }
         }
-        bw.write(Integer.toString(tileCount[n]));
+        bw.write(Integer.toString(tileCount[n] % 15746));
         bw.close();
     }
 }
