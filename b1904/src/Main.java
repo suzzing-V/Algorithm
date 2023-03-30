@@ -6,26 +6,13 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(bf.readLine());
-        int[] tile = new int[n];
-        getTileCount(tile, n, 0);
-        bw.write(Integer.toString(count % 15746));
+        int[] tileCount = new int[n + 1];
+        tileCount[1] = 1;
+        tileCount[2] = 2;
+        for(int i = 3; i <= n; i++) {
+            tileCount[i] = tileCount[i - 1] + tileCount[i - 2];
+        }
+        bw.write(Integer.toString(tileCount[n]));
         bw.close();
-    }
-
-    public static void getTileCount(int[] tile, int n, int t) {
-        if(t == n) {
-            count ++;
-            if(count == 15746) {
-                count = 0;
-            }
-            return;
-        }
-
-        if(t != n - 1) {
-            tile[t] = 0;
-            getTileCount(tile, n, t + 2);
-        }
-        tile[t] = 1;
-        getTileCount(tile, n, t + 1);
     }
 }
