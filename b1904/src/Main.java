@@ -11,9 +11,10 @@ public class Main {
             tileCount[2] = 2;
             for(int i = 3; i <= n; i++) {
                 tileCount[i] = tileCount[i - 1] + tileCount[i - 2];
+                tileCount[i] %= 15746;
             }
         }
-        bw.write(Integer.toString(tileCount[n] % 15746));
+        bw.write(Integer.toString(tileCount[n]));
         bw.close();
     }
 }
