@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -9,29 +10,17 @@ public class Main {
         arrStr = bf.readLine().split(" ");
 
         int[] arr = new int[n];
-        long[] total = new long[n - 1];
-        long max = -1000;
+        long[] sum = new long[n];
         for(int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(arrStr[i]);
         }
-        for(int i = 0; i < n - 1; i++) {
-            total[i] = arr[i];
-            if(max <= total[i])
-                max = total[i];
-        }
-        
-        int j;
+
+        sum[0] = arr[0];
         for(int i = 1; i < n; i++) {
-            j = 0;
-            for(int k = i; k < n; k++) {
-                total[j] += arr[k];
-                if(max <= total[j])
-                    max = total[j];
-                j++;
-            }
+            sum[i] = Math.max(arr[i], sum[i - 1] + arr[i]);
         }
-    
-        bw.write(Long.toString(max));
+        Arrays.sort(sum);
+        bw.write(Long.toString(sum[n - 1]));
         bw.close();
     }
 }
