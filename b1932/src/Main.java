@@ -26,7 +26,7 @@ public class Main {
                 if(j == 0) {
                     memo[i][j] = memo[i - 1][0] + triangle[i][j];
                 } else if(j == i) {
-                    memo[i][j] = memo[i - 1][i - 1];
+                    memo[i][j] = memo[i - 1][i - 1] + triangle[i][j];
                 } else {
                     memo[i][j] = Math.max(memo[i - 1][j], memo[i - 1][j - 1])+ triangle[i][j];
                 }
