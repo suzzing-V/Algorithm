@@ -15,49 +15,18 @@ public class Main {
             stair[i] = Integer.parseInt(bf.readLine());
         }
 
-        int[] startFirst = new int[n];
-        int[] startSecond = new int[n];
-        int[] count = new int[n];
+        int[] memo = new int[n];
         if(n == 1) {
             bw.write(Integer.toString(stair[0]));
         } else if (n == 2) {
             bw.write(Integer.toString(stair[0] + stair[1]));
         } else {
-            startFirst[0] = stair[0]; startFirst[1] = stair[0] + stair[1];
-            startSecond[1] = stair[1]; startSecond[2] = stair[1] + stair[2];
-        
-            count[0] = 1; count[1] = 2;
-            for(int i = 2; i < n; i++) {
-                if(count[i - 1] == 2) {
-                    startFirst[i] = startFirst[i - 2] + stair[i];
-                    count[i] = 1;
-                } else {
-                    if(startFirst[i - 2] >= startFirst[i - 1]) {
-                        startFirst[i] = startFirst[i - 2] + stair[i];
-                        count[i] = 1;
-                    } else {
-                        startFirst[i] = startFirst[i - 1] + stair[i];
-                        count[i] = 2;
-                    }   
-                }
-            }
-
-            count[1] = 1; count[2] = 2;
+            memo[0] = stair[0]; memo[1] = stair[0] + stair[1];
+            memo[2] = Math.max(memo[1], memo[0]) + stair[2];
             for(int i = 3; i < n; i++) {
-                if(count[i - 1] == 2) {
-                    startSecond[i] = startSecond[i - 2] + stair[i];
-                    count[i] = 1;
-                } else {
-                    if(startSecond[i - 2] >= startSecond[i - 1]) {
-                        startSecond[i] = startSecond[i - 2] + stair[i];
-                        count[i] = 1;
-                    } else {
-                        startSecond[i] = startSecond[i - 1] + stair[i];
-                        count[i] = 2;
-                    }   
-                }
+                memo[i] = Math.max(memo[i - 3] + stair[i - 1], memo[i - 2]) + stair[i];
             }
-            bw.write(Integer.toString(Math.max(startFirst[n - 1], startSecond[n - 2])));
+            bw.write(Integer.toString(memo[n - 1]));
     }
     bw.close();
 }
