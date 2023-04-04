@@ -9,7 +9,7 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(bf.readLine());
-        int[] arr = new int[N + 1];
+        int[] arr = new int[N + 2];
         arr[1] = 0; arr[2] = 1;
         for(int i = 3; i <= N; i++) {
             fillArr(arr, i);
