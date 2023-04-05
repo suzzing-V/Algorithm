@@ -8,21 +8,18 @@ public class Main {
 
         int[] before = new int[10];
         int[] after = new int[10];
-        int[] d = new int[N + 1];
         before[0] = 0;
         for(int i = 1; i <= 9; i++) {
             before[i] = 1;
         }
 
-        d[1] = 9;
         for(int i = 2; i <= N; i++) {
             fillCountArr(before, after);
-            d[i] = sumArrDiv(after);
             before = after;
             after = new int[10];
         }
         
-        bw.write(Integer.toString(d[N]));
+        bw.write(Integer.toString(sumArrDiv(before) % 1000000000));
         bw.close();
     }
 
