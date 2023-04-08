@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Comparator;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -13,8 +15,14 @@ public class Main {
             electric[i][0] = Integer.parseInt(str[0]);
             electric[i][1] = Integer.parseInt(str[1]);
         }
+        
+        Arrays.sort(electric, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0]; //앞에게 더 작으면 음수
+            }
+        });
 
-        arrangeAscend(electric, n);
         int ascend = findAscend(electric, n);
         bw.write(Integer.toString(n - ascend));
         bw.close();
@@ -34,22 +42,5 @@ public class Main {
             memo[i] = max + 1;
         }
         return memo[n];
-    }
-
-    public static void arrangeAscend(int[][] electric, int n) {
-        int tmp0;
-        int tmp1;
-        for(int j = 1; j < n; j++) {
-            for(int i = 1; i <= n - j; i++) {
-                if(electric[i][0] > electric[i + 1][0]) {
-                    tmp0 = electric[i][0];
-                    tmp1 = electric[i][1];
-                    electric[i][0] = electric[i + 1][0];
-                    electric[i + 1][0] = tmp0;
-                    electric[i][1] = electric[i + 1][1];
-                    electric[i + 1][1] = tmp1;
-                }
-            }
-        }
     }
 }
