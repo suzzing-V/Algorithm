@@ -17,6 +17,7 @@ public class Main {
             fp = p;
             while(p < arr2.length) {
                 if(arr1[i] == arr2[p]) {
+                    max = 0;
                     for(int j = 0; j < i; j++) {
                         if(count[arr1[j]] == true
                             && max < memo[j]) {
@@ -31,7 +32,6 @@ public class Main {
             }
             if(p == arr2.length) p = fp;
         }
-
         Arrays.sort(memo);
         bw.write(Integer.toString(memo[arr1.length - 1]));
         bw.close();
