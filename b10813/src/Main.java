@@ -9,18 +9,22 @@ public class Main {
         int N = Integer.parseInt(nm[0]);
         int M = Integer.parseInt(nm[1]);
         int[] basket = new int[N + 1];
+    
+        for(int a = 1; a <= N; a++) {
+            basket[a] = a;
+        }
 
-        int i, j, k;
+        int i, j;
+        int tmp;
         for(int a = 0; a < M; a++) {
-            String[] ijk = new String[3];
-            ijk = bf.readLine().split(" ");
-            i = Integer.parseInt(ijk[0]);
-            j = Integer.parseInt(ijk[1]);
-            k = Integer.parseInt(ijk[2]);
+            String[] ij = new String[2];
+            ij = bf.readLine().split(" ");
+            i = Integer.parseInt(ij[0]);
+            j = Integer.parseInt(ij[1]);
 
-            for(int b = i; b <= j; b++) {
-                basket[b] = k;
-            }
+            tmp = basket[i];
+            basket[i] = basket[j];
+            basket[j] = tmp;
         }
 
         for(int a = 1; a <= N; a++) {
