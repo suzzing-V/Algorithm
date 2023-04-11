@@ -6,24 +6,32 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int N = Integer.parseInt(bf.readLine());
         
-        int start = N;
+        int blank = N - 1;
+        int star = 1;
         for(int i = 1; i <= N; i++) {
-            for(int j = 1; j <= 2 * N - 1; j++) {
-                if(j >= start && j <= start + (i - 1) * 2) bw.write("*");
-                else bw.write(" ");
+            for(int j = 1; j <= blank; j++) {
+                bw.write(" ");
+            }
+            for(int j = 1; j <= star; j++) {
+                bw.write("*");
             }
             bw.write("\n");
-            start--;
+            blank--;
+            star += 2;
         }
 
-        start+=2;
-        for(int i = N - 1; i >= 1; i--) {
-            for(int j = 1; j <= 2*N - 1; j++) {
-                if(j >= start && j <= start + (i - 1) * 2) bw.write("*");
-                else bw.write(" ");
+        blank = 1;
+        star -= 4;
+        for(int i = 1; i < N; i++) {
+            for(int j = 1; j <= blank; j++) {
+                bw.write(" ");
+            }
+            for(int j = 1; j <= star; j++) {
+                bw.write("*");
             }
             bw.write("\n");
-            start++;
+            blank++;
+            star -= 2;
         }
         bw.close();
     }
