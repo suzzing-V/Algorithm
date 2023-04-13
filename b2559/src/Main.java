@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,21 +16,21 @@ public class Main {
             temper[i] = Integer.parseInt(line[i - 1]);
         }
 
-        int[] acc = new int[n + 1];
+        long[] acc = new long[n + 1];
         acc[1] = temper[1];
         for(int i = 2; i <= n; i++) {
             acc[i] = acc[i - 1] + temper[i];
         }
 
-        int[] kSum = new int[n - k + 2];
-        int max = -100;
+        long[] kSum = new long[n - k + 2];
+        long max = -10000000;
         for(int i = 1; i <= n - k + 1; i++) {
             kSum[i] = acc[i + (k - 1)] - acc[i - 1];
             if(max < kSum[i]) {
                 max = kSum[i];
             }
         }
-        bw.write(Integer.toString(max));
+        bw.write(Long.toString(max));
         bw.close();
     }
 }
