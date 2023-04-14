@@ -5,10 +5,11 @@ public class Main {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		String s = bf.readLine();
-		int q = Integer.parseInt(bf.readLine());
+		long q = Long.parseLong(bf.readLine());
 		
 		char a;
-		int l, r, result;
+		int l, r;
+		long result;
 		
 		for(int i = 1; i <= q; i++) {
 			String[] line = new String[3];
@@ -17,20 +18,20 @@ public class Main {
 			l = Integer.parseInt(line[1]);
 			r = Integer.parseInt(line[2]);
 			
-			int[] acc = new int[s.length()];
+			long[] acc = new long[s.length()];
 			getAccumulateArr(s, a, acc);
 			if(l == 0) {
 				result = acc[r];
 			} else {
 				result = acc[r] - acc[l - 1];
 			}
-			bw.write(Integer.toString(result) + "\n");
+			bw.write(Long.toString(result) + "\n");
 		}
 		bw.close();
 		
 	}
 	
-	public static void getAccumulateArr(String s, char a, int[] acc) {
+	public static void getAccumulateArr(String s, char a, long[] acc) {
 		if(s.charAt(0) == a) { acc[0] = 1; }
 		for(int i = 1; i < s.length(); i++) {
 			if(s.charAt(i) == a) { acc[i] = acc[i - 1] + 1; }
