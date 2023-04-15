@@ -22,12 +22,17 @@ public class Main {
 			acc[i] = acc[i - 1] + arr[i];
 		}
 		
+		long[] remain = new long[n + 1];
+		for(int i = 1;i <= n; i++) {
+			remain[i] = acc[i] % m;
+		}
+		
 		int count = 0;
-		long tmp;
-		for(int i = 1; i <= n; i++) {
-			for(int j = 1; j <= n - (i - 1); j++) {
-				tmp = acc[j + i - 1] - acc[j - 1];
-				if(tmp % m == 0) { count++; }
+		for(int i = 0; i <= n; i++) {
+			for(int j = i + 1; j <= n; j++) {
+				if(remain[i] == remain[j]) {
+					count++;
+				}
 			}
 		}
 		bw.write(Integer.toString(count));
