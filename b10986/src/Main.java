@@ -27,15 +27,16 @@ public class Main {
 			remain[i] = acc[i] % m;
 		}
 		
-		int count = 0;
+		int[] count = new int[m];
 		for(int i = 0; i <= n; i++) {
-			for(int j = i + 1; j <= n; j++) {
-				if(remain[i] == remain[j]) {
-					count++;
-				}
-			}
+			count[(int)remain[i]] ++;
 		}
-		bw.write(Integer.toString(count));
+		
+		int result = 0;
+		for(int i = 0; i < m; i++) {
+			result += (count[i] * (count[i] - 1)) / 2;
+		}
+		bw.write(Integer.toString(result));
 		bw.close();
 	}
 }
