@@ -7,7 +7,7 @@ public class Main {
 		String[] line = new String[2];
 		line = bf.readLine().split(" ");
 		int n = Integer.parseInt(line[0]);
-		int b = Integer.parseInt(line[1]);
+		long b = Long.parseLong(line[1]);
 		int[][] arr = new int[n][n];
 		for(int i = 0; i < n; i++) {
 			String[] row = new String[n];
