@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -8,7 +9,7 @@ public class Main {
               String[] line = new String[101];
     line = bf.readLine().split("");
     if(line[0].equals(".")) break;
-            bw.write(isBalanced(line));
+            bw.write(isBalanced(line) + "\n");
         }
        bw.close();
 }
