@@ -1,26 +1,22 @@
-import java.util.*;
+import java.util.PriorityQueue;
 import java.util.Collections;
 
 class Solution {
     public int solution(int[] scoville, int K) {
         int count = 0;
-        List<Integer> sco = new ArrayList<>();
-        Arrays.sort(scoville);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         for(int i = 0; i < scoville.length; i++) {
-            sco.add(scoville[i]);
+            pq.add(scoville[i]);
         }
         
-        while(sco.get(0) < K && sco.size() >= 2) {
-            int first = sco.get(0), second = sco.get(1);
-            int tmp = first + second * 2;
-            sco.set(0, tmp);
-            sco.remove(1);
+        while(pq.peek() < K && pq.size() >= 2) {
+            int first = pq.remove();
+            int second = pq.remove() * 2;
+            pq.add(first + second);
             count++;
-            
-            Collections.sort(sco);
         }
         
-        if(sco.get(0) < K) return -1;
+        if(pq.size() == 1 && pq.poll() < K) return -1;
         return count;
     }
 }
