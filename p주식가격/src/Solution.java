@@ -3,27 +3,39 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] prices) {
         int[] answer = new int[prices.length];
-        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> queue1 = new LinkedList<>();
+        Queue<Integer> queue2 = new LinkedList<>();
         HashMap<Integer, Integer> hm = new HashMap<>();
         for(int i = 0; i < prices.length; i++) {
-            stack.push(prices[i]);
+            queue1.offer(prices[i]);
         } //스택에 prices 넣기
         
-        for(int i = 5; i > 0; i--) {
-            int cur = stack.pop();
-            for(int j = 1; j < cur; j++) { //cur보다 작은 수가 앞에 있었는지
-                if(hm.containsKey(cur- j)) { //
-                    int tmp = hm.get(cur - j) - i; //answer에 넣을 값
-                    answer[i - 1] = tmp;
-                    break;
-                }
-            }
-            if(answer[i - 1] == 0) answer[i - 1] = prices.length - i;
-            //끝까지 자신보다 작은 수 없을 경우
-            if(!hm.containsKey(cur)) { //제일 처음 등장한 수일 경우
-                        hm.put(cur, i);
-            }
+        int i = 0;
+        while(true) {
+            if(popQueue(queue1, queue2, answer, i++) == 0) break;
+            if(popQueue(queue2, queue1, answer, i++) == 0) break;
         }
+        answer[prices.length - 1] = 0;
         return answer;
+    }
+    
+    public int popQueue(Queue<Integer> queue1, Queue<Integer> queue2, int[] answer, int i) {
+        int pop = queue1.remove();
+        int count = 0;
+        while(!queue1.isEmpty()) {
+            int tmp = queue1.remove();
+            queue2.offer(tmp);
+            if(tmp < pop) {
+                count++;
+                break;
+            }
+            count++;
+        }
+        
+        while(!queue1.isEmpty()) {
+            queue2.offer(queue1.remove());
+        }
+        answer[i] = count;
+        return queue2.size();
     }
 }
