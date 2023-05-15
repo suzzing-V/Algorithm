@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Collections;
 
 class Solution {
     public int solution(int[] scoville, int K) {
@@ -9,18 +10,17 @@ class Solution {
             sco.add(scoville[i]);
         }
         
-        int i = 0;
-        while(sco.get(i) < K && i + 1 < sco.size()) {
-            int first = sco.get(i), second = sco.get(i + 1);
-            int tmp = Math.min(first, second) + Math.max(first, second) * 2;
-            sco.set(i, tmp);
-            sco.remove(i + 1);
-            if(tmp >= K) i++;
+        while(sco.get(0) < K && sco.size() >= 2) {
+            int first = sco.get(0), second = sco.get(1);
+            int tmp = first + second * 2;
+            sco.set(0, tmp);
+            sco.remove(1);
             count++;
+            
+            Collections.sort(sco);
         }
         
-        if(sco.size() == 2) count++;
-        if(sco.size() == 1 && sco.get(0) > K) return -1;
+        if(sco.get(0) < K) return -1;
         return count;
     }
 }
