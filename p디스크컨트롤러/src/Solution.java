@@ -33,12 +33,14 @@ class Solution {
             while(pq.peek()[0] > time) {
                 queue.offer(pq.remove());
             }
-            
-            time += pq.peek()[1];
-            answer += time - pq.peek()[0];
-            pq.remove();
+            if(pq.isEmpty()) time++;
+            else {
+                time += pq.peek()[1];
+                answer += time - pq.peek()[0];
+                pq.remove();
+            }
             while(!queue.isEmpty()) {
-                pq.add(queue.remove());
+                    pq.add(queue.remove());
             }
         }
         answer /= jobs.length;
