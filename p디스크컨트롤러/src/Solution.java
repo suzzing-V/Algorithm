@@ -12,8 +12,6 @@ class Solution {
                 }
             }
         });
-        answer = jobs[0][1];
-        int time = jobs[0][0] + jobs[0][1];
         
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
@@ -24,23 +22,26 @@ class Solution {
                 }
             }
         });
-        Queue<int[]> queue = new LinkedList<>();
         
-        for(int i = 1; i < jobs.length; i++) {
-            pq.add(jobs[i]);
-        }
-        while(pq.size() != 0) {
-            while(pq.peek()[0] > time) {
-                queue.offer(pq.remove());
+        int i = 0;
+        int time = 0;
+        int count = 0;
+        while(count < jobs.length) {
+            while(i < jobs.length && jobs[i][0] <= time) {
+                pq.add(jobs[i++]);
             }
-            if(pq.isEmpty()) time++;
+            
+            if(pq.isEmpty()) {
+                time += jobs[i][0] - time + jobs[i][1];
+                answer += jobs[i][1];
+                i++;
+                count++;
+            }
             else {
                 time += pq.peek()[1];
                 answer += time - pq.peek()[0];
                 pq.remove();
-            }
-            while(!queue.isEmpty()) {
-                    pq.add(queue.remove());
+                count++;
             }
         }
         answer /= jobs.length;
