@@ -21,6 +21,7 @@ class Solution {
         for(int i = 0; i < arr.size(); i++) {
             answer += arr.get(i);
         }
+        if(answer.charAt(0) == '0') answer = "0";
         return answer;
     }
 }
