@@ -6,7 +6,7 @@ class Solution {
         Set<Integer> set = new HashSet<>();
         String[] num = new String[numbers.length()];
         num = numbers.split("");
-
+        
         int[] count = new int[num.length];
         addDigit(set, "", count, num);
         answer = set.size();
@@ -18,14 +18,10 @@ class Solution {
             return str;
         }
         for(int i = 0; i < count.length; i++) {
-            //System.out.println("str: " + str);
             if(count[i] == 0) {
-                //System.out.println("count = 0");
                 count[i]++;
-                //System.out.println("num[i]: " + num[i]);
                 int tmp = Integer.parseInt(addDigit(set, str + num[i], count, num));
                 count[i]--;
-                //System.out.println("tmp: " + tmp);
                 if(isPrime(tmp)) set.add(tmp);
             }
         }
@@ -33,10 +29,8 @@ class Solution {
     }
     
     public boolean isPrime(int n) { //소수판별 함수
-        //System.out.println("n: " + n);
         if(n == 0 || n == 1) return false;
-        for(int i = 2; i < Math.sqrt(n); i++) {
-            //System.out.println("i: " + i);
+        for(int i = 2; i <= Math.sqrt(n); i++) {
             if(n % i == 0) return false;
         }
         return true;
