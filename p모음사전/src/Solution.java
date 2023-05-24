@@ -7,14 +7,11 @@ class Solution {
             position[i] = position[i + 1] + (int)Math.pow(5, 4 - i);
         }
         
+        String[] wordS = new String[word.length() - 1];
+        wordS = word.split("");
+        
         for(int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            if(c == 'A') num += 0;
-            else if(c == 'E') num += position[i] * 1;
-            else if(c == 'I') num += position[i] * 2;
-            else if(c == 'O') num += position[i] * 3;
-            else if(c == 'U') num += position[i] * 4;
-            num += 1; //세고 한자리 건너야함
+            num += position[i] * "AEIOU".indexOf(wordS[i]) + 1;
         }
         return num;
     }
