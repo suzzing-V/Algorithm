@@ -11,7 +11,7 @@ class Solution {
             int k = i + 1;
             if(i + 1 < str.length && str[i+1].charAt(0) == 'A') { //다음글자가 A일 경우
                 //A가 아닐경우는 최소 경우가 나올 수 없다 //돌아갈 필요가 없기 때문
-                while(str[k].charAt(0) == 'A') k++; //A가 아닌 지점까지
+                while(k < str.length && str[k].charAt(0) == 'A') k++; //A가 아닌 지점까지
                 lr = Math.min(i * 2 + str.length - k, lr); //처음부터 i까지 왔다가 다시 뒤로 돌아가는 경우
                 lr = Math.min(i + (str.length - k) * 2, lr); //처음부터 뒤로 갔다가 i까지 가는 경우
             }
