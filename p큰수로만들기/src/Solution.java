@@ -9,6 +9,8 @@ class Solution {
         int maxIndex = -1;
         
         while(count > 0) {
+            max = Integer.parseInt(str[maxIndex + 1]);
+            maxIndex = maxIndex + 1;
             for(int i = maxIndex + 1; i <= str.length - count; i++) {
                 if(Integer.parseInt(str[i]) > max) {
                     max = Integer.parseInt(str[i]);
@@ -17,7 +19,6 @@ class Solution {
             }
             sb.append(str[maxIndex]);
             count--;
-            max = 0;
         }
         answer = sb.toString();
         return answer;
