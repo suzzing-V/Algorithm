@@ -4,36 +4,35 @@ class Solution {
     public int solution(int[] people, int limit) {
         int answer = 0;
         Arrays.sort(people);
-        List<Integer> sort = new ArrayList<>();
         List<Integer> reverse = new ArrayList<>();
         for(int i = 0; i < people.length; i++) {
-            sort.add(people[i]);
             reverse.add(people[people.length - 1 - i]);
         }
 
         while(!reverse.isEmpty()) {
-            getBoat(limit - reverse.get(0), sort, reverse);
+            int tmp = reverse.get(0);
+            reverse.remove(0);
+            getBoat(limit - tmp, reverse);
             answer++;
-            if(!reverse.isEmpty()) {
-                reverse.remove(0);
-                sort.remove(sort.size() - 1);
-            }
         }
         return answer;
     }
     
-    public void getBoat(int rest, List<Integer> sort, List<Integer> reverse) {
-        int tmp = 0;
+    public void getBoat(int rest, List<Integer> reverse) {
+        if(rest == 0) return ;
+        int kg = 0;
         int index = 0;
-        if(sort.isEmpty()) return ;
-        if(sort.get(0) > rest) return;
-        for(int i = 0; i < sort.size() - 1 && sort.get(i) <= rest; i++) {
-            tmp = sort.get(i);
-            index = i;
+        for(int i = 0; i < reverse.size(); i++) {
+            if(reverse.get(i) <= rest) {
+                kg = reverse.get(i);
+                index = i;
+                break;
+            }
         }
-        sort.remove(index);
-        reverse.remove(reverse.size() - 1 - index);
-        getBoat(rest - tmp, sort, reverse);
-        return;
+        if(kg == 0) return;
+        else {
+            reverse.remove(index);
+            getBoat(rest - kg, reverse);
+        }
     }
 }
