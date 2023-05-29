@@ -1,54 +1,35 @@
 import java.util.*;
 
-class Bridge {
-    int is1;
-    int is2;
-    int cost;
-    Bridge(int island1, int island2, int cost) {
-        this.is1 = island1;
-        this.is2 = island2;
-        this.cost = cost;
-    }
-}
 class Solution {
     public int solution(int n, int[][] costs) {
         int answer = 0;
+        int[] root = new int[n];
         Arrays.sort(costs, new Comparator<int[]> () { //cost 적은 순으로 정렬
             @Override
             public int compare(int[] o1, int[] o2) {
                 return o1[2] - o2[2];
             }
         });
-        List<Bridge> list = new ArrayList<>();
-        for(int i = 0; i < costs.length; i++) { //costs 각각의 요소 Bridge로 만들기
-            Bridge tmp = new Bridge(costs[i][0], costs[i][1], costs[i][2]); 
-            list.add(tmp);
+        for(int i = 0; i < root.length; i++) { //처음에 자신의 뿌리는 자신이다
+            root[i] = i;
         }
         
-        Set<Integer> used = new HashSet<>();
-        int i = 0;
         int count = 0;
-        while(count < n - 1) {
-            if(i >= list.size()) { //끝까지 돌아도 used 안에 들어있는 요소를 포함한 객체가 없을 때
+        for(int i = 0; count < n - 1 || i < costs.length; i++) { //n - 1까지 중복 없이 연결 가능
+            if(root[costs[i][0]] != root[costs[i][1]]) { //뿌리가 다르면 연결
+                connectIsland(root, costs[i][0], costs[i][1]);
+                answer += costs[i][2];
                 count++;
-                //System.out.println(list.get(0).cost);
-                answer += list.get(0).cost; //제일 cost 작은 객체 선택
-                used.add(list.get(0).is1);
-                used.add(list.get(0).is2);
-                list.remove(0);
-                i = -1;
             }
-            else if(used.contains(list.get(i).is1) || used.contains(list.get(i).is2)) {
-                count ++;
-                //System.out.println("is1 cost: " + list.get(i).is1 + " " + list.get(i).cost);
-                answer += list.get(i).cost;
-                used.add(list.get(i).is1);
-                used.add(list.get(i).is2);
-                list.remove(i);
-                i = -1;
-            }
-            i++;
         }
         return answer;
+    }
+    
+    public void connectIsland(int[] root, int root1, int root2) {
+        for(int i = 0; i < root.length; i++) {
+            if(root[i] == root2) { //뿌리 root2인 요소들 다 뿌리 root1이도록 만들기
+                root[i] = root[root1];
+            }
+        }
     }
 }
