@@ -8,33 +8,36 @@ public class Main {
         int i = 0;
         while(line.charAt(i) != ' ') {
             i++;
-        } //°ø¹é Àü±îÁö ±âº» º¯¼öÇü
-        String base = String.substring(line, 0, i);
+        } //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        String base = line.substring(0, i);
         
+        i--;
         while(line.charAt(i) != ';') {
-            i++;
+            i+= 2;
             int tmp = i;
             while((line.charAt(i) >= 'A' && line.charAt(i) <= 'Z') 
                 || (line.charAt(i) >= 'a' && line.charAt(i) <= 'z')) {
                 i++;
-            } //¾ËÆÄºª ¾Æ´Ñ °Å ³ª¿Ã ¶§±îÁö º¯¼öÀÌ¸§
-            String var = String.substring(line, tmp, i);
-
+            } //ï¿½ï¿½ï¿½Äºï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+            String var = line.substring(tmp, i);
             tmp = i;
-            while(line.charAt(i) != ',') {
+            while(line.charAt(i) != ',' && line.charAt(i) != ';') {
                 i++;
-            } //, Àü±îÁö Ãß°¡ º¯¼öÇü
-            String add = String.substring(line, tmp, i);
-
+            } //, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            String add = line.substring(tmp, i);
             StringBuilder sb = new StringBuilder();
             sb.append(base);
             for(int j = add.length() - 1; j >= 0; j--) {
-                sb.append(add.charAt(j));
+            	if(add.charAt(j) == ']') {
+            		sb.append("[]");
+            		j--;
+            	} else { sb.append(add.charAt(j)); }
             }
             sb.append(" ");
             sb.append(var);
-            sb.append(";");
+            sb.append(";\n");
             bw.write(sb.toString());
         }
+        bw.close();
     }
 }
