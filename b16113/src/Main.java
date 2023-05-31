@@ -9,7 +9,7 @@ public class Main {
 		for(int i = 0; i < line; i++) {
 			if(sign.charAt(i) == '#') {
 				int k = i;
-				while(sign.charAt(k) == '#') k++;
+				while(k < line && sign.charAt(k) == '#') k++;
 				if(k - i == 1) { i += judgeDigit(sign, 1, i, line); } //1, 4인 경우
 				else { i += judgeDigit(sign, 3, i, line); } //나머지 수인 경우
 			}
