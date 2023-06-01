@@ -7,18 +7,19 @@ public class Main {
 		for(int i = 0; i < 4; i++) {
 			String line = bf.readLine();
 			int[][] result = new int[6][3];
+			int sum = 0;
 			int j = 0, k = 0;
 			while(k < line.length()) {
-				result[j][0] = line.charAt(k) - '0';
+				sum += result[j][0] = line.charAt(k) - '0';
 				k += 2;
-				result[j][1] = line.charAt(k) - '0';
+				sum += result[j][1] = line.charAt(k) - '0';
 				k += 2;
-				result[j][2] = line.charAt(k) - '0';
+				sum += result[j][2] = line.charAt(k) - '0';
 				k += 2;
 				//System.out.println("result: " + result[j][0] + " " + result[j][1] + " " + result[j][2]);
 				j++;
 			}
-			if(dfs(0,1, result)) System.out.print(1 + " ");
+			if(sum == 30 && dfs(0,1, result)) System.out.print(1 + " ");
 			else System.out.print(0 + " ");
 		}
 	}
@@ -31,6 +32,12 @@ public class Main {
 		if(t1 == 5) return true;
 		
 		//System.out.println("t1 t2: " + t1 + " " + t2);
+		/*
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 3; j++) System.out.print(result[i][j] + " ");
+			System.out.println();
+		}
+		*/
 		//t1 win
 		result[t1][0] -= 1;
 		result[t2][2] -= 1;
