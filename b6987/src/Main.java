@@ -47,9 +47,9 @@ public class Main {
 		int i = 2;
 		int res = 0;
 		while(i < line.length()) {
-			if(res == 0 && line.charAt(i) != 0) {
+			if(res <= 0 && line.charAt(i) != 0) {
 				res += line.charAt(i) - '0';
-			} else if(res != 0 && line.charAt(i) != 0) {
+			} else if(res > 0 && line.charAt(i) != 0) {
 				res -= line.charAt(i) - '0';
 			}
 			i += 6;
