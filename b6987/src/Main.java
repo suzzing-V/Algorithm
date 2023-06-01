@@ -6,7 +6,7 @@ public class Main {
 		
 		for(int i = 0; i < 4; i++) {
 			String line = bf.readLine();
-			if(vicEqualsDef(line) && sumFive(line) && checkTie(line)) {
+			if(vicEqualsDef(line) && sumFive(line) && checkTie(line) && smallerThanSix(line)) {
 				System.out.print(1 + " ");
 			} else {
 				System.out.print(0 + " ");
@@ -57,5 +57,14 @@ public class Main {
 		
 		if(res != 0) return false;
 		else return true;
+	}
+	
+	public static boolean smallerThanSix(String line) {
+		int i = 0;
+		while(i < line.length()) {
+			if(line.charAt(i) - '0' > 6 && line.charAt(i) - '0' < 0) return false;
+			i += 2;
+		}
+		return true;
 	}
 }
