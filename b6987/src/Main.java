@@ -37,7 +37,7 @@ public class Main {
 		int i = 0;
 		while(i < line.length()) {
 			if(line.charAt(i) - '0' + line.charAt(i + 2) - '0'
-					+ line.charAt(i + 4) - '0' > 5) return false;
+					+ line.charAt(i + 4) - '0' != 5) return false;
 			i += 6;
 		}
 		return true;
