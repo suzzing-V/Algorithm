@@ -6,65 +6,59 @@ public class Main {
 		
 		for(int i = 0; i < 4; i++) {
 			String line = bf.readLine();
-			if(vicEqualsDef(line) && sumFive(line) && checkTie(line) && smallerThanSix(line)) {
-				System.out.print(1 + " ");
-			} else {
-				System.out.print(0 + " ");
+			int[][] result = new int[6][3];
+			int j = 0, k = 0;
+			while(k < line.length()) {
+				result[j][0] = line.charAt(k) - '0';
+				k += 2;
+				result[j][1] = line.charAt(k) - '0';
+				k += 2;
+				result[j][2] = line.charAt(k) - '0';
+				k += 2;
+				//System.out.println("result: " + result[j][0] + " " + result[j][1] + " " + result[j][2]);
+				j++;
 			}
+			if(dfs(0,1, result)) System.out.print(1 + " ");
+			else System.out.print(0 + " ");
 		}
 	}
 	
-	public static boolean vicEqualsDef(String line) {
-		int i = 0;
-		int vic = 0;
-		int def = 0;
-		while(i < line.length()) {
-			vic += line.charAt(i) - '0';
-			i += 6;
+	public static boolean dfs(int t1, int t2, int[][] result) {
+		if(t2 == 6) {
+			t1 ++;
+			t2 = t1 + 1;
 		}
+		if(t1 == 5) return true;
 		
-		i = 4;
-		while(i < line.length()) {
-			def += line.charAt(i) - '0';
-			i += 6;
+		//System.out.println("t1 t2: " + t1 + " " + t2);
+		//t1 win
+		result[t1][0] -= 1;
+		result[t2][2] -= 1;
+		if(result[t1][0] >= 0 && result[t2][2] >= 0) {
+			if(dfs(t1, t2 + 1, result)) return true;
 		}
-
-		if(vic == def) return true;
-		else return false;
-	}
-	
-	public static boolean sumFive(String line) {
-		int i = 0;
-		while(i < line.length()) {
-			if(line.charAt(i) - '0' + line.charAt(i + 2) - '0'
-					+ line.charAt(i + 4) - '0' != 5) return false;
-			i += 6;
+		result[t1][0] += 1;
+		result[t2][2] += 1;
+		//System.out.println("win pass");
+		//draw
+		result[t1][1] -= 1;
+		result[t2][1] -= 1;
+		if(result[t1][1] >= 0 && result[t2][1] >= 0) {
+			if(dfs(t1, t2 + 1, result)) return true;
 		}
-		return true;
-	}
-	
-	public static boolean checkTie(String line) {
-		int i = 2;
-		int res = 0;
-		while(i < line.length()) {
-			if(res <= 0 && line.charAt(i) != 0) {
-				res += line.charAt(i) - '0';
-			} else if(res > 0 && line.charAt(i) != 0) {
-				res -= line.charAt(i) - '0';
-			}
-			i += 6;
+		result[t1][1] += 1;
+		result[t2][1] += 1;
+		//System.out.println("draw pass");
+		//t1 lose
+		result[t1][2] -= 1;
+		result[t2][0] -= 1;
+		if(result[t1][2] >= 0 && result[t2][0] >= 0) {
+			if(dfs(t1, t2 + 1, result)) return true;
 		}
+		result[t1][2] += 1;
+		result[t2][0] += 1;
+		//System.out.println("lose pass");
 		
-		if(res != 0) return false;
-		else return true;
-	}
-	
-	public static boolean smallerThanSix(String line) {
-		int i = 0;
-		while(i < line.length()) {
-			if(line.charAt(i) - '0' > 6 && line.charAt(i) - '0' < 0) return false;
-			i += 2;
-		}
-		return true;
+		return false;
 	}
 }
