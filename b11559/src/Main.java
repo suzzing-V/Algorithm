@@ -37,7 +37,9 @@ public class Main {
 		int i = 11;
 		int j = 0;
 		int count = 0;
+		int answer = 0;
 		while(j != 6) {
+			count = 0;
 			while(j != 6) {
 				if(!field[i][j].equals(".")) {
 					HashSet<Position> set = new HashSet<>();
@@ -47,31 +49,30 @@ public class Main {
 						//System.out.println("4 이상: " + field[i][j]);
 						popPuyo(set, field);
 						count ++;
-						i = 11;
-						j = 0;
-						break;
 					}
 					//System.out.println("4 안됨: " + field[i][j]);
-					i--;
-					if(i < 0) {
-						i = 11;
-						j ++;
-					}
-				} else {
-					j++;
+				}
+				i--;
+				if(i < 0) {
 					i = 11;
+					j ++;
 				}
 			}
-		}
-		/*
-		for(int x = 0; x < 12; x++) {
-			for(int y = 0; y < 6; y++) {
-				System.out.print(field[x][y]);
+			pushPuyo(field);
+			if(count > 0) answer ++;
+			else break;
+			i = 11;
+			j = 0;
+			/*
+			for(int x = 0; x < 12; x++) {
+				for(int y = 0; y < 6; y++) {
+					System.out.print(field[x][y]);
+				}
+				System.out.println();
 			}
-			System.out.println();
+			*/
 		}
-		*/
-		System.out.println(count);
+		System.out.println(answer);
 	}
 	
 	public static void countPuyo(int i, int j, String[][] field, String word, Set<Position> set) {
@@ -119,7 +120,6 @@ public class Main {
 			field[tmp.x][tmp.y] = "."; 
 		}
 		//System.out.println("end");
-		pushPuyo(field);
 	}
 	
 	public static void pushPuyo(String[][] field) {
