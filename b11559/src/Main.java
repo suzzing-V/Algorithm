@@ -75,15 +75,17 @@ public class Main {
 	}
 	
 	public static void countPuyo(int i, int j, String[][] field, String word, Set<Position> set) {
-		if(i - 1 < 0 && j + 1 > 5 && i + 1 >= 12) {
+		if(i - 1 < 0 && j + 1 > 5 && i + 1 >= 12 && j - 1 < 0) {
 			set.add(new Position(i, j));
 			return;
 		}
-		if(i - 1 >= 0 && j + 1 <= 5 && i + 1 < 12 
-				&& !field[i - 1][j].equals(word) && !field[i][j + 1].equals(word)
-				&& !field[i + 1][j].equals(word)) {
-			set.add(new Position(i, j));
-			return;
+		
+		if(i - 1 >= 0 && j + 1 < 6 && i + 1 < 12 && j - 1 > 0) {
+			if(!field[i - 1][j].equals(word) && !field[i][j + 1].equals(word)
+					&& !field[i + 1][j].equals(word) && !field[i][j - 1].equals(word)) {
+				set.add(new Position(i, j));
+				return;
+			}
 		}
 		
 		if(set.contains(new Position(i, j))) return;
@@ -102,6 +104,10 @@ public class Main {
 		
 		if(i + 1 < 12 && field[i + 1][j].equals(word)) {
 			countPuyo(i + 1, j, field, word, set);
+		}
+		
+		if(j - 1 >= 0 && field[i][j - 1].equals(word)) {
+			countPuyo(i, j - 1, field, word, set);
 		}
 	}
 	
