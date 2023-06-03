@@ -144,7 +144,7 @@ public class Main {
 		while(iter.hasNext()) {
 			Pos tmp = iter.next();
 			int tmpX = tmp.x;
-			while(field[tmpX][tmp.y].equals("x")) {
+			while(tmpX >= 0 && field[tmpX][tmp.y].equals("x")) {
 				field[tmpX][tmp.y] = ".";
 				field[tmpX + min][tmp.y] = "x";
 				tmpX--;
