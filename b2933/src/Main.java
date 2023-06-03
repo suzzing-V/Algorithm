@@ -44,26 +44,26 @@ public class Main {
 		height = bf.readLine().split(" ");
 		
 		for(int i = 0; i < n; i++) {
-			throwStick(field, Integer.parseInt(height[i]), r, i + 1);
+			throwStick(field, r - Integer.parseInt(height[i]), i + 1);
 			//printField(field);
 		}
 		
 		printField(field);
 	}
 	
-	public static void throwStick(String[][] field, int h, int r, int order) {
+	public static void throwStick(String[][] field, int x, int order) {
 		int i = 0;
 		if(order % 2 == 1) {
-			while(i < field[0].length && field[r - h][i].equals(".")) i++;
+			while(i < field[0].length && field[x][i].equals(".")) i++;
 			if(i == field[0].length) return;
-			field[r - h][i] = ".";
+			field[x][i] = ".";
 		} else {
 			i = field[0].length - 1;
-			while(i >= 0 && field[r - h][i].equals(".")) i--;
-			if(i == -1) return;
-			field[r - h][i] = ".";
+			while(i >= 0 && field[x][i].equals(".")) i--;
+			if(i < 0) return;
+			field[x][i] = ".";
 		}
-		searchMineral(field, r - h, i);
+		searchMineral(field, x, i);
 	}
 
 	public static void searchMineral(String[][] field, int x, int y) {
@@ -106,7 +106,8 @@ public class Main {
 
 	public static boolean findMinHeight(String[][] field, int x, int y, Set<Pos> set, Set<Pos> cluster) {
 		if(cluster.contains(new Pos(x, y))) return true;
-		if(field[x][y].equals(".")) return true;
+		if(x < 0 || x >= field.length || y < 0 || y >= field[0].length 
+		|| field[x][y].equals(".")) return true;
 		if(x == field.length - 1) return false;
 
 		if(x > min.x) min = new Pos(x, y);
