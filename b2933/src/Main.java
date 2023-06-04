@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	static int min = 101;
 	public static class Pos {
 		int x;
 		int y;
@@ -73,10 +72,19 @@ public class Main {
 		if(x - 1 >= 0 && field[x - 1][y].equals("x")) {
 			Set<Pos> cluster = new HashSet<>();
 			Set<Pos> set = new HashSet<>();
-			min = 101;
 			boolean up = findMinHeight(field, x - 1, y, cluster, set);
 			if(up == true) {
-				fallCluster(field, min, set);
+				fallCluster(field, set, cluster);
+				return;
+			}
+		}
+		
+		if(x + 1 < field.length && field[x + 1][y].equals("x")) {
+			Set<Pos> cluster = new HashSet<>();
+			Set<Pos> set = new HashSet<>();
+			boolean down = findMinHeight(field, x + 1, y, cluster, set);
+			if(down == true) {
+				fallCluster(field, set, cluster);
 				return;
 			}
 		}
@@ -84,11 +92,11 @@ public class Main {
 		if(y - 1 >= 0 && field[x][y - 1].equals("x")) {
 			Set<Pos> cluster = new HashSet<>();
 			Set<Pos> set = new HashSet<>();
-			min = 101;
+			//System.out.println("왼쪽");
 			boolean left = findMinHeight(field, x, y - 1, cluster, set);
 			//System.out.println("left: " + left);
 			if(left == true) {
-				fallCluster(field, min, set);
+				fallCluster(field, set, cluster);
 				return;
 			}
 		}
@@ -96,10 +104,9 @@ public class Main {
 		if(y + 1 < field[0].length && field[x][y + 1].equals("x")) {
 			Set<Pos> cluster = new HashSet<>();
 			Set<Pos> set = new HashSet<>();
-			min = 101;
 			boolean right = findMinHeight(field, x, y + 1,cluster, set);
 			if(right == true) {
-				fallCluster(field, min, set);
+				fallCluster(field, set, cluster);
 				return;
 			}
 		}
@@ -111,15 +118,15 @@ public class Main {
 		if(cluster.contains(new Pos(x, y))) return true;
 		if(x < 0 || x >= field.length || y < 0 || y >= field[0].length 
 		|| field[x][y].equals(".")) return true;
-		if(x == field.length - 1) return false;
+		if(x == field.length - 1) {
+			//System.out.println("땅닿음");
+			return false;
+		}
 
 		if(x + 1 < field.length && field[x + 1][y].equals(".")) {
 			set.add(new Pos(x, y));
-			int tmp = getDistance(field, x, y);
-			if(tmp < min) min = tmp;
 		}
 
-		//System.out.println("x y min: " + x + " " + y + " " + min);
 		cluster.add(new Pos(x, y));
 		if(x - 1 >= 0 && field[x - 1][y].equals("x")) {
 			if(findMinHeight(field, x - 1, y, cluster, set) == false) return false;
@@ -139,12 +146,20 @@ public class Main {
 		return true;
 	}
 	
-	public static void fallCluster(String[][] field, int min, Set<Pos> set) {
+	public static void fallCluster(String[][] field, Set<Pos> set, Set<Pos> cluster) {
+		int min = 101;
 		Iterator<Pos> iter = set.iterator();
 		while(iter.hasNext()) {
 			Pos tmp = iter.next();
+			int dis = getDistance(field, tmp.x, tmp.y, cluster);
+			if(dis < min) min = dis;
+		}
+		
+		Iterator<Pos> iter2 = set.iterator();
+		while(iter2.hasNext()) {
+			Pos tmp = iter2.next();
 			int tmpX = tmp.x;
-			while(tmpX >= 0 && field[tmpX][tmp.y].equals("x")) {
+			while(tmpX >= 0 && field[tmpX][tmp.y].equals("x") && cluster.contains(new Pos(tmpX, tmp.y))) {
 				field[tmpX][tmp.y] = ".";
 				field[tmpX + min][tmp.y] = "x";
 				tmpX--;
@@ -152,29 +167,18 @@ public class Main {
 		}
 	}
 	
-	public static int getDistance(String[][] field, int x, int y) {
+	public static int getDistance(String[][] field, int x, int y, Set<Pos> cluster) {
 		int a = x + 1;
 		int b = y;
-		int save = x;
-		//System.out.println("a b: " + a + " " + b);
-		while(true) {
-			while(field[a][b].equals(".")) {
-				a++;
-				if(a >= field.length) {
-					return field.length - 1 - x;
-				}
+		while(a < field.length) {
+			if(field[a][b].equals("x") && !cluster.contains(new Pos(a, b))) {
+				break;
 			}
-			
-			save = a;
-			//System.out.println(a + " 저장");
-			while(field[a][b].equals("x")) {
-				a ++;
-				if(a >= field.length) {
-					return save - x - 1;
-				}
-			}
+			a++;
 		}
+		return a - x - 1;
 	}
+	
 	public static void printField(String[][] field) {
 		for(int i = 0; i < field.length; i++) {
 			for(int j = 0; j < field[0].length; j++) {
