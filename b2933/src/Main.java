@@ -74,9 +74,8 @@ public class Main {
 		List<Pos> cluster = new ArrayList<>();
 		
 		for(int i = 0; i < field[0].length; i++) {
-			if(field[field.length - 1][i].equals("x")) {
+			if(field[field.length - 1][i].equals("x") && visit[field.length - 1][i] == 0) {
 				BFS(visit, field, field.length - 1, i);
-				break;
 			}
 		}
 		findCluster(cluster, visit, field);
