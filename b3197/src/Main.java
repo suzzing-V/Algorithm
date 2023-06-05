@@ -12,6 +12,7 @@ public class Main {
 	}
 	
 	static Queue<Pos> swan = new LinkedList<>();
+	static Queue<Pos> ice = new LinkedList<>();
 	public static void main(String[] args) throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(bf.readLine());
@@ -19,17 +20,19 @@ public class Main {
 		int c = Integer.parseInt(st.nextToken());
 		
 		char[][] field = new char[r][c];
-		int[][] ice = new int[r][c];
 		for(int i = 0; i < r; i++) {
 			char[] line = bf.readLine().toCharArray();
 			for(int j = 0; j < c; j++) {
 				field[i][j] = line[j];
-				if(field[i][j] == 'X') ice[i][j] = 1;
 				if(field[i][j] == 'L') {
 					if(swan.isEmpty()) {
 						field[i][j] = '.';
 						swan.add(new Pos(i, j));
 					}
+					ice.add(new Pos(i, j));
+				}
+				if(field[i][j] == '.') {
+					ice.add(new Pos(i, j));
 				}
 			}
 		}
@@ -57,7 +60,7 @@ public class Main {
 				System.out.println("x y: " + pos.x + " " + pos.y);
 			}
 			*/
-			meltIce(field, ice, r, c);
+			meltIce(field, visit, r, c);
 			/*
 			for(int i = 0; i < r; i++) {
 				for(int j = 0; j < c; j++) {
@@ -72,28 +75,22 @@ public class Main {
 		System.out.println(day);
 	}
 	
-	public static void meltIce(char[][] field, int[][] ice, int r, int c) {
-		List<Pos> melt = new ArrayList<>();
-		for(int i = 0; i < r; i++) {
-			for(int j = 0; j < c; j++) {
-				if(checkIce(ice, i, j) && field[i][j] == 'X') {
-					field[i][j] = '.';
-					melt.add(new Pos(i, j));
+	public static void meltIce(char[][] field, int[][] visit, int r, int c) {
+		int[][] dir = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+		int size = ice.size();
+		for(int i = 0; i < size; i++) {
+			Pos tmp = ice.poll();
+			for(int j = 0; j < 4; j++) {
+				int mx = tmp.x + dir[j][0];
+				int my = tmp.y + dir[j][1];
+				if (mx < 0 || mx >= field.length || my < 0 || my >= field[0].length
+						|| visit[mx][my] == 1) continue;
+				if(field[mx][my] == 'X') {
+					field[mx][my] = '.';
+					ice.add(new Pos(mx, my));
 				}
 			}
 		}
-		
-		for(Pos pos : melt) {
-			ice[pos.x][pos.y] = 0; 
-		}
-	}
-	
-	public static boolean checkIce(int[][] ice, int x, int y) {
-		if(x - 1 >= 0 && ice[x - 1][y] == 0) return true;
-		if(x + 1 < ice.length && ice[x + 1][y] == 0) return true;
-		if(y - 1 >= 0 && ice[x][y - 1] == 0) return true;
-		if(y + 1 < ice[0].length && ice[x][y + 1] == 0) return true;
-		return false;
 	}
 	
 	public static boolean moveSwan(char[][] field, int[][] visit) {
