@@ -12,11 +12,8 @@ class Solution {
     }
     
     public String[] solution(String[][] tickets) {
-        String[] answer = listToArray(bfs(tickets));
-        return answer;
-    }
-    
-    public List<Ticket> bfs(String[][] tickets) {
+        boolean[] visit = new boolean[tickets.length];
+        List<Ticket> list = new ArrayList<>();
         Arrays.sort(tickets, new Comparator<String[]>() {
             @Override
             public int compare(String[] o1, String[] o2) {
@@ -25,37 +22,33 @@ class Solution {
             }
         });
         
-        int n = tickets.length;
-        boolean[] visit = new boolean[n];
-        Queue<Ticket> queue = new LinkedList<>();
-        List<Ticket> list = new ArrayList<>();
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < tickets.length; i++) {
             if(tickets[i][0].equals("ICN")) {
-                queue.add(new Ticket(tickets[i][0], tickets[i][1]));
                 visit[i] = true;
-                break;
+                list.add(new Ticket(tickets[i][0], tickets[i][1]));
+                if(dfs(tickets, visit, list, tickets[i][1])) break;
+                visit[i] = false;
+                list.remove(list.size() - 1);
             }
         }
         
-        while(!queue.isEmpty()) {
-            Ticket tmp = queue.poll();
-            //System.out.println("tmp: " + tmp.depart + " " + tmp.arrive);
-            if(list.size() == n - 1) {
-                list.add(new Ticket(tmp.depart, tmp.arrive));
-                break;
-            }
-            for(int i = 0; i < n; i++) {
-                if(visit[i]) continue;
-                if(tickets[i][0].equals(tmp.arrive)) {
-                    list.add(new Ticket(tmp.depart, tmp.arrive));
-                    queue.add(new Ticket(tickets[i][0], tickets[i][1]));
-                    visit[i] = true;
-                    break;
-                }
+        String[] answer = listToArray(list);
+        return answer;
+    }
+    
+    public boolean dfs(String[][] tickets, boolean[] visit, List<Ticket> list, String arrive) {
+        if(list.size() == tickets.length) return true;
+        
+        for(int i = 0; i < tickets.length; i++) {
+            if(!visit[i] && tickets[i][0].equals(arrive)) {
+                visit[i] = true;
+                list.add(new Ticket(tickets[i][0], tickets[i][1]));
+                if(dfs(tickets, visit, list, tickets[i][1])) return true;
+                visit[i] = false;
+                list.remove(list.size() - 1);
             }
         }
-        
-        return list;
+        return false;
     }
     
     public String[] listToArray(List<Ticket> list) {
