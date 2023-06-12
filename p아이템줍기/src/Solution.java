@@ -22,25 +22,8 @@ class Solution {
         for(int i = 0; i < rectangle.length; i++) {
             int x1 = rectangle[i][0] * 2;
             int x2 = rectangle[i][2] * 2;
-            int y1 = (50 - rectangle[i][1]) * 2;
-            int y2 = (50 - rectangle[i][3]) * 2;
-            for(int j = y2 + 1; j <= y1 - 1; j++) {
-                for(int k = x1 + 1; k <= x2 - 1; k++) {
-                    field[j][k] = 2;
-                }
-            }
-            
-            for(int j = y2; j <= y1; j++) {
-                if(field[j][x1] != 2)
-                    field[j][x1] = 1;
-                if(field[j][x2] != 2)
-                    field[j][x2] = 1;
-            }
-            
-            for(int j = x1; j <= x2; j++) {
-                if(field[y1][j] != 2) field[y1][j] = 1;
-                if(field[y2][j] != 2) field[y2][j] = 1;
-            }
+            int y1 = rectangle[i][1] * 2;
+            int y2 = rectangle[i][3] * 2;
         }
     }
     
