@@ -4,7 +4,7 @@ class Solution {
     public long solution(int n, int[] times) {
         Arrays.sort(times);
         long start = times[0];
-        long end = times[times.length - 1] * n;
+        long end = times[times.length - 1] * (long)n;
         long mid = 0;
         long possible = 0;
         
@@ -13,11 +13,10 @@ class Solution {
             possible = getPossibleNum(mid, times);
             
             if(possible < n) start = mid + 1;
-            else end = mid - 1;
+            else end = mid;
         }
         
-        long answer = start;
-        return answer;
+        return start;
     }
     
     public long getPossibleNum(long mid, int[] times) {
