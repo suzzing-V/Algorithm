@@ -5,10 +5,9 @@ class Solution {
         
         boolean flag = false;
         while(n != 0) {
-            if(flag == true) n --;
-            if(n == 0) break;
-            if(n % 3 == 1) answer = otf[0] + answer;
-            else if(n % 3 == 2) answer = otf[1] + answer;
+            n --;
+            if(n % 3 == 0) answer = otf[0] + answer;
+            else if(n % 3 == 1) answer = otf[1] + answer;
             else {
                 flag = true;
                 answer = otf[2] + answer;
