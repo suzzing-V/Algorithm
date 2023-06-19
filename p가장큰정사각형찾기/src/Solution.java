@@ -3,15 +3,18 @@ class Solution
     public int solution(int [][]board)
     {
         int max = 0;
+        boolean[][] visit = new boolean[board.length][board[0].length];
         
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++)
-                if(board[i][j] == 1) max = Math.max(max, findSquare(board, i, j));
+                if(!visit[i][j] && board[i][j] == 1) {
+                    max = Math.max(max, findSquare(board, i, j, visit));
+                }
         }
-        return max;
+        return max * max;
     }
     
-    public int findSquare(int[][] board, int cx, int cy) {
+    public int findSquare(int[][] board, int cx, int cy, boolean[][] visit) {
         int count = 1;
         int x = cx;
         int y = cy;
@@ -24,7 +27,16 @@ class Solution
                 } else break;
             } else break;
         }
-        return count * count;
+        
+        if((x >= board.length || board[x][cy] == 0) && (x >= board.length || board[x][cy + count - 1] == 0)
+           && (y >= board[0].length || board[cx][y] == 0) && (y >= board[0].length || board[cx + count - 1][y] == 0)) {
+            for(int i = cx; i < cx + count; i++) {
+                for(int j = cy; j < cy + count; j++) {
+                    visit[i][j] = true;
+                }
+            }
+        }
+        return count;
     }
     
     public boolean checkLine(int cx, int cy, int x, int y, int[][] board) {
