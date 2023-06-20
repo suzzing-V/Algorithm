@@ -1,20 +1,27 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(long begin, long end) {
-        int[] answer = new int[(int)end - (int)begin + 1];
+        int b = (int)begin; int e = (int)end;
+        int[] answer = new int[e - b + 1];
         int k = 0;
         
-        for(int i = (int)begin; i <= (int)end; i++) {
-            if(i == 1) answer[k++] = 0;
-            else if(i % 2 == 0) answer[k ++] = i / 2;
-            else answer[k++] = findMaxDivide(i);
+        for(int i = b; i <= e; i++) {
+            answer[k++] = findMaxDivide(i);
         }
         return answer;
     }
     
     public int findMaxDivide(int n) {
-        for(int i = n - 2; i > 2; i -= 2) {
-            if(n % i == 0) return i;
+        List<Integer> list = new ArrayList<>();
+        if(n == 1) return 0;
+        for(int i = 2; i <= Math.sqrt(n); i ++) {
+            if(n % i == 0) {
+                list.add(i);
+                if(n / i <= 10000000) return n / i;
+            }
         }
+        if(list.size() > 0) return list.get(list.size() - 1);
         return 1;
     }
 }
