@@ -1,7 +1,5 @@
 class Solution {
     public int solution(int n) {
-        if(n == 1) return 1;
-        if(n == 2) return 2;
         int answer = 0;
         int k = 3;
         
