@@ -11,21 +11,23 @@ class Solution {
         n -= 1;
         int idx = 0;
         while(true) {
-            long fac = factorial(n);
+            long fac = factorial(n--);
+            //System.out.println(fac);
             if(k % fac == 0) {
                 answer[idx++] = list.get((int)(k / fac) - 1);
-                list.remove(k / fac - 1);
+                list.remove((int)(k / fac) - 1);
                 putAnswer(list, answer, idx);
                 break;
             } else {
                 answer[idx++] = list.get((int)(k / fac));
-                list.remove(k / fac);
+                list.remove((int)(k / fac));
                 if(fac == 2) {
                     answer[idx++] = list.get(0);
                     answer[idx++] = list.get(1);
                     break;
                 }
             }
+            k %= fac;
         }
         return answer;
     }
