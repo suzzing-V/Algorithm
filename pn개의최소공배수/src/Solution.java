@@ -1,45 +1,29 @@
 import java.util.*;
 
 class Solution {
-    int result = 1;
-    public int solution(int[] arr) {
-        LCM(arr, getMin(arr));
-        return result;
+    int gcd = 1;
+    public long solution(int[] arr) {
+        int a = arr[0];
+        int b = arr[1];
+        GCD(a, b);
+        int lcm = (a / gcd) * (b / gcd) * gcd;
+        
+        for(int i = 2; i < arr.length; i++) {
+            gcd = 1;
+            GCD(lcm, arr[i]);
+            lcm = (lcm / gcd) * (arr[i] / gcd) * gcd;
+        }
+        return lcm;
     }
     
-    public void LCM(int[] arr, int min) {
+    public void GCD(int a, int b) {
+        int min = Math.min(a, b);
         for(int i = 2; i <= min; i++) {
-            boolean flag = false;
-            for(int j = 0; j < arr.length; j++) {
-                if(arr[j] % i != 0) {
-                    flag = true;
-                    break;
-                }
-            }
-            
-            if(!flag) {
-                result *= i;
-                int[] tmp = divideArr(arr, i);
-                LCM(tmp, getMin(tmp));
+            if(a % i == 0 && b % i == 0) {
+                gcd *= i;
+                GCD(a / i, b / i);
                 return;
             }
         }
-        
-        for(int i = 0; i < arr.length; i++) {
-            result *= arr[i];
-        }
-    }
-    
-    public int getMin(int[] arr) {
-        Arrays.sort(arr);
-        return arr[0];
-    }
-    
-    public int[] divideArr(int[] arr, int i) {
-        int[] tmp = new int[arr.length];
-        for(int j = 0; j < arr.length; j++) {
-            tmp[j] = arr[j] / i;
-        }
-        return tmp;
     }
 }
