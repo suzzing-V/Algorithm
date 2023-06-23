@@ -7,7 +7,7 @@ class Solution {
     }
     
     public void DFS(int n, int[][] road, int k, int count, boolean[] visit) {
-        if(count > k) return;
+        if(count > k || checkVisit(visit)) return;
         
         visit[n] = true;
         for(int i = 0; i < road.length; i++) {
@@ -25,5 +25,12 @@ class Solution {
             if(visit[i]) count++;
         }
         return count;
+    }
+    
+    public boolean checkVisit(boolean[] visit) {
+        for(int i = 1; i < visit.length; i++) {
+            if(!visit[i]) return false;
+        }
+        return true;
     }
 }
