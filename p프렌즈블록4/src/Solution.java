@@ -48,7 +48,9 @@ class Solution {
         if(set.isEmpty()) break;
         answer += set.size();
         popBlock(set, cBoard);
+        //printBoard(cBoard);
         fallBlock(cBoard);
+        //printBoard(cBoard);
         }
         return answer;
     }
@@ -61,33 +63,27 @@ class Solution {
     
     public void fallBlock(char[][] cBoard) {
         for(int j = 0; j < cBoard[0].length; j++) {
-            int i = cBoard.length - 1;
-            int start = -1;
-            int end = -1;
+            Queue<Character> queue = new LinkedList<>();
+            for(int i = cBoard.length - 1; i >= 0; i--) {
+                if(cBoard[i][j] != 'O') queue.add(cBoard[i][j]);
+                cBoard[i][j] = 'O';
+            }
             
-            while(i >= 0) {
-                if(start == -1 && cBoard[i][j] == 'O') {
-                    start = i;
-                }
-                if(start != -1 && cBoard[i][j] != 'O') {
-                    end = i;
-                    i = pushBlock(end, start - end, j, cBoard);
-                    start = -1;
-                }
-                i--;
+            int idx = cBoard.length - 1;
+            while(!queue.isEmpty()) {
+                cBoard[idx --][j] = queue.remove();
             }
         }
     }
-    
-    public int pushBlock(int end, int dis, int column, char[][] cBoard) {
-        int idx = 0;
-        for(int i = end; i >= 0; i --) {
-            char ch = cBoard[i][column];
-            cBoard[i][column] = 'O';
-            cBoard[i + dis][column] = ch;
-            idx = i + dis;
+    /*
+    public void printBoard(char[][] cBoard) {
+        for(int i = 0; i < cBoard.length; i++) {
+            for(int j = 0; j < cBoard[0].length; j++) {
+                System.out.print(cBoard[i][j]);
+            }
+            System.out.println();
         }
-        
-        return idx;
+        System.out.println();
     }
+    */
 }
