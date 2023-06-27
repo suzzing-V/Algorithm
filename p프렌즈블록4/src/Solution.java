@@ -36,7 +36,7 @@ class Solution {
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
                 char tmp = cBoard[i][j];
-                if(tmp != 'O' && i + 1 < m && j + 1 < n 
+                if(tmp != '.' && i + 1 < m && j + 1 < n 
                    && cBoard[i + 1][j] == tmp && cBoard[i + 1][j + 1] == tmp && cBoard[i][j + 1] == tmp) {
                     set.add(new Pos(i, j));
                     set.add(new Pos(i + 1, j));
@@ -57,7 +57,7 @@ class Solution {
         
     public void popBlock(Set<Pos> set, char[][] cBoard) {
         for(Pos pos : set) {
-            cBoard[pos.x][pos.y] = 'O';
+            cBoard[pos.x][pos.y] = '.';
         }
     }
     
@@ -65,8 +65,8 @@ class Solution {
         for(int j = 0; j < cBoard[0].length; j++) {
             Queue<Character> queue = new LinkedList<>();
             for(int i = cBoard.length - 1; i >= 0; i--) {
-                if(cBoard[i][j] != 'O') queue.add(cBoard[i][j]);
-                cBoard[i][j] = 'O';
+                if(cBoard[i][j] != '.') queue.add(cBoard[i][j]);
+                cBoard[i][j] = '.';
             }
             
             int idx = cBoard.length - 1;
