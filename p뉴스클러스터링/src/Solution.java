@@ -8,10 +8,11 @@ class Solution {
         
         getSet(str1, setA);
         getSet(str2, setB);
-        double unionSize = setA.size() + setB.size();
-        System.out.println("unionSize: " + unionSize);
+        int intersectionSize = getIntersectionSize(setA, setB);
+        double unionSize = setA.size() + setB.size() - intersectionSize;
+        
         if(setA.size() == 0 && setB.size() == 0) answer = 65536;
-        else answer = (int)((getIntersectionSize(setA, setB) / unionSize) * (double)65536);
+        else answer = (int)((intersectionSize / unionSize) * (double)65536);
         return answer;
     }
     
@@ -24,22 +25,21 @@ class Solution {
             if(c1 >= 'a' && c1 <= 'z') c1 -= 32;
             if(c2 >= 'a' && c2 <= 'z') c2 -= 32;
             
-            System.out.println(String.valueOf(c1) + String.valueOf(c2));
             set.add(String.valueOf(c1) + String.valueOf(c2));
         }
     }
     
     public int getIntersectionSize(List<String> setA, List<String> setB) {
         int count = 0;
+        List<String> setBcopy = new ArrayList<>();
+        for(String str : setB) setBcopy.add(str);
         
         for(String token : setA) {
-            if(setB.contains(token)) {
-                System.out.println("교집합: " + token);
-                setB.remove(token);
+            if(setBcopy.contains(token)) {
+                setBcopy.remove(token);
                 count++;
             }
         }
-        System.out.println("count: " + count);
         return count;
     }
 }
