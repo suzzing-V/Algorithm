@@ -15,6 +15,8 @@ class Solution {
                 break;
             }
         }
+        
+        if(answer.equals("")) return "(None)";
         return answer;
     }
     
