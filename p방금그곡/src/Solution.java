@@ -44,8 +44,8 @@ class Solution {
         int i = 0;
         while(l > 0 && i < melody.length()) {
             if(m.charAt(0) == melody.charAt(i) && isSame(m, melody, i, l)) return true;
+            if(melody.charAt(i) != '#') l--;
             i++;
-            l--;
         }
         
         return false;
@@ -56,8 +56,8 @@ class Solution {
         while(mIndex < m.length() && l > 0) {
             if(m.charAt(mIndex) != melody.charAt(i)) return false;
             mIndex++;
+            if(melody.charAt(i) != '#') l--;
             i++;
-            l--;
             if(i == melody.length()) i = 0;
         }
         
