@@ -2,6 +2,7 @@ class Solution {
     public String solution(String m, String[] musicinfos) {
         
         String answer = "";
+        int max = 0;
         
         for(int i = 0;i < musicinfos.length; i++) {
             String[] split = new String[4];
@@ -10,9 +11,9 @@ class Solution {
             int l = calculateMusicLength(split[0], split[1]);
             String title = split[2];
             String melody = split[3];
-            if(isRight(m, l, melody)) {
+            if(isRight(m, l, melody) && l > max) {
                 answer = title;
-                break;
+                max = l;
             }
         }
         
