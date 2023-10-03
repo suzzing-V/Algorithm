@@ -12,10 +12,11 @@ public class Main {
 
         int count = 0;
         for(int i = 1; i <= n; i++) {
-            if(n % k == 0) count++;
+            if(n % i == 0) count++;
             if(count == k) {
                 bw.write(String.valueOf(i));
-                break;
+                bw.close();
+                return;
             }
         }
         bw.write("0");
