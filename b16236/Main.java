@@ -24,11 +24,13 @@ public class Main {
                 if(space[i][j] == 9) {
                     sharkX = i;
                     sharkY = j;
+                    space[i][j] = 0;
                 }
             }
         }
 
-        while(bfs());
+        while(bfs()) {
+        };
         bw.write(String.valueOf(count));
         bw.close();
     }
@@ -47,7 +49,7 @@ public class Main {
 
     public static boolean bfs() {
         boolean[][] visit = new boolean[n][n];
-        Queue<Shark> queue = new LinkedList<>();
+        PriorityQueue<Shark> queue = new PriorityQueue<>((o1, o2) -> o1.dist != o2.dist ? Integer.compare(o1.dist, o2.dist) : (o1.x != o2.x ? Integer.compare(o1.x, o2.x) : Integer.compare(o1.y, o2.y)));
         int[][] go = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
 
         queue.add(new Shark(sharkX, sharkY, 0));
@@ -55,34 +57,29 @@ public class Main {
         while(!queue.isEmpty()) {
             Shark now = queue.poll();
 
-            System.out.println("x y: " + now.x + " " + now.y);
-            for(int i = 0; i < 4; i++) {
-                int goX = now.x + go[i][0];
-                int goY = now.y + go[i][1];
-
-                if(goX >= n || goX < 0 || goY >= n || goY < 0) continue;
-
-                if(!visit[goX][goY]) {
-                    if(space[goX][goY] < body && space[goX][goY] > 0) {
-                        System.out.println("eat: " + now.dist);
-                        space[goX][goY] = 0;
+            if(space[now.x][now.y] < body && space[now.x][now.y] > 0) {
+                
+                        space[now.x][now.y] = 0;
                         eat ++;
                         if(eat >= body) {
                             body ++;
                             eat = 0;
                         }
-                        count += now.dist + 1;
+                        count += now.dist;
                         sharkX = now.x;
                         sharkY = now.y;
                         return true;
-                    } else if(space[goX][goY] == 0 || space[goX][goY] == body) {
-                        System.out.println("pass: " + now.dist);
+                    }
+
+            for(int i = 0; i < 4; i++) {
+                int goX = now.x + go[i][0];
+                int goY = now.y + go[i][1];
+
+                if(goX >= n || goX < 0 || goY >= n || goY < 0 || visit[goX][goY] || space[goX][goY] > body) continue;
                         queue.add(new Shark(goX, goY, now.dist + 1));
                         visit[goX][goY] = true;
-                    } 
                 }
             }
-        }
         return false;
     }
 }
