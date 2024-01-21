@@ -32,7 +32,6 @@ public class Main {
     public static void dfs(int x, int y) {
         if(x < 0 || x >= r || y < 0 || y >= c || visit[board[x][y] - 65]) {
             max = Math.max(max, countVisit());
-            System.out.println("max: " + max);
             return;
         }
 

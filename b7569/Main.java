@@ -68,7 +68,6 @@ public class Main {
             Tomato now = queue.poll();
             days = now.day;
 
-            System.out.println("now : " + now.x + " " + now.y + " "+ now.h + " " + now.day);
             for(int i = 0; i < 6; i++) {
                 int goX = now.x + dir[i][0];
                 int goY = now.y + dir[i][1];

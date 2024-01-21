@@ -17,7 +17,7 @@ public class Main {
         }
         Arrays.sort(houses);
 
-        int length = binarySearch(houses, 1, houses[houses.length - 1] - houses[0], nc[1]);
+        int length = binarySearch(houses, 1, houses[houses.length - 1] - houses[0] + 1, nc[1]);
         bw.write(String.valueOf(length - 1));
         bw.close();
     }

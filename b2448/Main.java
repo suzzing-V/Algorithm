@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class Main {
     static boolean[][] piece = { {false, false, true, false, false},
