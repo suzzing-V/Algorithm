@@ -8,7 +8,7 @@ public class Main {
     static int m;
     static int[] root = new int[n + 1];
 
-    static class Road implements Comparable<Road> {
+    static class Road implements Comparable<Road>  {
         int start;
         int end;
         int cost;
