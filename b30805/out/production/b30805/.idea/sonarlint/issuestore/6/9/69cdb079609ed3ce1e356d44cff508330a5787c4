@@ -1,0 +1,12 @@
+
+y
+java:S1854"6Remove this useless assignment to local variable "bw".(ûÄÏ8ÆõÄ‰2J$3b142a67-44b1-4429-a934-93ebeeffc63f
+m	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8ÈõÄ‰2J$3058462f-1f55-420c-8911-170311a508b4
+j
+java:S1481"'Remove this unused "bw" local variable.(ûÄÏ8ÈõÄ‰2J$557d4d0b-340e-401b-8a5c-e89927164427
+k
+java:S5413+")Verify that "remove()" is used correctly.(óïºY8ËõÄ‰2J$14cb2e53-efbf-4b80-a159-f7a91f41614a
+l
+java:S5413.")Verify that "remove()" is used correctly.(ˆš½8ËõÄ‰2J$5d45ef3e-c639-4963-b7f7-f3dd5e90610b
+L	java:S1063"+Replace this use of System.out by a logger.(˜Ö“ñüÿÿÿÿ8‘™”Ä‰2
+G	java:S1065"+Replace this use of System.out by a logger.(Ù©È±8’™”Ä‰2
