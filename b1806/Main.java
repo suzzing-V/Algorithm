@@ -21,7 +21,10 @@ public class Main {
         int len = n + 1;
         while(low <= high && high < n) {
             if(sum < s) {
-                sum += original[++high];
+                if(++ high == n) {
+                    break;
+                }
+                sum += original[high];
             } else {
                 len = Math.min(len, high - low + 1);
                 sum -= original[low++];
