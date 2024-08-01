@@ -7,8 +7,8 @@ public class Main {
     static int m;
     static int[] arrA;
     static int[] arrB;
-    static Map<Long, Long> totalCountA = new HashMap<>();
-    static Map<Long, Long> totalCountB = new HashMap<>();
+    static Map<Integer, Long> totalCountA = new HashMap<>();
+    static Map<Integer, Long> totalCountB = new HashMap<>();
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -34,7 +34,7 @@ public class Main {
         }
 
         long result = 0;
-        for(Long key : totalCountA.keySet()) {
+        for(Integer key : totalCountA.keySet()) {
             Long countB = totalCountB.get(t - key);
             if(countB == null) {
                 continue;
@@ -44,7 +44,7 @@ public class Main {
         System.out.println(result);
     }
 
-    public static void dfs(int index, long sum, int[] arr, int length, Map<Long, Long> totalCount) {
+    public static void dfs(int index, int sum, int[] arr, int length, Map<Integer, Long> totalCount) {
         if (index >= length) {
             return;
         }
