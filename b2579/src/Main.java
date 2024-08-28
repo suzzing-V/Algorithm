@@ -7,27 +7,19 @@ import java.io.OutputStreamWriter;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(bf.readLine());
-        
-        int[] stair = new int[n];
-        for(int i = 0; i < n; i++) {
+        int[] stair = new int[n + 1];
+        int[][] dp = new int[n + 1][2];
+        for(int i = 1; i <= n; i++) {
             stair[i] = Integer.parseInt(bf.readLine());
         }
 
-        int[] memo = new int[n];
-        if(n == 1) {
-            bw.write(Integer.toString(stair[0]));
-        } else if (n == 2) {
-            bw.write(Integer.toString(stair[0] + stair[1]));
-        } else {
-            memo[0] = stair[0]; memo[1] = stair[0] + stair[1];
-            memo[2] = Math.max(memo[1], memo[0]) + stair[2];
-            for(int i = 3; i < n; i++) {
-                memo[i] = Math.max(memo[i - 3] + stair[i - 1], memo[i - 2]) + stair[i];
-            }
-            bw.write(Integer.toString(memo[n - 1]));
-    }
-    bw.close();
+        dp[1][0] = stair[1];
+        dp[1][1] = stair[1];
+        for(int i = 2; i <= n; i++) {
+            dp[i][0] = dp[i - 1][1] + stair[i];
+            dp[i][1] = Math.max(dp[i - 2][0], dp[i - 2][1]) + stair[i];
+        }
+        System.out.println(Math.max(dp[n][0], dp[n][1]));
 }
 }
