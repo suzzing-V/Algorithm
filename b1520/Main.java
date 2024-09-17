@@ -10,42 +10,37 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
         StringTokenizer st = new StringTokenizer(bf.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
-
         map = new int[n][m];
+        dp = new int[n][m];
+
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(bf.readLine());
             for(int j = 0; j < m; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-
-        dp = new int[n][m];
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
                 dp[i][j] = -1;
             }
         }
-        dp[n - 1][m - 1] = 1;
-
-        bw.write(String.valueOf(dfs(0, 0)));
-        bw.close();
+        System.out.println(dfs(0, 0));
     }
 
     public static int dfs(int x, int y) {
-        if(x == n - 1 && y == m - 1) return 1;
+        if(x == n - 1 && y == m - 1) {
+            return 1;
+        }
 
-        if(dp[x][y] == -1) {
-            dp[x][y] = 0;
-            for(int i = 0; i < 4; i++) {
-                int goX = x + dir[i][0];
-                int goY = y + dir[i][1];
-                if(goX >= 0 && goX < n && goY >= 0 && goY < m && map[goX][goY] < map[x][y])
-                    dp[x][y] += dfs(goX, goY);
+        if(dp[x][y] != -1) {
+            return dp[x][y];
+        }
+
+        dp[x][y] = 0;
+        for(int i = 0; i < 4; i++) {
+            int nx = x + dir[i][0];
+            int ny = y + dir[i][1];
+            if(nx <= n - 1 && nx >= 0 && ny <= m - 1 && ny >= 0 && map[nx][ny] < map[x][y]) {
+                dp[x][y] += dfs(nx, ny);
             }
         }
         return dp[x][y];
