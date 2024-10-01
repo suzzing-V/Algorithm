@@ -6,21 +6,25 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(bf.readLine());
         int m = Integer.parseInt(bf.readLine());
-        int[] clothes = new int[10000001];
+        int[] clothes = new int[n];
         StringTokenizer st = new StringTokenizer(bf.readLine());
         for(int i = 0; i < n; i++) {
-            clothes[Integer.parseInt(st.nextToken())] ++;
+            clothes[i] = Integer.parseInt(st.nextToken());
         }
 
+        Arrays.sort(clothes);
         int count = 0;
-        int end = m / 2;
-        if(m % 2 == 0) {
-            count += clothes[m / 2] / 2;
-            end = m / 2 - 1;
-        }
-        for(int i = 1; i <= end; i++) {
-            if(clothes[i] > 0 && clothes[m - i] > 0) {
-                count += Math.min(clothes[i], clothes[m - i]);
+        int start = 0;
+        int end = n - 1;
+        while(start < end) {
+            if(clothes[start] + clothes[end] == m) {
+                count++;
+                start ++;
+                end --;
+            } else if(clothes[start] + clothes[end] < m) {
+                start ++;
+            } else {
+                end --;
             }
         }
         System.out.println(count);
