@@ -3,22 +3,22 @@ import java.util.*;
 
 public class Main {
 
-    static Road[] roads;
+    static int[] dp;
+    static int d;
+    static ArrayList<Node>[] roads;
 
-    static class Road implements Comparable<Road> {
-        int start;
-        int end;
-        int dis;
+    static class Node implements Comparable<Node>{
+        int num;
+        int dist;
 
-        Road(int start, int end, int dis) {
-            this.start = start;
-            this.end = end;
-            this.dis = dis;
+        Node(int num, int dist) {
+            this.num = num;
+            this.dist = dist;
         }
 
         @Override
-        public int compareTo(Road o) {
-            return this.start - o.start;
+        public int compareTo(Node o) {
+            return this.dist - o.dist;
         }
     }
 
@@ -26,30 +26,47 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
         int n = Integer.parseInt(st.nextToken());
-        int d = Integer.parseInt(st.nextToken());
-        roads = new Road[n];
+        d = Integer.parseInt(st.nextToken());
+        roads = new ArrayList[d + 1];
+        for(int i = 0; i < d; i++) {
+            roads[i] = new ArrayList<>();
+            roads[i].add(new Node(i + 1, 1));
+        }
+        roads[d] = new ArrayList<>();
+
+        dp = new int[d + 1];
+        for(int i = 0; i <= d; i++) {
+                dp[i] = i;
+        }
+
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(bf.readLine());
-            roads[i] = new Road(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
-        }
-
-        Arrays.sort(roads);
-        int[] dp = new int[d + 1];
-        for(int i = 1; i <= d; i++) {
-            dp[i] = i;
-        }
-
-        for(int i = 0; i < n; i ++) {
-            Road road = roads[i];
-            if(road.end > d) {
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            if(end > d) {
                 continue;
             }
-            dp[road.end] = Math.min(dp[road.end], dp[road.start] + Math.min(road.dis, road.end - road.start));
-            for(int j = road.end + 1; j <= d; j++) {
-                dp[j] = Math.min(dp[j], dp[j - 1] + 1); // 갱신된 거 vs 기존 거
-            }
+            int dist = Integer.parseInt(st.nextToken());
+            roads[start].add(new Node(end, dist));
         }
 
+        dijkstra(0);
+
         System.out.println(dp[d]);
+    }
+
+    public static void dijkstra(int start) {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        pq.add(new Node(start, 0));
+
+        while(!pq.isEmpty()) {
+            Node node = pq.remove();
+
+            for(Node road : roads[node.num]) {
+                int next = road.num;
+                dp[next] = Math.min(dp[next], node.dist + road.dist);
+                pq.add(new Node(next, dp[next]));
+            }
+        }
     }
 }
