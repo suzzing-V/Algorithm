@@ -1,0 +1,11 @@
+
+L
+java:S1121ˆ".Extract the assignment out of this expression.(šğ‚†8ëßè©±2
+Q
+java:S1066A"/Merge this if statement with the enclosing one.(èÜÎÚşÿÿÿÿ8ëßè©±2
+{
+java:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(ßâ‰ùùÿÿÿÿ8Üàè©±2
+o
+java:S3776)"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(œû¿Ø8Şàè©±2
+L	java:S106b"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿ8áàè©±2
+G	java:S106m"+Replace this use of System.out by a logger.(›å–¾8âàè©±2
