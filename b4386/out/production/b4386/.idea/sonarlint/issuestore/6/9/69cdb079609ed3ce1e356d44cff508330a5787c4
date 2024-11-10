@@ -1,0 +1,10 @@
+
+q
+java:S1121O".Extract the assignment out of this expression.(šğ‚†8„Ó„›±2J$84f29c91-a7b5-4050-94d3-316de179a0df
+œ
+java:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(şÖÈ8¦“‡›±2J$e717b841-d269-4fe4-8f96-ce7a18fd85f7
+r	java:S106H"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿ8íÓ„›±2J$3822d26b-5614-40a5-a389-a1e88f5e9ae4
+x
+java:S1854V"5Remove this useless assignment to local variable "b".(á»ÑÅ8îÓ„›±2J$a23c3d12-2d55-4709-92d2-90384e246f71
+}
+java:S1854X"5Remove this useless assignment to local variable "a".(­ÛúÒûÿÿÿÿ8îÓ„›±2J$0451d279-01d9-487d-82c4-4dd03a6c95c0
