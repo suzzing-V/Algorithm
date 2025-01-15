@@ -12,8 +12,10 @@ public class Main {
 
         for(int i = 2; i <= n; i++) {
             for(int j = 0; j < 10; j ++) {
-                for(int k = j; k >= 0; k--) {
-                    dp[i][j] += dp[i - 1][k] % 10007;
+                if(j == 0) {
+                    dp[i][j] += dp[i - 1][j];
+                } else {
+                    dp[i][j] += dp[i - 1][j] + dp[i][j - 1];
                 }
                 dp[i][j] %= 10007;
             }
@@ -21,7 +23,7 @@ public class Main {
 
         long result = 0;
         for(int i = 0; i < 10; i ++) {
-            result += dp[n][i] % 10007;
+            result += dp[n][i];
         }
         System.out.println(result % 10007);
     }
