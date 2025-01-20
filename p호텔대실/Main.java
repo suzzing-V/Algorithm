@@ -1,33 +1,23 @@
 import java.util.*;
 
 class Solution {
-    boolean[][] time_rec;
+    PriorityQueue<Integer> rooms = new PriorityQueue<>();
     public int solution(String[][] book_time) {
-        time_rec = new boolean[1440][book_time.length];
+        Arrays.sort(book_time, (o1, o2) -> o1[0].compareTo(o2[0]));
         for(int i = 0; i < book_time.length; i++) {
             StringTokenizer st = new StringTokenizer(book_time[i][0], ":");
-            int startH = Integer.parseInt(st.nextToken());
-            int startM = Integer.parseInt(st.nextToken());
-            int startToMinute = startH * 60 + startM;
+            int start = Integer.parseInt(st.nextToken()) * 60 + Integer.parseInt(st.nextToken());
             st = new StringTokenizer(book_time[i][1], ":");
-            int endH = Integer.parseInt(st.nextToken());
-            int endM = Integer.parseInt(st.nextToken());
-            int endToMinute = endH * 60 + endM;
-            endToMinute = (endToMinute + 9 >= 1439) ? 1439 : endToMinute + 9;
+            int end = Integer.parseInt(st.nextToken()) * 60 + Integer.parseInt(st.nextToken());
 
-            for(int j = startToMinute; j <= endToMinute; j++) {
-                time_rec[j][i] = true;
+            Integer minEnd = rooms.peek();
+            if(minEnd == null || minEnd > start) {
+                rooms.add(end + 10);
+            } else {
+                rooms.remove();
+                rooms.add(end + 10);
             }
         }
-
-        int max = 0;
-        for(int i = 0; i < time_rec.length; i++) {
-            int cnt = 0;
-            for(int j = 0; j < time_rec[0].length; j++) {
-                if(time_rec[i][j]) cnt ++;
-            }
-            max = Math.max(cnt, max);
-        }
-        return max;
+        return rooms.size();
     }
 }
