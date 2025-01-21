@@ -50,32 +50,12 @@ public class Main {
         int ny = y;
         if(map[x][y].equals("U")) {
             nx = x - 1;
-            if(nx < 0) {
-                map[x][y] = "S";
-                sz ++;
-                return;
-            }
         } else if(map[x][y].equals("D")) {
             nx = x + 1;
-            if(nx >= n) {
-                map[x][y] = "S";
-                sz ++;
-                return;
-            }
         } else if(map[x][y].equals("L")) {
             ny = y - 1;
-            if(ny < 0) {
-                map[x][y] = "S";
-                sz ++;
-                return;
-            }
         } else if(map[x][y].equals("R")) {
             ny = y + 1;
-            if(ny >= m) {
-                map[x][y] = "S";
-                sz ++;
-                return;
-            }
         }
         dfs(nx, ny);
         finished[nx][ny] = true;
