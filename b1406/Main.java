@@ -4,6 +4,8 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         Stack<Character> left = new Stack<>();
         Stack<Character> right = new Stack<>();
         String str = br.readLine();
@@ -31,12 +33,12 @@ public class Main {
 //            System.out.println();
         }
 
-        List<Character> list = new ArrayList<>(left);
-        for(int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i));
+        while(!left.isEmpty()) {
+            right.add(left.pop());
         }
         while(!right.isEmpty()) {
-            System.out.print(right.pop());
+            bw.write(right.pop());
         }
+        bw.close();
     }
 }
