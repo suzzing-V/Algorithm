@@ -1,0 +1,11 @@
+
+x
+java:S3008"VRename this field "alpha_combi" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØœÃ¦üÿÿÿÿ8¼÷ÂÔÎ2
+S
+java:S1854"6Remove this useless assignment to local variable "bw".(ûÄÏ8¿÷ÂÔÎ2
+G	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8À÷ÂÔÎ2
+D
+java:S1481"'Remove this unused "bw" local variable.(ûÄÏ8À÷ÂÔÎ2
+]	java:S125"<This block of commented-out lines of code should be removed.(ôØ¿ˆÿÿÿÿÿ8Á÷ÂÔÎ2
+G	java:S106"+Replace this use of System.out by a logger.(êƒË8Â÷ÂÔÎ2
+G	java:S106"+Replace this use of System.out by a logger.(†ê¯Ä8Â÷ÂÔÎ2
