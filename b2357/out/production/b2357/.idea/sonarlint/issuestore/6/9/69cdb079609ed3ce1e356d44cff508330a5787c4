@@ -1,0 +1,8 @@
+
+u
+java:S3008	"SRename this field "max_tree" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Φª„έψÿÿÿÿ8¥υ›Ο2
+p
+java:S3008
+"SRename this field "min_tree" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ψΎΖµ8¦υ›Ο2
+G	java:S106"+Replace this use of System.out by a logger.(ϋΔΟ8¨υ›Ο2
+J	java:S108")Either remove or fill this block of code.(έΐΩψÿÿÿÿ8©υ›Ο2
