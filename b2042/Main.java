@@ -4,9 +4,9 @@ import java.util.*;
 public class Main {
 
     static long[] arr;
-    static int n;
-    static int m;
-    static int k;
+    static long n;
+    static long m;
+    static long k;
     static long[] tree;
 
     public static void main(String[] args) throws IOException {
@@ -14,48 +14,48 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(bf.readLine());
 
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        k = Integer.parseInt(st.nextToken());
-        arr = new long[n];
-        tree = new long[n * 4];
+        n = Long.parseLong(st.nextToken());
+        m = Long.parseLong(st.nextToken());
+        k = Long.parseLong(st.nextToken());
+        arr = new long[(int)n];
+        tree = new long[(int)n * 4];
         for(int i = 0; i < n; i++) {
             arr[i] = Long.parseLong(bf.readLine());
         }
 
-        buildTree(0, 0, n - 1);
+        buildTree(1, 0, n - 1);
 
-        int cmdNum = m + k;
+        long cmdNum = m + k;
         for(int i = 0; i < cmdNum; i++) {
             st = new StringTokenizer(bf.readLine());
-            int cmd = Integer.parseInt(st.nextToken());
-            int target = Integer.parseInt(st.nextToken());
-            int value = Integer.parseInt(st.nextToken());
+            long cmd = Long.parseLong(st.nextToken());
+            long target = Long.parseLong(st.nextToken());
+            long value = Long.parseLong(st.nextToken());
             if(cmd == 1) {
-                updateTree(0, target - 1, value, 0, n - 1);
+                updateTree(1, target - 1, value, 0, n - 1);
             } else {
-                bw.write(findTree(0, target - 1, value - 1, 0, n - 1) + "\n");
+                bw.write(findTree(1, target - 1, value - 1, 0, n - 1) + "\n");
             }
         }
 
         bw.close();
     }
 
-    private static long buildTree(int curr, int left, int right) {
+    private static long buildTree(long curr, long left, long right) {
         if(left == right) {
-            tree[curr] = arr[left];
-            return tree[curr];
+            tree[(int)curr] = arr[(int)left];
+            return tree[(int)curr];
         }
 
-        int mid = (left + right) / 2;
+        long mid = (left + right) / 2;
         long leftTree = buildTree(curr * 2, left, mid);
         long rightTree = buildTree(curr * 2 + 1, mid + 1, right);
-        return tree[curr] = leftTree + rightTree;
+        return tree[(int)curr] = leftTree + rightTree;
     }
 
-    private static void updateTree(int curr, int target, int value, int left, int right) {
+    private static void updateTree(long curr, long target, long value, long left, long right) {
         if(left == right && left == target) {
-            tree[curr] = value;
+            tree[(int)curr] = value;
             return;
         }
 
@@ -63,21 +63,22 @@ public class Main {
             return;
         }
 
-        int mid = (left + right) / 2;
+        long mid = (left + right) / 2;
         updateTree(curr * 2, target, value, left, mid);
         updateTree(curr * 2 + 1, target, value, mid + 1, right);
+        tree[(int)curr] = tree[(int)curr * 2 + 1] + tree[(int)curr * 2];
     }
 
-    private static long findTree(int curr, int fl, int fr, int left, int right) {
+    private static long findTree(long curr, long fl, long fr, long left, long right) {
         if(fl <= left && fr >= right) {
-            return tree[curr];
+            return tree[(int)curr];
         }
 
         if(fl > right || fr < left) {
             return 0;
         }
 
-        int mid = (left + right) / 2;
+        long mid = (left + right) / 2;
         long leftTree = findTree(curr * 2, fl, fr, left, mid);
         long rightTree = findTree(curr * 2 + 1, fl, fr, mid + 1, right);
         return leftTree + rightTree;
