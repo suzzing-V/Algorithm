@@ -1,0 +1,10 @@
+
+z	java:S135"YReduce the total number of break and continue statements in this loop to use at most one.(¸şõöúÿÿÿÿ8ïÁïìÏ2
+~
+java:S1854	"6Remove this useless assignment to local variable "bf".(Ó¦¨‚ıÿÿÿÿ8à½îìÏ2J$deda8df0-acb8-4ff3-b378-8940a08739ff
+o
+java:S1481	"'Remove this unused "bf" local variable.(Ó¦¨‚ıÿÿÿÿ8â½îìÏ2J$2a59e341-8631-4bd3-8ff5-4762e39f461e
+m	java:S106
+"+Replace this use of System.out by a logger.(ûÄÏ8â½îìÏ2J$f673a90d-4902-4bb9-a8da-97f02bba605d
+C
+java:S1128"&Remove this unused import 'java.util'.(Î€ŒÙ8úÁïìÏ2
