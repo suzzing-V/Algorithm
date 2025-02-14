@@ -1,0 +1,11 @@
+
+
+java:S1450"PRemove the "t" field and declare it as a local variable in the relevant methods.(η“ƒϊÿÿÿÿ8Ώ¬ϋΠ2J$8e3bc57f-dcc6-4367-a5bd-006e2ffaf868
+m	java:S106
+"+Replace this use of System.out by a logger.(ϋΔΟ8Γ¬ϋΠ2J$f3c738d6-96e1-454d-bed4-90aac7602a26
+C
+java:S1481"&Remove this unused "a" local variable.(€τα8Ϋ²ύΠ2
+C
+java:S1481"&Remove this unused "b" local variable.(°ς‹8Ϋ²ύΠ2
+H
+java:S1481"&Remove this unused "c" local variable.(ª››ύÿÿÿÿ8Ϋ²ύΠ2
