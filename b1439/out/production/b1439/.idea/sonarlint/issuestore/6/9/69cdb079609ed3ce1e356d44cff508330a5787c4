@@ -1,0 +1,13 @@
+
+	java:S127"XRefactor the code in order to not assign to this loop counter from within the loop body.(’ύςΨ8ή‘ΝΠ2J$a2acfc68-2bc8-4473-9138-186e5e4fae45
+™	java:S127"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ΔK8ή‘ΝΠ2J$a790e1f4-3503-4d1a-8448-51a896a30408
+	java:S127"XRefactor the code in order to not assign to this loop counter from within the loop body.(ηθ¦€8ή‘ΝΠ2J$870bfa79-0da3-4590-8afe-bad6c086f464
+™	java:S127"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ΔK8ή‘ΝΠ2J$91636c53-a940-4e9e-9a4e-bf3573c0c232
+m	java:S106"+Replace this use of System.out by a logger.(ϋΔΟ8γ‘ΝΠ2J$4294a0df-b3ed-4df3-874d-a812148d9c75
+n
+java:S1481
+"+Remove this unused "oneCnt" local variable.(οσ”γ8γ‘ΝΠ2J$101b273f-d7db-498d-9212-5e24bfd58ead
+t
+java:S1481",Remove this unused "zeroCnt" local variable.(Ξ€άώÿÿÿÿ8γ‘ΝΠ2J$a6f512e6-40c9-4b43-b4fa-828dbc36e51a
+k	java:S108")Either remove or fill this block of code.(’ύςΨ8δ‘ΝΠ2J$7fbb6996-7703-4152-accf-072d7265c090
+k	java:S108")Either remove or fill this block of code.(ηθ¦€8δ‘ΝΠ2J$2f3c07f4-324b-4ebf-bfad-fbdf07344f1c
