@@ -1,0 +1,5 @@
+
+Ÿ	java:S127-"XRefactor the code in order to not assign to this loop counter from within the loop body.(ƒÇÀëúÿÿÿÿ8­·ÚåÔ2J$0a78d392-3bb0-4190-8408-787b9a064d56
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(œû¿Ø8ñ·ÚåÔ2J$da31a629-9a91-4629-97de-049d3864834d
+m	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8ó·ÚåÔ2J$01bcd05d-2807-4b5b-b0e7-8037b389d028
