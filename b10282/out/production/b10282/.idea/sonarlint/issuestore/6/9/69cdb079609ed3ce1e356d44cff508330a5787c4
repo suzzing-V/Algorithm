@@ -1,0 +1,6 @@
+
+¡
+java:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(áÂ¦ÿÿÿÿÿ8‘ùÌüÔ2J$2365791d-ba66-4a70-90ab-c62853fe26b4
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(œû¿Ø8“ùÌüÔ2J$bb5119db-a6f7-426b-8e91-3435beee0c41
+m	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8•ùÌüÔ2J$b4d2dcb2-d639-4d72-a163-7f86dd54c884
