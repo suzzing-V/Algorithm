@@ -1,0 +1,8 @@
+
+p
+java:S1121Q".Extract the assignment out of this expression.(³ŞÏ8ßà¥¬Õ2J$59328ad1-3456-4120-8364-3ec643c9fd7d
+¡
+java:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(áÂ¦ÿÿÿÿÿ8Èá¥¬Õ2J$526852e1-1c07-47da-981b-5feed7bf3b3e
+m	java:S106#"+Replace this use of System.out by a logger.(ûÄÏ8Íá¥¬Õ2J$2ef336c4-5bc7-400f-966f-8289efed19d8
+w
+java:S2864="4Iterate over the "entrySet" instead of the "keySet".(—åˆ¬8Ğá¥¬Õ2J$506b5c73-d5f9-421f-a55b-ae39a46cd133
