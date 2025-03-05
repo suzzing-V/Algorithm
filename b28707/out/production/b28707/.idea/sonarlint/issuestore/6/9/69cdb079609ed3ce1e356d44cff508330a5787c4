@@ -1,0 +1,15 @@
+
+S
+java:S1854"6Remove this useless assignment to local variable "bw".(ûÄÏ8Ø²“ªÖ2
+G	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8Ú²“ªÖ2
+D
+java:S1481"'Remove this unused "bw" local variable.(ûÄÏ8Ú²“ªÖ2
+G	java:S106'"+Replace this use of System.out by a logger.(é¦¬ä8Ü²“ªÖ2
+B
+java:S2116'"%Use "Arrays.toString(array)" instead.(é¦¬ä8İ²“ªÖ2
+H
+java:S1068"&Remove this unused "a1" private field.(›¶»ûÿÿÿÿ8Ş²“ªÖ2
+H
+java:S1068"&Remove this unused "a2" private field.(˜¦Èèúÿÿÿÿ8Ş²“ªÖ2
+J
+java:S1068"(Remove this unused "cost" private field.(Ş‹Â—üÿÿÿÿ8Ş²“ªÖ2
