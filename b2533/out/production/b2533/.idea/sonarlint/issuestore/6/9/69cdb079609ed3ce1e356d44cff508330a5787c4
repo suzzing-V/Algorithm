@@ -1,0 +1,20 @@
+
+p
+java:S1121*".Extract the assignment out of this expression.(ÅÇÿ8Ü…êÄÙ2J$4e960a5b-eb7c-47e5-b777-f20781e4b157
+v
+java:S11217".Extract the assignment out of this expression.(¥•¤Ûùÿÿÿÿ8İ…êÄÙ2J$d20e1e67-f27c-4a0c-ab4a-0a7667d49687
+p
+java:S11219".Extract the assignment out of this expression.(ÅÇÿ8İ…êÄÙ2J$ea99c25a-841c-4222-a140-83556b06168b
+“	java:S117."QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶·é¢8İ…êÄÙ2J$4f2478a1-aefe-484d-b671-7c901d1eda45
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8ä…êÄÙ2J$1094f45b-59de-463c-a287-8a570ad973c8
+m	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8æ…êÄÙ2J$d7c15c75-8874-4468-a507-69231977adf3
+m	java:S106"+Replace this use of System.out by a logger.(Û×ïÓ8ç…êÄÙ2J$0ad73c7a-fd05-4c98-9516-0bf868fae945
+m	java:S106"+Replace this use of System.out by a logger.(ÿ¸§…8ç…êÄÙ2J$f985f7e8-dd49-4ee3-b9ec-961a4b307e21
+ƒ	java:S125"<This block of commented-out lines of code should be removed.(Ğóüªùÿÿÿÿ8¡ñÄÙ2J$0b1237c0-dec8-4c19-b0e6-3c8b4296cb08
+r	java:S106"+Replace this use of System.out by a logger.(Õ¦ûşÿÿÿÿ8è…êÄÙ2J$df0f3c35-9b2b-4c6c-8b4c-affa753f6b88
+~	java:S125"<This block of commented-out lines of code should be removed.(¾”´Ş8è…êÄÙ2J$41c3d0d6-b12a-40d9-89fc-a349b052a53a
+m	java:S106!"+Replace this use of System.out by a logger.(ƒ€Şú8é…êÄÙ2J$742badc5-9d8c-4bce-9105-d50265188061
+m	java:S106/"+Replace this use of System.out by a logger.(”Õ·8é…êÄÙ2J$0f576d93-b1d7-413f-88b2-1a1c6a97cc6f
+r	java:S1060"+Replace this use of System.out by a logger.(û¨£®ıÿÿÿÿ8é…êÄÙ2J$0029543f-4992-43cb-9676-dec608aefd8b
+l	java:S1063"+Replace this use of System.out by a logger.(††åU8Ê¦ğÄÙ2J$e1fb0534-fc7c-4cdd-98c1-d555d46a3f11
