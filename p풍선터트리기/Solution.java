@@ -2,37 +2,32 @@ import java.util.*;
 
 class Solution {
 
-    private PriorityQueue<Integer> right = new PriorityQueue<>();
-    private Map<Integer, Integer> visited = new HashMap<>();
+    private int[] left_min; // 0 ~ i까지의 수 중 최소값
+    private int[] right_min; // i ~ a.length - 1까지의 수 중 최소값
 
     public int solution(int[] a) {
-        if(a.length <= 2) return a.length;
+        left_min = new int[a.length];
+        right_min = new int[a.length];
 
-        int cnt = 1;
-        int left_min = a[0];
+        if(a.length == 2) return 1;
+
+        int cnt = 2; // 첫번째 수, 마지막 수는 무조건 가능
+
+        // 양쪽 구간 최소값 구하기
+        left_min[0] = a[0];
+        right_min[a.length - 1] = a[a.length - 1];
         for(int i = 1; i < a.length; i++) {
-            right.add(a[i]);
-            visited.put(a[i], 0);
+            left_min[i] = Math.min(a[i], left_min[i - 1]);
         }
-        int right_min = right.peek();
+        for(int i = a.length - 2; i >= 0; i--) {
+            right_min[i] = Math.min(a[i], right_min[i + 1]);
+        }
 
+        // 왼쪽 최소값, 오른쪽 최소값, 현재 값 비교해서 현재 값이 제일 크면 최후의 풍선 될 수 없다.
         for(int i = 1; i < a.length - 1; i++) {
-            visited.remove(a[i]); // 오른쪽에서 현재 수 삭제
-            while(true) { // 오른쪽 수 중 가장 작은 수 갱신
-                int peek = right.peek();
-                if(visited.get(peek) != null) {
-                    right_min = peek;
-                    break;
-                }
-                right.poll();
-            }
-            // System.out.println(left_min + " " + a[i] + " "+ right_min);
-
-            if(!(a[i] > left_min && a[i] > right_min)) cnt ++; // 세 수 중 현재 수가 가장 크면 현재 수는 최후까지 남을 수 없다.
-            left_min = Math.min(a[i], left_min); // 현재 수가 왼쪽 수들 중 가장 작으면 갱신
+            if((left_min[i - 1] < a[i] && right_min[i + 1] < a[i])) continue;
+            cnt ++;
         }
-
-        cnt ++; // 마지막 수도 무조건 가능
         return cnt;
     }
 }
