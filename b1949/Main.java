@@ -3,48 +3,50 @@ import java.util.*;
 
 public class Main {
 
-    private static class Applicant {
-        private int first;
-        private int second;
+    private static int n;
+    private static List<Integer>[] neighbors;
+    private static int[] people;
+    private static int[][] dp; // i 마을이 우수마을일 때와 우수마을이 아닐 때의 최대 우수마을 주민 술
+    private static boolean[] visited;
 
-        Applicant(int first, int second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int t = Integer.parseInt(bf.readLine());
-        for(int i = 0; i < t; i++) {
-            int n = Integer.parseInt(bf.readLine());
-            List<Applicant> applicants = new ArrayList<>();
-            for(int j = 0; j < n; j++) {
-                StringTokenizer st = new StringTokenizer(bf.readLine());
-                int first = Integer.parseInt(st.nextToken());
-                int second = Integer.parseInt(st.nextToken());
-                applicants.add(new Applicant(first, second));
-            }
-            Collections.sort(applicants, (o1, o2) -> {return o1.first - o2.first;});
-            for(int j = 1; j < applicants.size(); j++) {
-                Applicant curr = applicants.get(j);
-                Applicant prev = applicants.get(j - 1);
-                if(curr.second > prev.second) {
-                    applicants.remove(curr);
-                    j --;
-                }
-            }
-            Collections.sort(applicants, (o1, o2) -> {return o1.second - o2.second;});
-            for(int j = 1; j < applicants.size(); j++) {
-                Applicant curr = applicants.get(j);
-                Applicant prev = applicants.get(j - 1);
-                if(curr.first > prev.first) {
-                    applicants.remove(curr);
-                    j --;
-                }
-            }
-            bw.write(applicants.size() + "\n");
+        n = Integer.parseInt(bf.readLine());
+        people = new int[n + 1];
+        neighbors = new ArrayList[n + 1];
+        dp = new int[n + 1][2];
+        visited = new boolean[n + 1];
+        StringTokenizer st = new StringTokenizer(bf.readLine());
+        for(int i = 1; i <= n; i++) {
+            people[i] = Integer.parseInt(st.nextToken());
+            neighbors[i] = new ArrayList<>();
         }
+
+        for(int i = 0; i < n - 1; i++) {
+            st = new StringTokenizer(bf.readLine());
+            int n1 = Integer.parseInt(st.nextToken());
+            int n2 = Integer.parseInt(st.nextToken());
+            neighbors[n1].add(n2);
+            neighbors[n2].add(n1);
+        }
+
+        dfs(1);
+        bw.write(String.valueOf(Math.max(dp[1][0], dp[1][1])));
         bw.close();
+    }
+
+    private static void dfs(int curr) {
+//        System.out.println(curr);
+        visited[curr] = true;
+        for(int i = 0; i < neighbors[curr].size(); i++) {
+            int child = neighbors[curr].get(i);
+            if(visited[child]) continue;
+            dfs(child);
+            dp[curr][0] += Math.max(dp[child][1], dp[child][0]); // 현재 마을이 우수 마을이 아닐 때 자식노드들은 우수마을 주민 수 최대인 경우 고른다.
+            dp[curr][1] += dp[child][0]; // 현재 마을이 우수마을이면 자식 노드는 모두 우수마을 아니다.
+        }
+
+        dp[curr][1] += people[curr]; // 현재 마을이 우수마을일 경우 현재 마을의 주민 수 더해줘야 함.
     }
 }

@@ -1,8 +1,0 @@
-
-š	java:S127""XRefactor the code in order to not assign to this loop counter from within the loop body.(Â¨•ù8Êæ¡’Ğ2J$7cdcb038-b462-42f9-bea9-cc543a44aad4
-š	java:S127+"XRefactor the code in order to not assign to this loop counter from within the loop body.(Â¨•ù8²Â¤’Ğ2J$be35dc44-3aee-4cc3-aae5-b17df15b5917
-m	java:S106"+Replace this use of System.out by a logger.(ûÄÏ8éÿ’Ğ2J$b4ffac72-ecf5-41fb-8daf-2e30712a1bc0
-•
-java:S1602"SRemove useless curly braces around statement and then remove useless return keyword(ó (8ü¢’Ğ2J$c101fab3-ff03-4e6e-85e2-950312c97aa3
-–
-java:S1602%"SRemove useless curly braces around statement and then remove useless return keyword(Ó’÷¥8ü¢’Ğ2J$661fee2b-278e-4bba-8b34-f707d68277db
