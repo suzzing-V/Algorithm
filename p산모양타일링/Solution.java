@@ -1,19 +1,29 @@
+import java.util.*;
+
 class Solution {
+
+    private int[] dp;
+    private int MOD = 10007;
+
     public int solution(int n, int[] tops) {
-        int[] mo = new int[n];
-        int[] mx = new int[n];
+        dp = new int[2 * n + 2];
+        dp[1] = 1;
+        dp[2] = tops[0] == 1 ? 3 : 2;
 
-        mo[0] = 1;
-        mx[0] = tops[0] == 1 ? 3 : 2;
-
-        for(int i = 1; i < n; i ++) {
-            mo[i] = (mo[i - 1] + mx[i - 1]) % 10007;
-            if(tops[i] == 1) {
-                mx[i] = (mx[i - 1] * 3 + mo[i - 1] * 2) % 10007;
+        for(int i = 3; i <= 2 * n + 1; i++) {
+            if(i % 2 != 0) {
+                dp[i] = dp[i - 1] % MOD + dp[i - 2] % MOD;
             } else {
-                mx[i] = (mx[i - 1] * 2 + mo[i - 1]) % 10007;
+                if(tops[i / 2 - 1] == 1) {
+                    dp[i] = 2 * dp[i - 1] % MOD + dp[i - 2] % MOD;
+                } else {
+                    dp[i] = dp[i - 1] % MOD + dp[i - 2] % MOD;
+                }
             }
+
+            dp[i] %= MOD;
         }
-        return (mo[n - 1] + mx[n - 1]) % 10007;
+
+        return dp[2 * n + 1];
     }
 }
