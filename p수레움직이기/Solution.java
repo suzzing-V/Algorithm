@@ -1,147 +1,185 @@
 import java.util.*;
 
-public class Node {
-    int redX;
-    int redY;
-    int blueX;
-    int blueY;
-    int turn;
-
-    boolean[][] redV;
-    boolean[][] blueV;
-    Node(int redX, int redY, int blueX, int blueY, int turn, boolean[][] redV, boolean[][] blueV) {
-        this.redX = redX;
-        this.redY = redY;
-        this.blueX = blueX;
-        this.blueY = blueY;
-        this.turn = turn;
-        this.redV = new boolean[redV.length][redV[0].length];
-        this.blueV = new boolean[redV.length][redV[0].length];
-        for(int i = 0; i < redV.length; i++) {
-            for(int j = 0; j < redV[0].length; j++) {
-                this.redV[i][j] = redV[i][j];
-                this.blueV[i][j] = blueV[i][j];
-            }
-        }
-
-
-    }
-}
-
 class Solution {
-    public int[][] dir = { {1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-    public int solution(int[][] maze) {
-        int answer = 0;
-        int row = maze.length;
-        int col = maze[0].length;
-        int redSrtX = 0;
-        int redSrtY = 0;
-        int blueSrtX = 0;
-        int blueSrtY = 0;
-        int redArvX = 0;
-        int redArvY = 0;
-        int blueArvX = 0;
-        int blueArvY = 0;
+    private int[][] dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    private int goalRedX;
+    private int goalRedY;
+    private int goalBlueX;
+    private int goalBlueY;
+    private int n;
+    private int m;
+    private int[][] maze;
 
-        for(int i = 0; i < row; i++) {
-            for(int j = 0; j < col; j++) {
+    private class Node {
+        int redX;
+        int redY;
+        int blueX;
+        int blueY;
+        int turn;
+        boolean[][] visitedRed;
+        boolean[][] visitedBlue;
+
+        Node(int redX, int redY, int blueX, int blueY, int turn, boolean[][] visitedRed, boolean[][] visitedBlue) {
+            this.redX = redX;
+            this.redY = redY;
+            this.blueX = blueX;
+            this.blueY = blueY;
+            this.turn = turn;
+            this.visitedRed = visitedRed;
+            this.visitedBlue = visitedBlue;
+        }
+    }
+
+    public int solution(int[][] maze1) {
+        maze = maze1;
+        n = maze.length;
+        m = maze[0].length;
+        boolean[][] visitedRed = new boolean[n][m];
+        boolean[][] visitedBlue = new boolean[n][m];
+        int initRedX = -1;
+        int initRedY = -1;
+        int initBlueX = -1;
+        int initBlueY = -1;
+
+        // 빨간 수레, 파란 수레 시작 좌표 찾기
+        for(int i = 0; i < maze.length; i++) {
+            for(int j = 0; j < maze[0].length; j++) {
                 if(maze[i][j] == 1) {
-                    redSrtX = i;
-                    redSrtY = j;
-                } else if(maze[i][j] == 2) {
-                    blueSrtX = i;
-                    blueSrtY = j;
-                } else if(maze[i][j] == 3) {
-                    redArvX = i;
-                    redArvY = j;
-                } else if(maze[i][j] == 4) {
-                    blueArvX = i;
-                    blueArvY = j;
+                    initRedX = i;
+                    initRedY = j;
+                }
+
+                if(maze[i][j] == 2) {
+                    initBlueX = i;
+                    initBlueY = j;
+                }
+
+                if(maze[i][j] == 3) {
+                    goalRedX = i;
+                    goalRedY = j;
+                }
+
+                if(maze[i][j] == 4) {
+                    goalBlueX = i;
+                    goalBlueY = j;
                 }
             }
         }
 
+        // 시작부분 방문처리
+        visitedRed[initRedX][initRedY] = true;
+        visitedBlue[initBlueX][initBlueY] = true;
+        return bfs(new Node(initRedX, initRedY, initBlueX, initBlueY, 0, visitedRed, visitedBlue));
+    }
+
+    private int bfs(Node start) {
         Queue<Node> queue = new LinkedList<>();
+        queue.add(start);
 
-        queue.add(new Node(redSrtX, redSrtY, blueSrtX, blueSrtY, 0, new boolean[row][col], new boolean[row][col]));
         while(!queue.isEmpty()) {
-            Node now = queue.remove();
-            //경계, 방문 확인
-            if(now.redX >= row || now.redX < 0 || now.redY >= col || now.redY < 0
-                    || now.blueX >= row || now.blueX < 0 || now.blueY >= col || now.blueY < 0 || now.redV[now.redX][now.redY] || now.blueV[now.blueX][now.blueY]) {
-                continue;
-            }
+            Node curr = queue.remove();
 
-            //벽 체크
-            if(maze[now.redX][now.redY] == 5 || maze[now.blueX][now.blueY] == 5) {
-                continue;
-            }
-
-            //동시에 같은 칸인지
-            if(now.redX == now.blueX && now.redY == now.blueY) {
-                continue;
-            }
-
-            boolean redArv = false;
-            boolean blueArv = false;
-            // 빨강 도착
-            if(now.redX == redArvX && now.redY == redArvY) {
-                redArv = true;
-            }
-
-            // 파랑 도착
-            if(now.blueX == blueArvX && now.blueY == blueArvY) {
-                blueArv = true;
-            }
-
-            if(redArv && blueArv) {
-                answer = now.turn;
-                break;
-            }
-
-            if(redArv) {
-                now.blueV[now.blueX][now.blueY] = true;
-            } else if(blueArv) {
-                now.redV[now.redX][now.redY] = true;
-            } else {
-                now.redV[now.redX][now.redY] = true;
-                now.blueV[now.blueX][now.blueY] = true;
-            }
-
-            if(redArv) {
+            // System.out.println(curr.redX + " " + curr.redY + " " + curr.blueX + " " + curr.blueY);
+            if(isGoalRed(curr.redX, curr.redY) && isGoalBlue(curr.blueX, curr.blueY)) { //  둘다 목적지에 도착하면 끝
+                return curr.turn;
+            } else if(isGoalRed(curr.redX, curr.redY)) { // 빨간색이 목적지에 도착했다면 파란색만 움직이기
+                int nextRedX = curr.redX;
+                int nextRedY = curr.redY;
                 for(int j = 0; j < 4; j++) {
-                    int blueNx = now.blueX + dir[j][0];
-                    int blueNy = now.blueY + dir[j][1];
-                    queue.add(new Node(now.redX, now.redY, blueNx, blueNy, now.turn + 1, now.redV, now.blueV));
-                }
-                continue;
-            }
+                    int nextBlueX = curr.blueX + dir[j][0];
+                    int nextBlueY = curr.blueY + dir[j][1];
 
-            if(blueArv) {
+                    if(isWallOrOut(nextBlueX, nextBlueY) || curr.visitedBlue[nextBlueX][nextBlueY]) continue;
+
+                    if(isMeet(nextRedX, nextRedY, nextBlueX, nextBlueY)) continue;
+
+                    boolean[][] visitedRed = copyVisited(curr.visitedRed);
+                    boolean[][] visitedBlue = copyVisited(curr.visitedBlue);
+                    visitedRed[nextRedX][nextRedY] = true;
+                    visitedBlue[nextBlueX][nextBlueY] = true;
+                    queue.add(new Node(nextRedX, nextRedY, nextBlueX, nextBlueY, curr.turn + 1, visitedRed, visitedBlue));
+                }
+            } else if(isGoalBlue(curr.blueX, curr.blueY)) { // 파란색이 도착했다면 빨간색만 움직이기
+                int nextBlueX = curr.blueX;
+                int nextBlueY = curr.blueY;
+                for(int j = 0; j < 4; j++) {
+                    int nextRedX = curr.redX + dir[j][0];
+                    int nextRedY = curr.redY + dir[j][1];
+
+                    if(isWallOrOut(nextRedX, nextRedY) || curr.visitedRed[nextRedX][nextRedY]) continue;
+
+                    if(isMeet(nextRedX, nextRedY, nextBlueX, nextBlueY)) continue;
+
+                    boolean[][] visitedRed = copyVisited(curr.visitedRed);
+                    boolean[][] visitedBlue = copyVisited(curr.visitedBlue);
+                    visitedRed[nextRedX][nextRedY] = true;
+                    visitedBlue[nextBlueX][nextBlueY] = true;
+                    queue.add(new Node(nextRedX, nextRedY, nextBlueX, nextBlueY, curr.turn + 1, visitedRed, visitedBlue));
+                }
+            } else { // 둘다 도착하지 않았으면 둘다 움직이기
+
                 for(int i = 0; i < 4; i++) {
-                    int redNx = now.redX + dir[i][0];
-                    int redNy = now.redY + dir[i][1];
-                    queue.add(new Node(redNx, redNy, now.blueX, now.blueY, now.turn + 1, now.redV, now.blueV));
-                }
-                continue;
-            }
+                    int nextRedX = curr.redX + dir[i][0];
+                    int nextRedY = curr.redY + dir[i][1];
+                    if(isWallOrOut(nextRedX, nextRedY) || curr.visitedRed[nextRedX][nextRedY]) continue;
 
-            for(int i = 0; i < 4; i++) {
-                for(int j = 0; j < 4; j++) {
-                    int redNx = now.redX + dir[i][0];
-                    int redNy = now.redY + dir[i][1];
-                    int blueNx = now.blueX + dir[j][0];
-                    int blueNy = now.blueY + dir[j][1];
+                    for(int j = 0; j < 4; j++) {
+                        int nextBlueX = curr.blueX + dir[j][0];
+                        int nextBlueY = curr.blueY + dir[j][1];
 
-                    //서로 자리 바꾸기인지
-                    if(redNx == now.blueX && redNy == now.blueY && blueNx == now.redX && blueNy == now.redY) {
-                        continue;
+                        if(isWallOrOut(nextBlueX, nextBlueY) || curr.visitedBlue[nextBlueX][nextBlueY]) continue;
+
+                        if(isMeet(nextRedX, nextRedY, nextBlueX, nextBlueY)) continue;
+                        if(isCross(curr.redX, curr.redY, curr.blueX, curr.blueY, nextRedX, nextRedY, nextBlueX, nextBlueY)) continue;
+
+                        boolean[][] visitedRed = copyVisited(curr.visitedRed);
+                        boolean[][] visitedBlue = copyVisited(curr.visitedBlue);
+                        visitedRed[nextRedX][nextRedY] = true;
+                        visitedBlue[nextBlueX][nextBlueY] = true;
+                        queue.add(new Node(nextRedX, nextRedY, nextBlueX, nextBlueY, curr.turn + 1, visitedRed, visitedBlue));
                     }
-                    queue.add(new Node(redNx, redNy, blueNx, blueNy, now.turn + 1, now.redV, now.blueV));
                 }
             }
         }
 
-        return answer;
+        return 0;
+    }
+
+    private boolean isWallOrOut(int x, int y) {
+        if(x >= n || x < 0 || y >= m || y < 0) return true;
+        if(maze[x][y] == 5) return true;
+        return false;
+    }
+
+    private boolean isGoalRed(int x, int y) {
+        if(x == goalRedX && y == goalRedY) return true;
+        return false;
+    }
+
+    private boolean isGoalBlue(int x, int y) {
+        if(x == goalBlueX && y == goalBlueY) return true;
+        return false;
+    }
+
+    private boolean isMeet(int x1, int y1, int x2, int y2) {
+        if(x1 == x2 && y1 == y2) return true;
+        return false;
+    }
+
+    private boolean isCross(int cx1, int cy1, int cx2, int cy2, int nx1, int ny1, int nx2, int ny2) {
+        if(cx1 == nx2 && cy1 == ny2 && cx2 == nx1 && cy2 == ny1) return true;
+        return false;
+    }
+
+    private boolean[][] copyVisited(boolean[][] origin) {
+        boolean[][] copy = new boolean[n][m];
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j ++) {
+                copy[i][j] = origin[i][j];
+            }
+        }
+
+        return copy;
     }
 }
