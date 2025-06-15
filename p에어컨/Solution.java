@@ -24,15 +24,15 @@ class Solution {
                 }
 
                 // 온도 조절하기
-                if(j < temperature) { // 안 키면 올라감
-                    if(j + 1 <= 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j]);
-                    if(j - 1 >= 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j] + a);
-                } else if(j > temperature) {
-                    if(j + 1 <= 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j] + a);
-                    if(j - 1 >= 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j]);
-                } else {
-                    if(j + 1 <= 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j] + a);
-                    if(j - 1 >= 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j] + a);
+                if(temperature > j) { // 외부온도 > 실내온도면 끄면 +1, 키면 -1
+                    if(j < 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j]);
+                    if(j > 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j] + a);
+                } else if(temperature == j) { // 외부온도 == 실내온도면 키면 +1, 키면 -1
+                    if(j < 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j] + a);
+                    if(j > 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j] + a);
+                } else { // 외부온도 < 실내온도면 키면 +1, 끄면 -1
+                    if(j < 50) dp[i + 1][j + 1] = Math.min(dp[i + 1][j + 1], dp[i][j] + a);
+                    if(j > 0) dp[i + 1][j - 1] = Math.min(dp[i + 1][j - 1], dp[i][j]);
                 }
             }
         }
