@@ -2,65 +2,82 @@ import java.util.*;
 
 class Solution {
 
-    private PriorityQueue<Integer>[] endTimes;
-    private int[] mentoNum;
-    private int k;
-    private int n;
-    private int[][] reqs;
     private int min = Integer.MAX_VALUE;
+    private int[][] reqs;
 
-    public int solution(int k1, int n1, int[][] reqs1) {
-        k = k1;
-        n = n1;
+    public int solution(int k, int n, int[][] reqs1) {
         reqs = reqs1;
-        endTimes = new PriorityQueue[k + 1];
-        mentoNum = new int[k + 1];
-        // 유형당 멘토 하나씩 있어야됨
-        n -= k;
-        Arrays.fill(mentoNum, 1);
-        makeMentoCombi(0, 0); // 가능한 모든 멘토수 조합
 
+        // 유형별 가능한 멘토 수 조합 구하기
+        int[] mentoCnt = new int[k + 1];
+        Arrays.fill(mentoCnt, 1);
+        makeMentoCombi(n - k, 1, mentoCnt);
         return min;
     }
 
-    private void makeMentoCombi(int start, int sum) {
-        if(sum == n) { // 조합 완성하면 그 조합으로 했을 때의 대기시간 합 구하기
-            int wt = calWaitingTime();
-            min = Math.min(wt, min);
+    private void makeMentoCombi(int rest, int idx, int[] mentoCnt) {
+        if(idx == mentoCnt.length) {
+            if(rest != 0) return;
+
+            counsel(mentoCnt);
             return;
         }
 
-        for(int i = start; i <= k; i++) { // 조합이므로 처음부터 시작하지 않아도 됨. 다음에 오는건 자기와 같거나 큰거
-            mentoNum[i] ++;
-            makeMentoCombi(i, sum + 1);
-            mentoNum[i] --;
+        for(int i = rest; i >= 0; i --) {
+            mentoCnt[idx] = i + 1;
+            makeMentoCombi(rest - i, idx + 1, mentoCnt);
         }
     }
 
-    private int calWaitingTime() {
-        // 멘토 수에 맞게 endTimes 초기화
-        for(int i = 1; i <= k; i++) {
-            endTimes[i] = new PriorityQueue<>();
-            for(int j = 0; j < mentoNum[i]; j++) {
-                endTimes[i].add(0);
+    private void counsel(int[] mentoCnt) {
+        PriorityQueue<Counsel>[] counsels = new PriorityQueue[mentoCnt.length];
+
+        // 유형별 멘토 수만큼 큐에 넣기
+        for(int i = 1; i < mentoCnt.length; i++) {
+            counsels[i] = new PriorityQueue<Counsel>();
+            int num = mentoCnt[i];
+            // System.out.print(num + " ");
+            for(int j = 1; j <= num; j++) {
+                counsels[i].add(new Counsel(0, 0));
             }
         }
+        System.out.println();
 
-        // 상담자 순회하면서 해당 상담자의 상담유형에 들어있는 큐에서 제일 작은 값(끝나는 시간이 가장 빠른 상담사) 뽑기
-        int time = 0;
+        // 상담 진행하면서 대기시간 구하기
+        int waitingTime = 0;
         for(int i = 0; i < reqs.length; i++) {
-            int rt = reqs[i][0];
-            int st = reqs[i][1];
+            int start = reqs[i][0];
+            int duration = reqs[i][1];
             int type = reqs[i][2];
-            int et = endTimes[type].remove();
-            if(et <= rt) { // 상담 가능
-                endTimes[type].add(rt + st);
-            } else { // 상담 불가능
-                time += (et - rt);
-                endTimes[type].add(et + st);
+
+            Counsel c = counsels[type].remove(); // 해당 유형 상담 중 가장 빨리 끝나는 상담 뽑기
+            // System.out.println(start + " " + duration);
+            // System.out.println(c.start + " " + c.duration);
+
+            int waiting = 0;
+            if(c.start + c.duration > start) { // 뽑은 상담의 끝나는 시간이 현재 멘티의 도착시간보다 크면 대기해야함
+                waiting = c.start + c.duration - start;
             }
+            waitingTime += waiting;
+            // System.out.println(waitingTime);
+            counsels[type].add(new Counsel(start + waiting, duration)); // 멘토의 상담 갱신
         }
 
-        return time;
+        min = Math.min(min, waitingTime);
+    }
+
+    private class Counsel implements Comparable<Counsel> {
+        int start;
+        int duration;
+
+        Counsel(int start, int duration) {
+            this.start = start;
+            this.duration = duration;
+        }
+
+        @Override
+        public int compareTo(Counsel c) {
+            return (this.start + this.duration) - (c.start + c.duration);
+        }
     }
 }
