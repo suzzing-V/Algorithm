@@ -1,53 +1,51 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(long[] numbers) {
-        int[] answer = new int[numbers.length];;
-        for(int i = 0; i < numbers.length; i ++) {
-            String bin = Long.toBinaryString(numbers[i]);
+        int[] answer = new int[numbers.length];
 
-            bin = fillZero(bin); // 포화 이진트리의 노드 개수는 2^n - 1이므로 자리수를 이에 맞춘다
-            answer[i] = checkTree(bin, false) ? 1 : 0;
+        for(int i = 0; i < numbers.length; i++) {
+            // 이진수 문자열 얻기
+            String bn = Long.toBinaryString(numbers[i]);
+
+            // 문자열 길이가 이진트리 노드 개수가 될 수 없으면 될때까지 앞에 0붙여줌
+            if(bn.length() == 1) {}
+            else if(bn.length() <= 3) bn = fillZero(bn, 3) + bn;
+            else if(bn.length() <= 7) bn = fillZero(bn, 7) + bn;
+            else if(bn.length() <= 15) bn = fillZero(bn, 15) + bn;
+            else if(bn.length() <= 31) bn = fillZero(bn, 31) + bn;
+            else if(bn.length() <= 63) bn = fillZero(bn, 63) + bn;
+
+            // 문자열 쪼개가면서 탐색.
+            answer[i] = dfs(0, bn.length() - 1, bn);
         }
         return answer;
     }
 
-    private String fillZero(String bin) {
-        int p = 0;
-        while(true) {
-            if(bin.length() <= Math.pow(2, p) - 1) {
-                bin = String.format("%" + (int)(Math.pow(2, p) - 1) + "s", bin).replace(' ', '0');
-                break;
-            }
-            p++;
+    private String fillZero(String bn, int size) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = bn.length(); i < size; i++) {
+            sb.append('0');
         }
-        return bin;
+        return sb.toString();
     }
 
-    private boolean checkTree(String tree, boolean isDummy) {
-        int half = tree.length() / 2;
-
-        // 길이가 2^n - 1인지 확인
-        int p = 0;
-        while(true) {
-            if(tree.length() < Math.pow(2, p) - 1) return false;
-            else if(tree.length() == Math.pow(2, p) - 1) break;
-            p ++;
+    private int dfs(int start, int end, String str) {
+        if(start == end) { // 끝까지 도달했으면 문제없다는 의미
+            return 1;
         }
 
-        // 부모 노드가 더미노드일 때 자식 노드들은 모두 0이어야 한다.
-        long toLong = tree.isEmpty() ? 0L : Long.parseLong(tree, 2);
-        if(isDummy && Long.bitCount(toLong) != 0) return false;
-
-        // 마지막 노드면 완성
-        if(tree.length() == 1) return true;
-
-        String left = tree.substring(0, half);
-        String right = tree.substring(half + 1, tree.length());
-
-        boolean isD = tree.charAt(half) == '0'? true : false;
-        if(checkTree(left, isD) && checkTree(right, isD)) { // 왼 오 나눴을 때 두 서브트리 모두 조건을 만족한다면 올바른 트리
-            return true;
+        int mid = (start + end) / 2;
+        if(str.charAt(mid) == '0') { // 가운데가 0일 경우는 다 0이어야 한다.
+            for(int i = start; i <= end; i++) {
+                if(str.charAt(i) != '0') return 0;
+            }
         }
-        return false;
+
+        // 가운데가 1일 경우는 양쪽 트리 모두 조건을 만족해야 한다
+        if(dfs(start, mid - 1, str) == 1 && dfs(mid + 1, end, str) == 1) {
+            return 1;
+        }
+        return 0;
     }
 }
