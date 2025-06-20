@@ -1,134 +1,77 @@
 import java.util.*;
+import java.io.*;
 
 class Solution {
 
+    private Pos[][] parents = new Pos[51][51];
     private String[][] chart = new String[51][51];
-    private Pos[][] parent = new Pos[51][51];
-
-
-    private class Pos implements Comparable<Pos> {
-        private int x;
-        private int y;
-
-        private Pos(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if(this == o) return true;
-            if(o == null || this.getClass() != o.getClass()) return false;
-            Pos pos = (Pos)o;
-            return this.x == pos.x && this.y == pos.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-        @Override
-        public int compareTo(Pos o) {
-            if(o.x == this.x) {
-                return this.y - o.y;
-            }
-            return this.x - o.x;
-        }
-    }
 
     public String[] solution(String[] commands) {
-
-        List<String> result = new ArrayList<>();
-        for(int i = 1; i <= 50; i++) {
-            for(int j = 1; j <= 50; j++) {
-                Pos pos = new Pos(i, j);
-                parent[i][j] = pos;
+        for(int i = 0; i < 51; i++) {
+            for(int j = 0; j < 51; j++) {
+                parents[i][j] = new Pos(i, j);
             }
         }
 
-        for(int i = 0; i < commands.length; i++) {
-            String[] split = commands[i].split(" ");
-            String cmd = split[0];
-            if(cmd.equals("UPDATE")) {
-                if(split.length == 4) {
-                    int r = Integer.parseInt(split[1]);
-                    int c = Integer.parseInt(split[2]);
-                    String value = split[3];
+        List<String> result = new ArrayList<>();
+        for(int a = 0; a < commands.length; a++) {
+            StringTokenizer st = new StringTokenizer(commands[a]);
+            String command = st.nextToken();
+
+            if(command.equals("UPDATE")) {
+                if(st.countTokens() == 3) {
+                    int r = Integer.parseInt(st.nextToken());
+                    int c = Integer.parseInt(st.nextToken());
+                    String value = st.nextToken();
 
                     Pos root = find(new Pos(r, c));
                     chart[root.x][root.y] = value;
                 } else {
-                    String value1 = split[1];
-                    String value2 = split[2];
+                    String value1 = st.nextToken();
+                    String value2 = st.nextToken();
 
-                    for(int a = 1; a <= 50; a++) {
-                        for(int b = 1; b <= 50; b++) {
-                            Pos root = find(new Pos(a, b));
-                            if(chart[root.x][root.y] == null) continue;
-                            if(chart[root.x][root.y].equals(value1)) chart[root.x][root.y] = value2;
-                        }
-                    }
+                    updateValue(value1, value2);
                 }
-            } else if(cmd.equals("MERGE")) {
-                int r1 = Integer.parseInt(split[1]);
-                int c1 = Integer.parseInt(split[2]);
-                int r2 = Integer.parseInt(split[3]);
-                int c2 = Integer.parseInt(split[4]);
-                Pos root1 = find(new Pos(r1, c1));
-                Pos root2 = find(new Pos(r2, c2));
-                if(root1.equals(root2)) continue;
+            } else if(command.equals("MERGE")) {
+                int r1 = Integer.parseInt(st.nextToken());
+                int c1 = Integer.parseInt(st.nextToken());
+                int r2 = Integer.parseInt(st.nextToken());
+                int c2 = Integer.parseInt(st.nextToken());
 
-                String value = null;
-                if(chart[root1.x][root1.y] != null && chart[root2.x][root2.y] == null) value = chart[root1.x][root1.y];
-                if(chart[root1.x][root1.y] != null && chart[root2.x][root2.y] != null) value = chart[root1.x][root1.y];
-                if(chart[root1.x][root1.y] == null && chart[root2.x][root2.y] != null) value = chart[root2.x][root2.y];
-                chart[root1.x][root1.y] = value;
+                // 같은 셀일 경우 무시
+                if(find(new Pos(r1, c1)).equals(find(new Pos(r2, c2)))) continue;
                 union(new Pos(r1, c1), new Pos(r2, c2));
-                // System.out.println("merge: " + newRoot.x + " " + newRoot.x + " " + nR.x + " " + nR.y);
-            } else if(cmd.equals("UNMERGE")) {
-                int r = Integer.parseInt(split[1]);
-                int c = Integer.parseInt(split[2]);
+            } else if(command.equals("UNMERGE")) {
+                int r = Integer.parseInt(st.nextToken());
+                int c = Integer.parseInt(st.nextToken());
+
                 Pos root = find(new Pos(r, c));
                 String value = chart[root.x][root.y];
-
-                for(int a = 1; a <= 50; a ++) {
-                    for(int b = 1; b <= 50; b++) {
-                        find(new Pos(a, b));
-                    }
-                }
-                for(int a = 1; a <= 50; a++) {
-                    for(int b = 1; b <= 50; b++) {
-                        if(find(new Pos(a, b)).equals(root)) {
-                            parent[a][b] = new Pos(a, b);
-                            chart[a][b] = null;
+                List<Pos> poses = new ArrayList<>();
+                for(int i = 1; i < 51; i ++) {
+                    for(int j = 1; j < 51; j++) {
+                        Pos rt = find(new Pos(i, j));
+                        // 바로 처리해버리면 parents가 바뀌므로 뒤에 있는 것들의 root가 바뀔 수 있다. 따라서 일단 리스트에 넣고 한번에 처리한다.
+                        if(rt.x == root.x && rt.y == root.y) {
+                            poses.add(new Pos(i, j));
                         }
                     }
                 }
+                for(Pos pos : poses) {
+                    chart[pos.x][pos.y] = null;
+                    parents[pos.x][pos.y] = new Pos(pos.x, pos.y);
+                }
                 chart[r][c] = value;
-            } else if(cmd.equals("PRINT")) {
-                int r = Integer.parseInt(split[1]);
-                int c = Integer.parseInt(split[2]);
+            } else if(command.equals("PRINT")) {
+                int r = Integer.parseInt(st.nextToken());
+                int c = Integer.parseInt(st.nextToken());
+
                 Pos root = find(new Pos(r, c));
                 if(chart[root.x][root.y] == null) result.add("EMPTY");
                 else result.add(chart[root.x][root.y]);
             }
-
-            //     for(int a = 1; a <= 4; a++) {
-            //     for(int b = 1; b <= 4; b++) {
-            //         System.out.print(chart[a][b] + " ");
-            //     }
-            //     System.out.println();
-            // }
-            //     System.out.println();
+            // printParents();
         }
-
-        // for(int i = 1; i <= 4; i++) {
-        //     for(int j = 1; j <= 4; j++) {
-        //         System.out.print(chart[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
 
         String[] answer = new String[result.size()];
         for(int i = 0; i < answer.length; i++) {
@@ -141,15 +84,61 @@ class Solution {
         p1 = find(p1);
         p2 = find(p2);
 
-        if(!p1.equals(p2)) {
-            parent[p2.x][p2.y] = p1;
+        if(chart[p1.x][p1.y] != null && chart[p2.x][p2.y] != null) {
+            parents[p2.x][p2.y] = new Pos(p1.x, p1.y);
+            chart[p2.x][p2.y] = null;
+        } else if(chart[p1.x][p1.y] != null) {
+            parents[p2.x][p2.y] = new Pos(p1.x, p1.y);
+            chart[p2.x][p2.y] = null;
+        } else {
+            parents[p1.x][p1.y] = new Pos(p2.x, p2.y);
+            chart[p1.x][p1.y] = null;
         }
     }
 
     private Pos find(Pos p) {
-        if(parent[p.x][p.y].equals(p)) {
+        // System.out.println(p.x + " " + p.y + "의 부모: " + parents[p.x][p.y].x + " " + parents[p.x][p.y].y);
+        if(p.equals(parents[p.x][p.y])) {
+            // System.out.println();
+            // System.out.println();
             return p;
         }
-        return parent[p.x][p.y] = find(parent[p.x][p.y]);
+
+        Pos root = find(parents[p.x][p.y]);
+        return parents[p.x][p.y] = root;
+    }
+
+    private void updateValue(String curr, String change) {
+        for(int i = 0; i < 51; i++) {
+            for(int j = 0; j < 51; j++) {
+                if(chart[i][j] != null && chart[i][j].equals(curr)) {
+                    chart[i][j] = change;
+                }
+            }
+        }
+    }
+
+    class Pos {
+        int x;
+        int y;
+
+        Pos(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(this == obj) return true;
+            if(obj == null || getClass() != obj.getClass()) return false;
+
+            Pos p = (Pos) obj;
+            return this.x == p.x && this.y == p.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return x + y;
+        }
     }
 }
