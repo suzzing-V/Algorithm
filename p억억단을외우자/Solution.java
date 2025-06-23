@@ -1,43 +1,39 @@
 import java.util.*;
 
 class Solution {
-
-    private int[] divisor; // 약수 개수
-    private int[] maxNum; // i ~ n까지의 최대 약수개수 가진 수
-
+    int[] dp;
+    int[] cnts;
     public int[] solution(int e, int[] starts) {
-        int[] answer = new int[starts.length];
-        divisor = new int[e + 1];
-        maxNum = new int[e + 1];
-        countPrime(e);
-        getMaxDivisorNum(e);
+        dp = new int[e + 1]; // i ~ e까지의 수 중 가장 많이 등장하는 수
+        cnts = new int[e + 1]; // e까지의 수들의 약수의 개수
+        makeCnts(e);
+        dp[e] = e;
+        int maxCnt = cnts[e];
+        // 끝은 e로 정해져 있으므로 맨 뒤에서부터 최대값 갱신하면 ?~e의 범위에서 최대값 갱신 가능
+        for(int i = e - 1; i >= 1; i --) {
+            int cnt = cnts[i];
+            if(cnt >= maxCnt) {
+                dp[i] = i;
+                maxCnt = cnt;
+            } else {
+                dp[i] = dp[i + 1];
+            }
+            // System.out.println(i + " " + cnt + " " + max[e -1][0]);
+        }
 
+        int[] answer = new int[starts.length];
         for(int i = 0; i < starts.length; i++) {
-            answer[i] = maxNum[starts[i]];
+            answer[i] = dp[starts[i]];
         }
         return answer;
     }
 
-    private void countPrime(int target) {
-        // System.out.print(target + " ");
-        for(int i = 1; i <= target; i++) {
-            for(int j = i; j <= target; j+= i) {
-                divisor[j] ++;
+    private void makeCnts(int n) {
+        // 1의 배수 ++, 2의 배수 ++, 3의 배수 ++
+        for(int i = 1; i <= n; i++) {
+            for(int j = i; j <= n; j+= i) {
+                cnts[j] ++;
             }
-        }
-
-        // System.out.println(Arrays.toString(divNum));
-    }
-
-    private void getMaxDivisorNum(int e) {
-        int maxIdx = e;
-        for(int i = e; i >= 1; i--) {
-            if(divisor[maxIdx] <= divisor[i]) {
-                divisor[maxIdx] = divisor[i];
-                maxIdx = i;
-            }
-
-            maxNum[i] = maxIdx;
         }
     }
 }
