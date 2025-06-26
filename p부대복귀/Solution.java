@@ -1,66 +1,72 @@
 import java.util.*;
+import java.io.*;
 
 class Solution {
 
-    private List<Integer>[] lines;
+    private ArrayList<Integer>[] conn;
     private int n;
-    private int[] minDist;
+    private int destination;
+    private int[] dist;
 
-    private class Node {
-        private int num;
-        private int dist;
-
-        private Node(int num, int dist) {
-            this.num = num;
-            this.dist = dist;
-        }
-    }
-
-    public int[] solution(int n1, int[][] roads, int[] sources, int destination) {
+    public int[] solution(int n1, int[][] roads, int[] sources, int destination1) {
         n = n1;
-        minDist = new int[n + 1];
-        Arrays.fill(minDist, -1);
-        minDist[destination] = 0;
-        lines = new ArrayList[n + 1];
-        for(int i = 0; i <= n; i++) {
-            lines[i] = new ArrayList<>();
+        destination = destination1;
+        conn = new ArrayList[n + 1];
+        for(int i = 1; i <= n; i++) {
+            conn[i] = new ArrayList<>();
         }
 
         for(int i = 0; i < roads.length; i++) {
-            lines[roads[i][0]].add(roads[i][1]);
-            lines[roads[i][1]].add(roads[i][0]);
-            if(roads[i][0] == destination) {
-                minDist[roads[i][1]] = 1;
-            }
-            if(roads[i][1] == destination) {
-                minDist[roads[i][0]] = 1;
-            }
+            int r1 = roads[i][0];
+            int r2 = roads[i][1];
+            conn[r1].add(r2);
+            conn[r2].add(r1);
         }
 
-        bfs(destination);
+        dikstra(destination);
         int[] answer = new int[sources.length];
         for(int i = 0; i < sources.length; i++) {
-            answer[i] = minDist[sources[i]];
-            // System.out.println(Arrays.toString(minDist));
+            if(dist[sources[i]] == 10000000) answer[i] = -1;
+            else answer[i] = dist[sources[i]];
         }
+
         return answer;
     }
 
-    private void bfs(int start) {
-        Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[n + 1];
-        queue.add(start);
-        visited[start] = true;
+    private void dikstra(int start) {
+        // System.out.println(start);
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        pq.add(new Node(start, 0));
+        dist = new int[n + 1];
+        Arrays.fill(dist, 10000000);
+        dist[start] = 0;
 
-        while(!queue.isEmpty()) {
-            int curr = queue.remove();
+        while(!pq.isEmpty()) {
+            Node curr = pq.remove();
+            // System.out.println(curr.num + " " + curr.d);
+            if(dist[curr.num] < curr.d) continue;
 
-            for(int next : lines[curr]) {
-                if(visited[next]) continue;
-                minDist[next] = minDist[curr] + 1;
-                visited[next] = true;
-                queue.add(next);
+            for(int next : conn[curr.num]) {
+                if(curr.d + 1 < dist[next]) {
+                    dist[next] = curr.d + 1;
+                    pq.add(new Node(next, curr.d + 1));
+                }
             }
+        }
+    }
+
+    private class Node implements Comparable<Node> {
+        private int num;
+        private int d;
+
+        private Node(int num, int d) {
+            this.num = num;
+            this.d = d;
+        }
+
+        @Override
+        public int compareTo(Node n) {
+            return this.d - n.d;
         }
     }
 }
