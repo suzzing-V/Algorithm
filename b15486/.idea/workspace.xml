@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6c434e1d-204f-44ab-a8f6-c8610846653d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/b15486.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/b15486/.idea/b15486.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b11725/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../b11725/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b1463/out/production/b1463/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../b1463/out/production/b1463/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b1463/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b1463/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b15894/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../b15894/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b2579/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b2579/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b30180/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b30180/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/.idea/b2748.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/.idea/b2748.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b2748/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b7579/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b7579/.idea/b7579.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b7579/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b7579/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../b7579/out/production/b7579/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2m1EFGSs7GUxUBGxp9CPZvMus7h" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/atti/Algorithm/b15486",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "AtomSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c434e1d-204f-44ab-a8f6-c8610846653d" name="Changes" comment="" />
+      <created>1726235576929</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726235576929</updated>
+      <workItem from="1726235578328" duration="1633000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

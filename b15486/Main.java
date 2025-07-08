@@ -16,7 +16,7 @@ public class Main {
         for(int i = 1; i <= n + 1; i++) {
             dp[i] = Math.max(dp[i - 1], dp[i]);
             if(i + tp[i][0] <= n + 1) {
-                dp[i + tp[i][0]] = dp[i] + tp[i][1];
+                dp[i + tp[i][0]] = Math.max(dp[i] + tp[i][1], dp[i + tp[i][0]]);
             }
         }
         System.out.println(dp[n + 1]);

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94fd1f02-f7b0-4d4f-8f7d-8b570a71b530" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/b7579.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../b11725/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../b11725/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../b1463/out/production/b1463/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../b1463/out/production/b1463/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../b1463/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b1463/src/Main.java" afterDir="false" />
@@ -13,17 +12,7 @@
       <change beforePath="$PROJECT_DIR$/../b15894/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../b15894/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../b2579/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b2579/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../b30180/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../b30180/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/b2748.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/.idea/b2748.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b2748/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/b7579/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +44,12 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/atti/Algorithm/b7579",
+    "last_opened_file_path": "D:/atti/Algorithm/b1197",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "AtomSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
@@ -72,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727615939862</updated>
-      <workItem from="1727615941175" duration="1023000" />
+      <workItem from="1727615941175" duration="2738000" />
     </task>
     <servers />
   </component>

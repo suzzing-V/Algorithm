@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-// 문제를 제대로 읽자
 public class Main {
 
     private static List<Pos> enemies = new ArrayList<>();
@@ -35,17 +34,23 @@ public class Main {
     private static void dfs(int idx, Pos[] attacks) {
         if(idx == 3) {
             int result = game(attacks);
+//            if(result == 14) {
+//                for(int i = 0; i < 3; i++) {
+//                    System.out.print(attacks[i].x + "," + attacks[i].y + " ");
+//                }
+//                System.out.println();
+//            }
             max = Math.max(max, result);
             return;
         }
 
-            for(int j = 0; j < m; j++) {
-                if(!visited[j]) {
-                    attacks[idx] = new Pos(n, j);
-                    visited[j] = true;
-                    dfs(idx + 1, attacks);
-                    visited[j] = false;
-                }
+        for(int j = 0; j < m; j++) {
+            if(!visited[j]) {
+                attacks[idx] = new Pos(n, j);
+                visited[j] = true;
+                dfs(idx + 1, attacks);
+                visited[j] = false;
+            }
         }
     }
 
@@ -74,11 +79,11 @@ public class Main {
                     i --;
                     continue;
                 }
-                    if(isAttacked[enemy.x][enemy.y]) {
-                        currEnemies.remove(enemy);
-                        i --;
-                        continue;
-                    }
+                if(isAttacked[enemy.x][enemy.y]) {
+                    currEnemies.remove(enemy);
+                    i --;
+                    continue;
+                }
                 enemy.x ++;    // 아래로 전진
             }
         }
