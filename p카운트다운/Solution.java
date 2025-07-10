@@ -1,57 +1,74 @@
 import java.util.*;
 
+// 10^5 * 60
 class Solution {
 
-    private int[][] dp;
+    private int[] cnt;
+    private int[] sb;
 
     public int[] solution(int target) {
-        dp = new int[target + 1][2];
-        for(int i = 1; i <= Math.min(20, target); i++) {
-            dp[i][0] = 1;
-            dp[i][1] = 1;
+        cnt = new int[100001];
+        sb = new int[100001];
+
+        // 1~20까지는 싱글 1개가 최선
+        for(int i = 1; i <= 20; i++) {
+            cnt[i] = 1;
+            sb[i] = 1;
         }
 
-        for(int i = 21; i <= target; i++) {
-            int cnt = 0;
-            int bs = 0;
-            int minus = 0;
-            if(i / 2 * 2 > 40) {
-                minus = 40;
-            } else {
-                minus = i / 2 * 2;
-            }
-            dp[i][0] = dp[i - minus][0] + 1;
-            dp[i][1] = dp[i - minus][1];
-
-            minus = 20;
-            if(dp[i - minus][0] + 1 < dp[i][0] || (dp[i - minus][0] + 1 == dp[i][0] && dp[i - minus][1] + 1 > dp[i][1])) {
-                dp[i][0] = dp[i - minus][0] + 1;
-                dp[i][1] = dp[i - minus][1] + 1;
-            }
-
-            if(i / 3 * 3 > 60) {
-                minus = 60;
-            } else {
-                minus = i / 3 * 3;
-            }
-            if(dp[i - minus][0] + 1 < dp[i][0] || (dp[i - minus][0] + 1 == dp[i][0] && dp[i - minus][1] > dp[i][1])) {
-                dp[i][0] = dp[i - minus][0] + 1;
-                dp[i][1] = dp[i - minus][1];
-            }
-
-            if(i >= 50) {
-                minus = 50;
-                if(dp[i - minus][0] + 1 < dp[i][0] || (dp[i - minus][0] + 1 == dp[i][0] && dp[i - minus][1] + 1 > dp[i][1])) {
-                    dp[i][0] = dp[i - minus][0] + 1;
-                    dp[i][1] = dp[i - minus][1] + 1;
+        for(int i = 21; i <= 100000; i++) {
+            // 싱글 하나 추가할 경우
+            cnt[i] = Integer.MAX_VALUE;
+            sb[i] = -1;
+            for(int j = 1; j <= 20; j++) {
+                // 횟수 적으면 갱신
+                if(cnt[i] > cnt[i - j] + 1) {
+                    cnt[i] = cnt[i - j] + 1;
+                    sb[i] = sb[i - j] + 1;
+                    // 횟수 같은데 싱글/불 개수가 더 많으면 갱신
+                } else if(cnt[i] == cnt[i - j] + 1 && sb[i] < sb[i - j] + 1) {
+                    sb[i] = sb[i - j] + 1;
                 }
             }
-            // System.out.println(i + " " + dp[i][0] + " " + dp[i][1]);
-        }
 
-        int[] answer = new int[2];
-        answer[0] = dp[target][0];
-        answer[1] = dp[target][1];
+            // 더블 하나 추가할 경우
+            for(int j = 2; j <= 40; j+=2) {
+                if(i - j < 0) break;
+                // 횟수 적으면 갱신
+                if(cnt[i] > cnt[i - j] + 1) {
+                    cnt[i] = cnt[i - j] + 1;
+                    sb[i] = sb[i - j];
+                    // 횟수 같은데 싱글/불 개수가 더 많으면 갱신
+                } else if(cnt[i] == cnt[i - j] + 1 && sb[i] < sb[i - j]) {
+                    sb[i] = sb[i - j];
+                }
+            }
+
+            // 트리플 하나 추가
+            for(int j = 3; j <= 60; j+=3) {
+                if(i - j < 0) break;
+                // 횟수 적으면 갱신
+                if(cnt[i] > cnt[i - j] + 1) {
+                    cnt[i] = cnt[i - j] + 1;
+                    sb[i] = sb[i - j];
+                    // 횟수 같은데 싱글/불 개수가 더 많으면 갱신
+                } else if(cnt[i] == cnt[i - j] + 1 && sb[i] < sb[i - j]) {
+                    sb[i] = sb[i - j];
+                }
+            }
+
+            // 불 하나 추가
+            if(i - 50 >= 0) {
+                if(cnt[i] > cnt[i - 50] + 1) {
+                    cnt[i] = cnt[i - 50] + 1;
+                    sb[i] = sb[i - 50] + 1;
+                    // 횟수 같은데 싱글/불 개수가 더 많으면 갱신
+                } else if(cnt[i] == cnt[i - 50] + 1 && sb[i] < sb[i - 50] + 1) {
+                    sb[i] = sb[i - 50] + 1;
+                }
+            }
+        }
+        int[] answer = {cnt[target], sb[target]};
         return answer;
     }
 }
