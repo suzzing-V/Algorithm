@@ -1,0 +1,8 @@
+
+z
+java:S1450"XRemove the "isDivided" field and declare it as a local variable in the relevant methods.(”βƒΉώÿÿÿÿ8ε”µΙ3
+t
+java:S1450"RRemove the "max" field and declare it as a local variable in the relevant methods.(„°ƒΡÿÿÿÿÿ8ε”µΙ3
+n
+java:S1450"RRemove the "min" field and declare it as a local variable in the relevant methods.(»›ª)8ε”µΙ3
+G	java:S106 "+Replace this use of System.out by a logger.(®υγ‚8κ”µΙ3
