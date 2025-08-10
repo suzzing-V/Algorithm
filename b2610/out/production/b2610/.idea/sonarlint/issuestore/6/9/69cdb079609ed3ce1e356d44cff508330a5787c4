@@ -1,0 +1,7 @@
+
+˜
+java:S1450
+"PRemove the "k" field and declare it as a local variable in the relevant methods.(—Ò°ûÿÿÿÿ8ÙÚû•‰3J$ab51b432-bf3e-4681-8601-df2fa3c5b785
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(œû¿Ø8ÚÚû•‰3J$1b770236-c863-4a2c-9717-afbfa1e59ed1
+m	java:S1064"+Replace this use of System.out by a logger.(ô¤„å8İÚû•‰3J$f1cff47c-10f5-4756-be71-f117818c75a6
