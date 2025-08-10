@@ -8,9 +8,11 @@ import java.io.*;
 
 public class Main {
 
-    private static List<Integer>[] conn;
+    private static Map<Integer, List<Integer>> teams = new HashMap<>();
+
     private static int[][] dp;
     private static boolean[] visited;
+    private static int[] root;
     private static int n;
     private static int k;
 
@@ -19,10 +21,10 @@ public class Main {
         n = Integer.parseInt(bf.readLine());
         k = Integer.parseInt(bf.readLine());
         visited = new boolean[n + 1];
-        conn = new ArrayList[n + 1];
         dp = new int[n + 1][n + 1];
+        root = new int[n + 1];
         for(int i = 1; i <= n ;i++) {
-            conn[i] = new ArrayList<>();
+            root[i] = i;
             for(int j = 1; j <= n;j ++) {
                 if(i == j) dp[i][j] = 0;
                 else dp[i][j] = 200;
@@ -34,8 +36,7 @@ public class Main {
             int n1 = Integer.parseInt(st.nextToken());
             int n2 = Integer.parseInt(st.nextToken());
 
-            conn[n1].add(n2);
-            conn[n2].add(n1);
+            union(n1, n2);
             dp[n1][n2] = 1;
             dp[n2][n1] = 1;
         }
@@ -44,14 +45,24 @@ public class Main {
 
         int cnt = 0;
         List<Integer> answers = new ArrayList<>();
+        // 그룹 만들기
         for(int i = 1; i <= n; i++) {
-            if(visited[i]) continue;
-            List<Integer> set = bfs(i);
+            int root = find(i);
+            if(teams.containsKey(root)) {
+                teams.get(root).add(i);
+            } else {
+                teams.put(root, new ArrayList<>());
+                teams.get(root).add(i);
+            }
+        }
 
+        // 각 팀에서 조건에 맞는 팀장 정하기
+        for(int key : teams.keySet()) {
+            List<Integer> team = teams.get(key);
             int min = 200;
             int answer = 0;
-            for(int king : set) {
-                int max = findMaxTime(set, king);
+            for(int king : team) {
+                int max = findMaxTime(team, king);
                 if(min > max) {
                     min = max;
                     answer = king;
@@ -78,24 +89,23 @@ public class Main {
         }
     }
 
-    private static List<Integer> bfs(int start) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
-        List<Integer> team = new ArrayList<>();
+    private static void union(int a, int b) {
+        a = find(a);
+        b = find(b);
 
-        while(!queue.isEmpty()) {
-            int curr = queue.remove();
-            team.add(curr);
-            visited[curr] = true;
+        if(a < b) {
+            root[b] = a;
+        } else {
+            root[a] = b;
+        }
+    }
 
-            for(int next : conn[curr]) {
-                if(visited[next]) continue;
-
-                queue.add(next);
-            }
+    private static int find(int x) {
+        if(root[x] == x) {
+            return x;
         }
 
-        return team;
+        return root[x] = find(root[x]);
     }
 
     private static int findMaxTime(List<Integer> set, int king) {
