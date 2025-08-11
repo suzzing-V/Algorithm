@@ -1,0 +1,23 @@
+
+˜
+java:S3008"VRename this field "live_trees1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ğ‰¬e8¬Â‹Ë‰3J$1fb97b30-95dc-4317-bca3-ae06eaa14333
+
+java:S3008"VRename this field "live_trees2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒı÷Âşÿÿÿÿ8¬Â‹Ë‰3J$2604325b-508a-4b14-a577-fdc72023e9fd
+˜
+java:S3008"URename this field "dead_trees" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å’Şµ8¬Â‹Ë‰3J$737c4727-8400-41ce-90a3-7280c3ceaabc
+˜
+java:S1450"PRemove the "a" field and declare it as a local variable in the relevant methods.(åÁØÑşÿÿÿÿ8­Â‹Ë‰3J$d61c7ed1-6c8b-4026-a118-d5a378edc837
+˜
+java:S1450
+"PRemove the "k" field and declare it as a local variable in the relevant methods.(—Ò°ûÿÿÿÿ8®Â‹Ë‰3J$54fd22e8-7100-4fbb-85ab-a92ce96506ea
+˜
+java:S1450	"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8¯Â‹Ë‰3J$99a48cd4-f4a8-4ad1-99e4-e287372aa534
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8¯Â‹Ë‰3J$13bba723-e820-41b8-b31a-a48732251f12
+•
+java:S1450"RRemove the "yum" field and declare it as a local variable in the relevant methods.(ù«ôò8¯Â‹Ë‰3J$8d7ee47c-d7f0-4705-8f39-6e708c0524cd
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(œû¿Ø8²Â‹Ë‰3J$a5d07475-db4b-42bd-9e91-c5e7dd026a62
+r	java:S106Y"+Replace this use of System.out by a logger.(Áø¤çÿÿÿÿÿ8¶Â‹Ë‰3J$b6be78f7-fde0-4ab1-bec5-8cfbb63b57e7
+¡
+java:S1210h"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(ÌàåÊüÿÿÿÿ8¶Â‹Ë‰3J$88b02509-6dd3-4180-bd96-8ca83a2faed9
