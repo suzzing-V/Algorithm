@@ -1,51 +1,56 @@
 import java.util.*;
 
+// list 순회할 때 for쓰기
+// 시간복잡도 : O(V+E)
 class Solution {
 
-    private long[] result;
-    private List<Integer>[] lines;
+    private List<Integer>[] conn;
     private boolean[] visited;
-    long answer = 0;
+    private long answer = 0;
+    private long[] a;
 
-    public long solution(int[] a, int[][] edges) {
-        result = new long[a.length];
-        lines = new ArrayList[a.length];
+    public long solution(int[] a1, int[][] edges) {
+        a = new long[a1.length];
+        for(int i = 0; i < a1.length; i++) {
+            a[i] = a1[i];
+        }
+
+        conn = new ArrayList[a.length];
         visited = new boolean[a.length];
-        for(int i = 0; i < a.length; i++) {
-            lines[i] = new ArrayList<>();
+        for(int i = 0; i < conn.length; i++) {
+            conn[i] = new ArrayList<Integer>();
         }
 
+        // 연결 정보 저장
         for(int i = 0; i < edges.length; i++) {
-            int n1 = edges[i][0];
-            int n2 = edges[i][1];
-
-            lines[n1].add(n2);
-            lines[n2].add(n1);
+            conn[edges[i][0]].add(edges[i][1]);
+            conn[edges[i][1]].add(edges[i][0]);
         }
 
-        for(int i = 0; i < a.length; i++) {
-            result[i] = a[i];
-        }
-
+        visited[0] = true;
         dfs(0);
-        // System.out.println(Arrays.toString(result));
-        if(result[0] != 0) answer = -1;
+        if(a[0] != 0) return -1;
         return answer;
     }
 
-    private void dfs(int curr) {
-        if(lines[curr].size() == 1 && curr != 0) { // 말단노드일 경우 멈춤
-            return;
+    private long dfs(int node) {
+        // System.out.println("node: "+ node);
+        if(conn[node].size() == 1 && node != 0) {
+            return a[node];
         }
 
-        visited[curr] = true;
-        for(int i = 0; i < lines[curr].size(); i++) {
-            int child = lines[curr].get(i);
+        for(int i = 0; i < conn[node].size(); i++) {
+            int child = conn[node].get(i);
             if(visited[child]) continue;
-            dfs(child);
-            answer += Math.abs(result[child]); // 자식노드의 결과값만큼 변화를 줘야하므로
-            result[curr] += result[child]; // 자식노드 0 만든 만큼 더해주기
-            result[child] -= result[child];
+            visited[child] = true;
+
+            long amount = dfs(child);
+            // System.out.println(amount);
+            a[node] += amount;
+            answer += Math.abs(amount);
         }
+
+        // System.out.println("a: " + node + " " + a[node]);
+        return a[node];
     }
 }
