@@ -1,146 +1,183 @@
 import java.util.*;
 
+// while문 잘 쓰기
+// dfs로 뒤집을 카드 순서 정하고, 그 순서대로 카드 뒤집기
+// 시간 복잡도: 6! *
 class Solution {
 
-    private Map<Integer, List<Pos>> poses = new HashMap<>();
-    private boolean[] visited;
-    private int min = Integer.MAX_VALUE;
-    private int n;
-    private int[][] dir = { {1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     private int[][] board;
+    private int[][] dir = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+    private int answer = Integer.MAX_VALUE;
+    private Pos[][] poses = new Pos[7][2];
+    private int card_cnt = 0;
+    private int r;
+    private int c;
 
-    private class Pos {
-        private int x;
-        private int y;
-
-        private Pos(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    private class Node implements Comparable<Node> {
-        private int x;
-        private int y;
-        private int cost;
-
-        private Node(int x, int y, int cost) {
-            this.x = x;
-            this.y = y;
-            this.cost = cost;
-        }
-
-        @Override
-        public int compareTo(Node n) {
-            return this.cost - n.cost;
-        }
-    }
-
-    public int solution(int[][] board1, int r, int c) {
+    public int solution(int[][] board1, int r1, int c1) {
         board = board1;
-        visited = new boolean[7];
-
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[0].length; j++) {
+        r = r1;
+        c = c1;
+        // 카드 위치 정보 저장
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
                 if(board[i][j] != 0) {
-                    if(r == i && c == j) continue;
-                    if(poses.get(board[i][j]) == null) {
-                        poses.put(board[i][j], new ArrayList<>());
+                    if(poses[board[i][j]][0] == null) {
+                        poses[board[i][j]][0] = new Pos(i, j, 0);
+                        card_cnt ++;
                     }
-                    poses.get(board[i][j]).add(new Pos(i, j));
+                    else poses[board[i][j]][1] = new Pos(i, j, 0);
                 }
             }
         }
-        n = poses.size();
-        int enter = n * 2; // enter 수는 카드 종류 * 2로 일정하다. 거리계산만 하기 위함.
 
-        // 시작점에 카드가 있을 경우 처리
-        int init = 0;
-        if(board[r][c] != 0) {
-            Pos p = poses.get(board[r][c]).get(0);
-            init = bfs(new Pos(r, c), new Pos(p.x, p.y));
-            r = p.x;
-            c = p.y;
-            visited[board[r][c]] = true;
-            poses.remove(board[r][c]);
-            n --;
-        }
-
-        // 카드 뒤집는 순서 dfs
-        dfs(r, c, 0, n);
-        return min + init + enter;
+        dfs(0, new ArrayList<>());
+        // enter 수는 카드 수 * 2
+        return answer + card_cnt * 2;
     }
 
-    private void dfs(int x, int y, int cnt, int rest) {
-        if(rest == 0) {
-            // System.out.println("end: " + cnt);
-            min = Math.min(cnt, min);
+    private void dfs(int cnt, List<Integer> cards) {
+        // 카드 순서 완성. 이 순서대로 뒤집었을 때 거리 합과 answer 값 비교해 최솟값 갱신
+        if(cnt == card_cnt) {
+            // System.out.println(cards.toString());
+            answer = Math.min(answer, getDistance(cards));
             return;
         }
 
-        // System.out.println(board[x][y] + " " + cnt + " " + rest);
-        for(int key : poses.keySet()) {
-            if(visited[key]) continue; // 이미 뒤집은 카드
-            // System.out.println(key);
-            Pos p1 = poses.get(key).get(0);
-            Pos p2 = poses.get(key).get(1);
-            visited[key] = true;
-            // 해당 카드의 두 위치로 갈 경우를 모두 생각한다.
-            // 현재 위치 -> p1 -> p2일 경우
-            dfs(p2.x, p2.y, cnt + bfs(new Pos(x, y), new Pos(p1.x, p1.y)) + bfs(new Pos(p1.x, p1.y), new Pos(p2.x, p2.y)), rest - 1);
-            // 현재 위치 -> p2 -> p1일 경우
-            dfs(p1.x, p1.y, cnt + bfs(new Pos(x, y), new Pos(p2.x, p2.y)) + bfs(new Pos(p2.x, p2.y), new Pos(p1.x, p1.y)), rest - 1);
-            visited[key] = false;
+        for(int i = 1; i <= 6; i++) {
+            if(poses[i][0] == null || cards.contains(i)) continue;
+
+            cards.add(i);
+            dfs(cnt + 1, cards);
+            cards.remove((Integer)i);
         }
     }
 
-    private int bfs(Pos start, Pos end) {
-        boolean[][] v = new boolean[4][4];
-        PriorityQueue<Node> queue = new PriorityQueue<>();
-        queue.add(new Node(start.x, start.y, 0));
+    private int getDistance(List<Integer> cards) {
+        int x = r;
+        int y = c;
+        int sum = 0;
+        int[][] tmp = new int[4][4];
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) tmp[i][j] = board[i][j];
+        }
 
-        while(!queue.isEmpty()) {
-            Node curr = queue.remove();
-            // System.out.println(curr.x + " " +curr.y);
-            if(curr.x == end.x && curr.y == end.y) {
-                // System.out.println(start.x + " " + start.y + " " + end.x + " " + end.y + " " + curr.cost);
-                return curr.cost;
+        for(int i = 0; i < cards.size(); i++) {
+            int card = cards.get(i);
+            Pos p1 = poses[card][0];
+            Pos p2 = poses[card][1];
+            // System.out.println(p1.x + " " + p1.y + " " + p2.x + " " + p2.y);
+            // d1: 현재 위치 ~ 두번째 카드 위치 가는 최소 거리
+            int d1 = bfs(x, y, p1.x, p1.y, tmp); // 현재 위치 ~ 첫번째 카드 위치
+            // 첫번째 카드 뒤집기
+            tmp[p1.x][p1.y] = 0;
+            // 첫번째 카드 위치~두번째 카드 위치
+            d1 += bfs(p1.x, p1.y, p2.x, p2.y, tmp);
+            // 다시 복구
+            tmp[p1.x][p1.y] = card;
+
+            // d2: 현재 위치 ~ 첫번째 카드 가는 최소 거리
+            int d2 = bfs(x, y, p2.x, p2.y, tmp);
+            tmp[p2.x][p2.y] = 0;
+            d2 += bfs(p2.x, p2.y, p1.x, p1.y, tmp);
+            tmp[p2.x][p2.y] = card;
+
+            // 현재 카드 뒤집음으로 표시
+            tmp[p1.x][p1.y] = 0;
+            tmp[p2.x][p2.y] = 0;
+
+            // 두 경우 중 최소거리인 경우 선택
+            if(d1 < d2) {
+                sum += d1;
+                x = p2.x;
+                y = p2.y;
+            } else {
+                sum += d2;
+                x = p1.x;
+                y = p1.y;
+            }
+        }
+
+        return sum;
+    }
+
+    private int bfs(int sx, int sy, int ex, int ey, int[][] tmp) {
+        PriorityQueue<Pos> pq = new PriorityQueue<>();
+        pq.add(new Pos(sx, sy, 0));
+        boolean[][] visited = new boolean[4][4];
+
+        while(!pq.isEmpty()) {
+            Pos curr = pq.remove();
+
+            // System.out.println("curr: " + curr.x + " " + curr.y + " "+ curr.d);
+            if(curr.x == ex && curr.y == ey) {
+                // System.out.println();
+
+                return curr.d;
             }
 
-            for(int i = 0; i < 4; i++) {
-                // 방향키 + ctrl
-                Pos nxt = ctrl(curr.x, curr.y, i, end);
-                v[nxt.x][nxt.y] = true;
-                // System.out.println("ctrl: " + nxt.x + " " + nxt.y + " " + curr.cost);
-                queue.add(new Node(nxt.x, nxt.y, curr.cost + 1));
-
-                // 방향키
+            // 한칸 이동
+            for(int i = 0 ; i < 4; i++) {
                 int nx = curr.x + dir[i][0];
                 int ny = curr.y + dir[i][1];
-                if(nx < 0 || ny < 0 || nx >= 4 || ny >= 4 || v[nx][ny]) continue;
 
-                v[nx][ny] = true;
-                // System.out.println(nx + " " + ny + " " + curr.cost);
-                queue.add(new Node(nx, ny, curr.cost + 1));
+                if(nx < 0 || nx >= 4 || ny < 0 || ny >= 4 || visited[nx][ny]) {
+                    continue;
+                }
+
+                visited[nx][ny] = true;
+                pq.add(new Pos(nx, ny, curr.d + 1));
+            }
+
+            // 가장 가까운 카드로 이동
+            for(int i = 0; i < 4; i++) {
+                int nx = curr.x;
+                int ny = curr.y;
+
+                // 카드를 만날 경우 그 위치, 끝에 다다를 경우 그 줄의 마지막 칸
+                while(true) {
+                    nx += dir[i][0];
+                    ny += dir[i][1];
+
+                    if(nx < 0) {
+                        nx = 0;
+                        break;
+                    } else if(ny < 0) {
+                        ny = 0;
+                        break;
+                    } else if(nx >= 4) {
+                        nx = 3;
+                        break;
+                    } else if(ny >= 4) {
+                        ny = 3;
+                        break;
+                    } else if(tmp[nx][ny] != 0) {
+                        break;
+                    }
+                }
+                // System.out.println(nx + " "+ ny + " " + curr.d);
+                if(visited[nx][ny]) continue;
+                visited[nx][ny] = true;
+                pq.add(new Pos(nx, ny, curr.d + 1));
             }
         }
 
-        return 0;
+        return -1;
     }
 
-    private Pos ctrl(int x, int y, int d, Pos target) {
-        int cnt = 0;
-        while(true) {
-            x += dir[d][0];
-            y += dir[d][1];
-            if(x < 0) return new Pos(0, y);
-            if(x >= 4) return new Pos(3, y);
-            if(y < 0) return new Pos(x, 0);
-            if(y >= 4) return new Pos(x, 3);
-            // System.out.println(x + " " + y + " " + board[x][y]);
-            if(board[x][y] != 0 && !visited[board[x][y]]) break; // 방문하지 않은 다른 카드 만날 경우 멈춤
-            if(x == target.x && y == target.y) break; // 현재 도달하고자 하는 값이면 멈춤. 같은 카드끼리의 거리를 계산할 때 이 조건이 없다면 위에서 해당 카드에 방문 처리를 했기 때문에 해당 카드를 만나도 카드를 만났다고 처리하지 않음.
+    private class Pos implements Comparable<Pos> {
+        int x;
+        int y;
+        int d;
+
+        Pos(int x, int y, int d) {
+            this.x =x;
+            this.y = y;
+            this.d = d;
         }
-        return new Pos(x, y);
+
+        @Override
+        public int compareTo(Pos p) {
+            return this.d - p.d;
+        }
     }
 }
