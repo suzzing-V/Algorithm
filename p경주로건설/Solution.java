@@ -1,49 +1,84 @@
 import java.util.*;
 
+// 온 방향에 따른 최솟값도 저장해야 하는 이유: 현재 칸에 도착했을 경우 최솟값이지만 코너를 돌아서 후의 행보는 더 많이 들 수도 있다. 따라서 방향에 따른 최솟값도 저장해야한다.
 class Solution {
 
-    private int[][] dir = { {1, 0}, {0, 1}, {0, -1}, {-1, 0}};
-    private int[][][] dp;
+    private int n;
     private int[][] board;
-    private boolean[][] visited;
-    private int min = 1000000;
+    private int[][][] dp;
+    private int[][] dir = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
     public int solution(int[][] board1) {
+        n = board1.length;
         board = board1;
-        dp = new int[board.length][board[0].length][4];
-        visited = new boolean[board.length][board[0].length];
-        for(int i = 0; i < dp.length; i++) {
-            for(int j = 0; j < dp[0].length; j++) {
-                for(int k = 0; k < 4; k++) {
-                    dp[i][j][k] = 1000000;
-                }
-            }
+        dp = new int[n][n][4];
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++)
+                Arrays.fill(dp[i][j], Integer.MAX_VALUE);
         }
-        dfs(0, 0, 0, 0);
+
+        for(int i = 0; i < 4; i++) dp[0][0][i] = 0;
+        dikstra();
+        // for(int i = 0; i < n; i++) {
+        //     for(int j = 0; j < n; j++) {
+        //         System.out.print(dp[i][j] + " ");
+        //     }
+        //     System.out.println();
+        // }
+        int min = Integer.MAX_VALUE;
+        for(int i =0;i  <4; i++) {
+            min = Math.min(dp[n - 1][n - 1][i], min);
+        }
         return min;
     }
 
-    private void dfs(int x, int y, int from, int cost) {
-        if(x == board.length - 1 && y == board[0].length - 1) {
-            // System.out.println("도달!");
-            min = Math.min(min, cost);
-            return;
+    private void dikstra() {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        for(int i = 0; i < 2; i++) {
+            pq.add(new Node(0, 0, 0, i));
         }
-        if(dp[x][y][from] < cost) return; // 저장된 최소비용이 지금까지 온 경로의 최소비용보다 작으면 더 갈 필요가 없다.이미 그 방법으로 간게 더 최소.
-        else dp[x][y][from] = cost; // 아니면 지금 비용 저장하고 탐색
 
-        visited[x][y] = true;
-        for(int i = 0; i < 4; i++) {
-            int nx = x + dir[i][0];
-            int ny = y + dir[i][1];
-            if(nx < 0 || nx >= board.length || ny < 0 || ny >= board[0].length || board[nx][ny] == 1 || visited[nx][ny]) continue;
+        while(!pq.isEmpty()) {
+            Node curr = pq.remove();
 
-            if(i == from || (x == 0 && y == 0) ) { // 이전 방향과 같은 방향으로 가면 100원
-                dfs(nx, ny, i, cost + 100);
-            } else {
-                dfs(nx, ny, i, cost + 600); // 다른 방향으로 가면 600원
+            if(dp[curr.x][curr.y][curr.dir] < curr.cost) {
+                continue;
+            }
+
+            for(int i = 0; i < 4; i++) {
+                int nx = curr.x + dir[i][0];
+                int ny = curr.y + dir[i][1];
+
+                if(nx < 0 || nx >= n || ny < 0 || ny >= n || board[nx][ny] == 1) continue;
+
+                if(i == curr.dir && dp[nx][ny][i] >= curr.cost + 100) {
+                    dp[nx][ny][i] = curr.cost + 100;
+                    pq.add(new Node(nx, ny, curr.cost + 100, i));
+                } else if(i != curr.dir && dp[nx][ny][i] >= curr.cost + 600) {
+                    dp[nx][ny][i] = curr.cost + 600;
+                    pq.add(new Node(nx, ny, curr.cost + 600, i));
+                }
             }
         }
-        visited[x][y] = false;
+    }
+
+    private class Node implements Comparable<Node> {
+        int x;
+        int y;
+        int cost;
+        int dir;
+
+        Node(int x, int y, int cost, int dir) {
+            this.x = x;
+            this.y = y;
+            this.cost = cost;
+            this.dir = dir;
+        }
+
+        @Override
+        public int compareTo(Node n) {
+            return this.cost - n.cost;
+        }
     }
 }
