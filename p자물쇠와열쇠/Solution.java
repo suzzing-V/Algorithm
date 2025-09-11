@@ -1,89 +1,83 @@
+import java.util.*;
 
-// 문제 조건 잘 확인하기
+// 시간복잡도: 40 * 40 * 4 * (20 * 20 + 20 * 20)
+// 문제 잘 읽기. 자물쇠의 모든 홈 채워야한다.
 class Solution {
 
-    private int[][] key_extend;
     private int[][] lock;
     private int n;
     private int m;
+    private int[][][] rotated;
 
     public boolean solution(int[][] key, int[][] lock1) {
         lock = lock1;
         n = lock.length;
         m = key.length;
-        key_extend = new int[n * 2 + m - 2][n * 2 + m - 2];
-        // key 채우기
-        for(int i = n - 1; i < n - 1 + m; i++) {
-            for(int j = n - 1; j < n - 1 + m; j++) {
-                key_extend[i][j] = key[i - n + 1][j - n + 1];
-            }
+        rotated = new int[4][m][m];
+
+        rotated[0] = key;
+        for(int i = 1; i < 4; i++) {
+            rotated[i] = rotate(rotated[i - 1]);
+
+            // printKey(rotated[i]);
         }
 
-        // 가능한 시작점 돌면서 그 판 회전시키면서 가능한지 확인
-        for(int i = 0; i < n - 1 + m; i++) {
-            for(int j = 0; j < n - 1 + m; j++) {
-                int[][] tmp = new int[n][n];
-                for(int a = 0; a < n; a ++) {
-                    for(int b = 0; b < n; b++) {
-                        tmp[a][b] = key_extend[i + a][j + b];
+        for(int i = - (m - 1); i < n; i ++) {
+            for(int j = - (m - 1); j < n; j ++) {
+                // System.out.println(i + " " + j);
+                // 키 돌리기
+                for(int r = 0; r < 4; r ++) {
+                    // i, j를 시작으로 하는 키 들어맞는지 확인하기
+                    boolean flag = true;
+                    for(int x = i; x < i + m; x++) {
+                        for(int y = j; y < j + m; y ++) {
+                            if(x < 0 || x >= n || y < 0 || y >= n) continue;
+                            // 같으면 false -> 못 연다.
+                            if(lock[x][y] == rotated[r][x - i][y - j]) {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if(!flag) break;
+                    }
+                    // 자물쇠 범위에서 걸리는 거 없으면 나머지 범위 채울 필요 없는지 확인
+                    if(flag) {
+                        for(int x = 0; x < n; x ++) {
+                            for(int y = 0; y < n ;y ++) {
+                                // 열쇠 범위면 넘어가기
+                                if((x >= i && x < i + m) && (y >= j && y < j + m)) continue;
+                                if(lock[x][y] == 0) {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if(flag) return true;
                     }
                 }
-                if(check_0(tmp)) return true;
-                if(check_90(tmp)) return true;
-                if(check_180(tmp)) return true;
-                if(check_270(tmp)) return true;
             }
         }
         return false;
     }
 
-    private boolean check_0(int[][] tmp) {
-        int a = 0;
-        for(int i = 0; i < n; i++) {
-            int b = 0;
-            for(int j = 0; j < n; j++) {
-                if(lock[a][b ++] == tmp[i][j]) return false;
+    private void printKey(int[][] key) {
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < m; j++) {
+                System.out.print(key[i][j] + " ");
             }
-            a ++;
+            System.out.println();
         }
-        System.out.println();
-        return true;
     }
 
-    private boolean check_90(int[][] tmp) {
-        int a = 0;
-        for(int i = n - 1; i >= 0; i--) {
-            int b = 0;
-            for(int j = 0; j < n; j++) {
-                if(lock[a][b ++] == tmp[j][i]) return false;
-            }
-            a ++;
-        }
-        return true;
-    }
+    private int[][] rotate(int[][] before) {
+        int[][] after = new int[m][m];
 
-    private boolean check_180(int[][] tmp) {
-        int a = 0;
-        for(int i = n - 1; i >= 0; i--) {
-            int b = 0;
-            for(int j = n - 1; j >= 0; j--) {
-                if(lock[a][b ++] == tmp[i][j]) return false;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < m; j++) {
+                after[j][m - 1 - i] = before[i][j];
             }
-            a ++;
         }
-        return true;
-    }
 
-    private boolean check_270(int[][] tmp) {
-        int a = 0;
-        for(int i = 0; i < n; i++) {
-            int b = 0;
-            for(int j = n - 1; j >= 0; j--) {
-                if(lock[a][b] == tmp[j][i]) return false;
-                b++;
-            }
-            a++;
-        }
-        return true;
+        return after;
     }
 }
