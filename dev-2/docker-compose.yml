@@ -1,0 +1,49 @@
+services:
+  h2:
+    image: oscarfonts/h2
+    container_name: rtr-h2
+    ports:
+      - "1521:1521"  # H2 TCP 포트
+      - "81:81"      # H2 웹 콘솔 포트
+    environment:
+      - H2_OPTIONS=-tcp -webAllowOthers -ifNotExists
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.2
+    container_name: rtr-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: rockstar
+      POSTGRES_USER: suzzingv
+      POSTGRES_PASSWORD: rockstar0720
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+#  mysql:
+#    image: mysql:8.0
+#    container_name: rtr-mysql
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: rtr20250613
+#      MYSQL_DATABASE: rtr
+#      MYSQL_USER: suzzingv
+#      MYSQL_PASSWORD: rtr20250613
+#    ports:
+#      - "3306:3306"
+
+
+volumes:
+  redis_data:
+  postgres_data:
