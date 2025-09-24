@@ -1,0 +1,9 @@
+
+ 	java:S135M"YReduce the total number of break and continue statements in this loop to use at most one.(ı­Ïüÿÿÿÿ8ŸªÍä—3J$359f8d45-1862-4f81-81be-e2b1b22955d4
+“	java:S117S"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±¾°8ŸªÍä—3J$9ae13dd0-1e95-4bba-ae13-4a907811a28f
+“	java:S117u"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í¸šÁ8ŸªÍä—3J$c9171863-9578-4bcb-be46-ed379747e879
+r	java:S106B"+Replace this use of System.out by a logger.(¾ùôŒùÿÿÿÿ8´ªÍä—3J$47344d87-e112-4f84-b177-cbe788e5bded
+š
+java:S3776E"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(İ½Áøÿÿÿÿ8´ªÍä—3J$2942c2e3-9069-4ccf-bae0-740b4715dd01
+r	java:S106H"+Replace this use of System.out by a logger.(ã‡¾Èøÿÿÿÿ8µªÍä—3J$512c880f-2f26-4fd9-bd11-54259290cb69
+m	java:S106s"+Replace this use of System.out by a logger.(×ñ×8·ªÍä—3J$f5477462-b9c2-4c40-bca6-c49c53dadb4d

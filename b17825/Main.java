@@ -1,16 +1,17 @@
 import java.io.*;
 import java.util.*;
 
+// 시간복잡도: 4^10
 public class Main {
 
     private static int[] dice = new int[10];
+//    private static int[] m = {0, 1, 1, 1, 0, 1, 0, 0, 1, 0};
     private static int max = 0;
     // board[i][0] : 파란 호살표가 가리키는 노드
     // board[i][1] : 빨간 화살표가 가리키는 노드
-    private static int[][] board = new int[41][2];
+    private static int[][] board = new int[33][3];
     private static boolean[] isOccupied = new boolean[101];
     private static int[] pos = new int[4];
-    private static int[] prev_pos = new int[4];
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
@@ -18,33 +19,50 @@ public class Main {
             dice[i] = Integer.parseInt(st.nextToken());
         }
 
-        for(int i = 0; i < 41; i++) {
+        for(int i = 0; i <= 32; i++) {
             board[i][0] = -1;
             board[i][1] = -1;
         }
 
-        // 보드 만들기
-        for(int i = 2; i <= 38; i += 2) {
-            board[i][1] = i + 2;
+        // 21번 노드가 도착
+        // 큰 원 화살표 만들기
+        for(int i = 0; i <= 20; i ++) {
+            board[i][1] = i + 1;
+            board[i][2] = 2 * i;
         }
-        board[13][1] = 16;
-        board[16][1] = 19;
-        board[19][1] = 25;
 
-        board[22][1] = 24;
+        // 왼쪽 선 만들기
+        board[5][0] = 22;
+        board[22][1] = 23;
+        board[22][2] = 13;
+        board[23][1] = 24;
+        board[23][2] = 16;
         board[24][1] = 25;
+        board[24][2] = 19;
 
-        board[28][1] = 27;
-        board[27][1] = 26;
+        // 오른쪽 선 만들기
         board[26][1] = 25;
-        for(int i = 25; i <= 35; i+= 5) {
-            board[i][1] = i + 5;
-        }
+        board[26][2] = 26;
+        board[27][1] = 26;
+        board[27][2] = 27;
+        board[28][1] = 27;
+        board[28][2] = 28;
+        board[15][0] = 28;
 
-        board[10][0] = 13;
-        board[20][0] = 22;
-        board[0][0] = 2;
-        board[40][1] = 100;
+        // 밑에 선 만들기
+        board[10][0] = 29;
+        board[29][1] = 30;
+        board[29][2] = 22;
+        board[30][1] = 25;
+        board[30][2] = 24;
+
+        // 위에 선 만들기
+        board[25][1] = 31;
+        board[25][2] = 25;
+        board[31][1] = 32;
+        board[31][2] = 30;
+        board[32][1] = 20;
+        board[32][2] = 35;
 
         dfs(0, 0);
         System.out.println(max);
@@ -53,89 +71,60 @@ public class Main {
     private static void dfs(int di, int sum) {
         if(di == 10) {
             max = Math.max(sum, max);
-            System.out.println(sum + " " + Arrays.toString(pos));
+//            System.out.println(sum + " " + Arrays.toString(pos));
             return;
         }
 
         boolean isSelected = false;
         for(int i = 0; i < 4; i++) {
+//            if(m[di] != i) continue;
             // 이미 해당 말이 도착칸에 있으면 움직이지 못한다.
-            if(pos[i] == 100) {
+            if(pos[i] == 21) {
                 continue;
             }
 
-            int prev = prev_pos[i];
             int curr_pos = pos[i];
             int move = dice[di];
+            int next = 0;
             // 현재 위치에서 파란 화살표 있으면 파란 화살표 방향으로 가야한다.
             if(board[curr_pos][0] != -1) {
                 // 파란화살표 방향으로 한번 움직이고 move 닳을 때까지 빨간화살표로 이동
                 move --;
-                pos[i] = board[curr_pos][0];
+                next = board[curr_pos][0];
                 while(move > 0) {
-                    prev_pos[i] = pos[i];
-                    pos[i] = board[pos[i]][1];
+                    next = board[next][1];
 
-                    if(pos[i] == 100) {
+                    if(next == 21) {
                         break;
                     }
                     move --;
                 }
             } else {
                 // 빨간화살표바껭 없으면 빨간화살표로 가야한다.
+                next = curr_pos;
                 while(move > 0) {
-                    if(pos[i] == 16) {
-                        if(prev_pos[i] == 13) {
-                            prev_pos[i] = 16;
-                            pos[i] = 19;
-                        } else {
-                            prev_pos[i] = 16;
-                            pos[i] = 18;
-                        }
-                    } else if(pos[i] == 22) {
-                        if(prev_pos[i] == 20) {
-                            prev_pos[i] = 22;
-                            pos[i] = 24;
-                        } else {
-                            prev_pos[i] = 22;
-                            pos[i] = 24;
-                        }
-                    } else if(pos[i] == 24) {
-                        if(prev_pos[i] == 20) {
-                            prev_pos[i] = 22;
-                            pos[i] = 24;
-                        } else {
-                            prev_pos[i] = 22;
-                            pos[i] = 24;
-                        }
-                    }
-                    prev_pos[i] = pos[i];
-                    pos[i] = board[pos[i]][1];
-                    System.out.print(pos[i] + " ");
-                    // 도착칸에 도착하면 멈춘다.
-                    if(pos[i] == 100) {
+                    next = board[next][1];
+//                    System.out.print(next + " ");
+                    if(next == 21) {
                         break;
                     }
-
                     move --;
                 }
-                System.out.println();
             }
+//            System.out.println();
 
             // 다음으로 갈 칸이 도착칸이 아닌데 누가 있으면 이거 선택 못한다.
-            if(next != 100 && isOccupied[next]) continue;
+            if(next != 21 && isOccupied[next]) continue;
 
             // 이동 후 다음 주사위
-            System.out.println(i + "말 " + next + "로 이동");
-            int before = pos[i];
-            int before_prev = prev_pos[i];
+//            if(i == 0 || i == 1) System.out.println(i + "말 " + next + "로 이동, " + board[next][2] + "점 추가");
             pos[i] = next;
-            prev_pos[i] = before;
             isOccupied[next] = true;
-            dfs(di + 1, sum + next);
-            pos[i] = before;
-            prev_pos[i] = before_prev;
+            isOccupied[curr_pos] = false;
+            dfs(di + 1, sum + board[next][2]);
+            pos[i] = curr_pos;
             isOccupied[next] = false;
+            isOccupied[curr_pos] = true;
             isSelected = true;
         }
 
