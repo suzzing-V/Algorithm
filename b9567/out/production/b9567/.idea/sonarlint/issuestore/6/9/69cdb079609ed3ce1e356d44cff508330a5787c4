@@ -1,0 +1,19 @@
+
+r
+java:S10661"/Merge this if statement with the enclosing one.(¡Ë¹¸8±ºäš3J$94144489-d24c-4f36-b194-479f3890c1f7
+š
+java:S1450	"RRemove the "acc" field and declare it as a local variable in the relevant methods.(û“Î‡ùÿÿÿÿ8çºäš3J$2b17aff0-36d0-4571-b26e-dc63462e4725
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8çºäš3J$a761e246-a0ef-413d-8da0-3fdabb838df7
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8çºäš3J$c61c8f33-f1a5-4986-adde-794313b09911
+š
+java:S1450"WRemove the "selected" field and declare it as a local variable in the relevant methods.(ğ·óÓ8çºäš3J$faddd83e-6243-4d4c-a1b0-532f693371d7
+˜
+java:S1450"PRemove the "t" field and declare it as a local variable in the relevant methods.(ç“ƒúÿÿÿÿ8çºäš3J$c5a75fc3-ea08-4dfc-bd2d-cc116402b3c0
+–
+java:S1602
+"SRemove useless curly braces around statement and then remove useless return keyword(Úì±8èºäš3J$fc670124-432b-4e2b-a4ec-90b9fda84718
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(œû¿Ø8éºäš3J$e90819b7-ec9c-4c1b-8a47-bffe825da7a4
+L	java:S106A"+Replace this use of System.out by a logger.(­ËÖşÿÿÿÿ8ãæš3
