@@ -1,0 +1,6 @@
+
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8ÂÇ¥˜š3J$e62e5539-0557-4c9f-bc21-b33ecfbe9d0e
+r	java:S106*"+Replace this use of System.out by a logger.(¦Äô€ÿÿÿÿÿ8ÍÇ¥˜š3J$6c342b5a-5a43-421b-abf4-885dcaae03f6
+”
+java:S3776-"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(Üù›38ÍÇ¥˜š3J$40ad4504-7440-4f39-af9a-899f8c97b613
