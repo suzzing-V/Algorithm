@@ -1,0 +1,19 @@
+
+œ	java:S135¢"YReduce the total number of break and continue statements in this loop to use at most one.(ÅæÊÛ8©¸­Ñš3J$c10d3b00-928e-4546-8a4f-2236a31f5be9
+™	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿÅŒÔüÿÿÿÿ8©¸­Ñš3J$16d93b11-7f0b-4553-b2c3-8658acb1c7ef
+
+java:S1450"URemove the "answer" field and declare it as a local variable in the relevant methods.(¤—š‚øÿÿÿÿ8æ¸­Ñš3J$d90ad77b-eea4-4583-8e88-45f4a573c5ef
+š
+java:S1450"RRemove the "dir" field and declare it as a local variable in the relevant methods.(Øÿªıÿÿÿÿ8æ¸­Ñš3J$007b0c03-c188-4209-b3ab-841fd09eb962
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8ç¸­Ñš3J$cacb4e47-2701-4614-a4f7-793084b139d4
+—
+java:S1450
+"TRemove the "poses" field and declare it as a local variable in the relevant methods.(¸‰–º8è¸­Ñš3J$d4226adc-9e5a-4fb5-a7cc-5d546cc7f9e6
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 99 to the 15 allowed.(œû¿Ø8é¸­Ñš3J$1d270b42-31b3-4e37-8f2e-beaa8bb6e3f3
+s	java:S106¹"+Replace this use of System.out by a logger.(Ë¨µÚúÿÿÿÿ8ì¸­Ñš3J$32428935-b48f-46cf-883e-c905ed3abb55
+M	java:S106¿"+Replace this use of System.out by a logger.(©Šùÿÿÿÿ8á…·Ñš3
+M	java:S106Á"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8á…·Ñš3
+Š
+java:S6541"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 141 to 64, Complexity from 34 to 14, Nesting Level from 6 to 2, Number of Variables from 33 to 6.(œû¿Ø8ì¸­Ñš3J$d711f915-f3d6-4302-b3e4-b6830a9e5608
