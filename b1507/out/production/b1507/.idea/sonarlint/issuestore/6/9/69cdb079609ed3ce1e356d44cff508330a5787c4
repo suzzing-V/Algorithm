@@ -1,0 +1,12 @@
+
+u
+java:S1450"SRemove the "memo" field and declare it as a local variable in the relevant methods.(§¦×İÿÿÿÿÿ8ËæÀš3
+o
+java:S1450"RRemove the "min" field and declare it as a local variable in the relevant methods.(üÂ§™8ËæÀš3
+r
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8ËæÀš3
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(œû¿Ø8ŸËæÀš3
+G	java:S1069"+Replace this use of System.out by a logger.(‚¨Ö§8£ËæÀš3
+v
+java:S1210H"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(½á±Ó8£ËæÀš3
