@@ -1,0 +1,8 @@
+
+˜
+java:S3008"URename this field "is_visited" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôò‘è8£˜žæš3J$401a8a20-0cb0-4ad6-a25d-a3b9e6f468ba
+•
+java:S3008	"SRename this field "is_light" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Åï\8£˜žæš3J$ddce1406-9824-4494-912a-dd1af1c0a646
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8¤˜žæš3J$8d0fc295-d9bb-405d-9b34-f0dcfd77a648
+m	java:S106,"+Replace this use of System.out by a logger.(®õã‚8§˜žæš3J$f9e6d7a9-d68e-449d-8670-fbcbfb5fe21b
