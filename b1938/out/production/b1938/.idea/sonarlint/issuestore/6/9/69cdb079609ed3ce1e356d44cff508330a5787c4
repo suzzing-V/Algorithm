@@ -1,0 +1,18 @@
+
+Q
+java:S1066B"/Merge this if statement with the enclosing one.(Ù’¸³ùÿÿÿÿ8°¦àîš3
+L
+java:S1066k"/Merge this if statement with the enclosing one.(¡Àúì8±¦àîš3
+l	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«ÄÓ8±¦àîš3
+s
+java:S3008	"QRename this field "init_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×‚­çøÿÿÿÿ8¨§àîš3
+s
+java:S3008
+"QRename this field "init_x" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üËÛ¨üÿÿÿÿ8¨§àîš3
+s
+java:S3008"QRename this field "init_y" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ÖÂûÿÿÿÿ8¨§àîš3
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(œû¿Ø8ª§àîš3
+G	java:S1061"+Replace this use of System.out by a logger.(î³ñŒ8­§àîš3
+o
+java:S37764"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(Á³“8®§àîš3
