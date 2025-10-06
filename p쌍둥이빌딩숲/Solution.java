@@ -17,8 +17,11 @@ class Solution {
     public int solution(int n, int count) {
         dp = new long[n + 1][n + 1];
         dp[1][1] = 1;
+
         for(int i = 2; i <= n; i++) {
-            for(int j = 1; j <= i; j++) {
+            int limit = Math.min(count, i);
+            // 어짜피 j - 1의 값을 구하므로, j + 1은 필요가 없다. 우리가 구하는 건 count인 경우이기 때문에 count까지만 구해도 된다.
+            for(int j = 1; j <= limit; j++) {
                 dp[i][j] = (dp[i - 1][j] * 2 * (i - 1)) % MOD + (dp[i - 1][j - 1]) % MOD;
                 dp[i][j] %= MOD;
             }
