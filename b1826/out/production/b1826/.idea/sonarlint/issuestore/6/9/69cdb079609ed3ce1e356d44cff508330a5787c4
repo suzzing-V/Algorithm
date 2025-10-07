@@ -1,0 +1,9 @@
+
+ 	java:S135"YReduce the total number of break and continue statements in this loop to use at most one.(οÿÿÿÿÿ8‚ψϊγ›3J$0fc936ff-18aa-496f-9540-d33b736cf238
+
+java:S1450"PRemove the "l" field and declare it as a local variable in the relevant methods.(µαψÿÿÿÿ8¨υργ›3J$0e821dff-d115-44a6-aef6-737da61c807c
+
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬δϋÿÿÿÿ8¨υργ›3J$4a8c7a50-24b5-43b5-8203-c014b11e19cd
+
+java:S1450	"PRemove the "p" field and declare it as a local variable in the relevant methods.(’κΥεϊÿÿÿÿ8¨υργ›3J$bb0d596e-c977-4763-b6d0-86f09d5af4ae
+m	java:S1064"+Replace this use of System.out by a logger.(®υγ‚8µψϊγ›3J$048b685d-d7df-44bd-a1be-862338a58b41
