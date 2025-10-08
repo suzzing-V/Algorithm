@@ -1,0 +1,13 @@
+
+?
+java:S2189(""Correct this loop's end condition.(ÍÑû8íÛ œ3
+n
+java:S1450"QRemove the "dp" field and declare it as a local variable in the relevant methods.(ÎÑ¹›8íÛ œ3
+r
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8íÛ œ3
+r
+java:S1450
+"PRemove the "q" field and declare it as a local variable in the relevant methods.(‹î¥Åùÿÿÿÿ8íÛ œ3
+X
+java:S2251(";"bit" is incremented and will never reach "stop condition".(ÍÑû8”íÛ œ3
+L	java:S1062"+Replace this use of System.out by a logger.(­ËÖşÿÿÿÿ8”íÛ œ3
