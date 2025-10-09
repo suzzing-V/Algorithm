@@ -1,0 +1,7 @@
+
+ 	java:S135["YReduce the total number of break and continue statements in this loop to use at most one.(ÈŸ¤²úÿÿÿÿ8îüí¸œ3J$8d5a01b9-f44e-4ee7-8449-6b2b262e399b
+œ
+java:S3012"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(‹”­õ8àşí¸œ3J$60b52ea9-868d-4d6a-a3bf-070b05ae738d
+m	java:S106/"+Replace this use of System.out by a logger.(Å¶áç8âşí¸œ3J$4de92999-f04f-404e-8262-a77dac5665a0
+	java:S1002"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â¯Ú8âşí¸œ3J$c776fb51-ecde-4f11-8dd6-14ac8e391426
+‘	java:S100Š"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šÛä8íşí¸œ3J$f9298445-7f4d-49de-954c-68b846736551
