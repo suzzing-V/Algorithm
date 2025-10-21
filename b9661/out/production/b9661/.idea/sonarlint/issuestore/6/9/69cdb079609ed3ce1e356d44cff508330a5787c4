@@ -1,0 +1,9 @@
+
+“
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(í¼ §8¯¥Ù° 3J$385b8703-f3bc-4227-b5c0-84ef893c1a9b
+ƒ	java:S125"<This block of commented-out lines of code should be removed.(ªæÝùÿÿÿÿ8®œÚ° 3J$1f9a82f4-01bb-4eea-8bc7-8aae0d83fa32
+~	java:S125"<This block of commented-out lines of code should be removed.(®ïÈ…8¯œÚ° 3J$18630887-6934-40d3-810c-6869e0e58b70
+~	java:S125"<This block of commented-out lines of code should be removed.(Øîò›8¯œÚ° 3J$66fbf80b-1332-4538-8f38-03efd0d18601
+r	java:S106!"+Replace this use of System.out by a logger.(àª¯úýÿÿÿÿ8³¥Ù° 3J$a7806247-bf55-4ba8-9b82-453c41f2e98b
+m	java:S106""+Replace this use of System.out by a logger.(ÄÑ“Û8³¥Ù° 3J$8010f4a2-a173-4d94-9690-5265ba7421c8
+r	java:S106$"+Replace this use of System.out by a logger.(‰­›”øÿÿÿÿ8³¥Ù° 3J$7dce2223-4ede-4405-9fb8-74749b68911c
