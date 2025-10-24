@@ -1,0 +1,12 @@
+
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8êïù©¡3J$0f4d22ce-a775-49bc-a0fb-deb2a4c260af
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8êïù©¡3J$3a56e40b-3ff7-45a8-b28a-1adb5a863a8a
+w
+java:S2864)"4Iterate over the "entrySet" instead of the "keySet".(¥ËÒØ8íïù©¡3J$1bfeafe8-e530-4a1a-a0a4-2e41df19aac1
+w
+java:S28649"4Iterate over the "entrySet" instead of the "keySet".(ËÈĞ8îïù©¡3J$74e83c85-b1fc-4a3e-95fe-46ed0267d6ec
+r	java:S106O"+Replace this use of System.out by a logger.(­ËÖşÿÿÿÿ8ïïù©¡3J$5d9f33b8-b62b-49d8-8738-a5858058fc95
+¡
+java:S1210s"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(‚ˆêüûÿÿÿÿ8ğïù©¡3J$d459e366-31af-4462-b737-f00cc619b3c6
