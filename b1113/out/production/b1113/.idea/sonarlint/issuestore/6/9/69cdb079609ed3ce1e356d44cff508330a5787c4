@@ -1,0 +1,7 @@
+
+ 	java:S1358"YReduce the total number of break and continue statements in this loop to use at most one.(ı­Ïüÿÿÿÿ8„º½Ô¡3J$8ec6459e-2d73-4ac0-8397-82a0f3259868
+r	java:S106)"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿ8¶º½Ô¡3J$10cfe8f6-ead1-436f-8966-159f1d88a1ca
+š
+java:S3776,"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(«ş¯¡ıÿÿÿÿ8·º½Ô¡3J$a39d1be0-079c-47df-9956-7ef3fa7c8a50
+œ
+java:S1210j"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(Â¥†Æ8¸º½Ô¡3J$724930a3-7bf7-4e9e-bf2e-9b75ef283881
