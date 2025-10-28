@@ -1,0 +1,13 @@
+
+ 	java:S135,"YReduce the total number of break and continue statements in this loop to use at most one.(ÙÁõÚøÿÿÿÿ8ğİš§¢3J$1258e5c7-e4ea-4ec3-8182-b016e038307c
+j
+java:S2189,""Correct this loop's end condition.(ÙÁõÚøÿÿÿÿ8şİš§¢3J$dca2cb56-6ff2-4e9e-a161-ba3621e33c9d
+’
+java:S1450"PRemove the "h" field and declare it as a local variable in the relevant methods.(±ı™'8ÿİš§¢3J$3a08ee12-fea1-4e5d-b6c0-08a2a6d8d245
+˜
+java:S1450"PRemove the "l" field and declare it as a local variable in the relevant methods.(µáøÿÿÿÿ8ÿİš§¢3J$cc8b2493-6dbe-4dbd-a3df-bcfc249a47ed
+˜
+java:S1450"PRemove the "w" field and declare it as a local variable in the relevant methods.(­™÷ºúÿÿÿÿ8ÿİš§¢3J$37e9bd38-d0c9-42ef-bcae-4d766ee34651
+m	java:S106"+Replace this use of System.out by a logger.(®õã‚8‚Şš§¢3J$2391fae2-e365-440a-85f2-a9bc2c4b75a1
+
+java:S2251,"9"i" is incremented and will never reach "stop condition".(ÙÁõÚøÿÿÿÿ8ƒŞš§¢3J$511ac930-00ef-47a7-ad69-066d6a875ddf
