@@ -1,0 +1,17 @@
+
+›	java:S1357"YReduce the total number of break and continue statements in this loop to use at most one.(ãéº¦8À‘ŒĞ¢3J$51006a2d-ce42-469e-87fc-3808f8e6b155
+ƒ
+java:S2184I"@Cast one of the operands of this addition operation to a "long".(ôİÕò8Á‘ŒĞ¢3J$829d6a69-1e4a-4f7c-8c39-8da53328f0cf
+ˆ
+java:S2184L"@Cast one of the operands of this addition operation to a "long".(ıÕØ±úÿÿÿÿ8Á‘ŒĞ¢3J$13a7b45a-81ab-4b24-a7fa-291fb4c49c07
+ƒ
+java:S2184Q"@Cast one of the operands of this addition operation to a "long".(ôİÕò8È¾Ğ¢3J$f515e125-522a-4eb8-a829-fb8fe8e4cfd6
+˜
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8÷‘ŒĞ¢3J$348fabf9-0e83-465d-9421-4f3c22ac5cf3
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8÷‘ŒĞ¢3J$fd4a5d62-6ec1-494a-9be6-9e6de890c2d0
+m	java:S1060"+Replace this use of System.out by a logger.(®õã‚8ú‘ŒĞ¢3J$fe778369-74c7-4831-9d93-f396a05c8c27
+š
+java:S37763"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(æÏĞÒÿÿÿÿÿ8ú‘ŒĞ¢3J$8360d586-48b6-47b3-8be5-3a96d55b62a8
+œ
+java:S1210d"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(½á±Ó8û‘ŒĞ¢3J$1668daf2-1fcf-4517-9f20-2540c6cb469e
