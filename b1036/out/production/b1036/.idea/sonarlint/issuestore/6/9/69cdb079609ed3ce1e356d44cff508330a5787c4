@@ -1,0 +1,14 @@
+
+—
+java:S1450	"TRemove the "infos" field and declare it as a local variable in the relevant methods.(šµÖ©8íÚ±ò¢3J$5eeb3f23-c4cd-433c-b327-892572ca1748
+˜
+java:S1450"PRemove the "k" field and declare it as a local variable in the relevant methods.(—Ò°ûÿÿÿÿ8íÚ±ò¢3J$d1df5b6b-b145-4fed-972f-8a229b75d785
+˜
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8äÃ²ò¢3J$2fbd31ba-9b14-4c1a-aa80-1d30d300270c
+–
+java:S1450"SRemove the "nums" field and declare it as a local variable in the relevant methods.(Åô¯Ô8íÚ±ò¢3J$b48e9e5a-8dad-4447-aaf0-6f9fe05f50ee
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(œû¿Ø8îÚ±ò¢3J$bc227895-7655-460d-985e-7acdbc0acff9
+n
+java:S2201="+The return value of "replace" must be used.(åºĞà8ğÚ±ò¢3J$f8422ca2-699e-42df-a261-606d4493a53a
+r	java:S106N"+Replace this use of System.out by a logger.(åö¡½úÿÿÿÿ8ğÚ±ò¢3J$31a31a4b-2ffa-4892-893a-d5321f5f8ed4
