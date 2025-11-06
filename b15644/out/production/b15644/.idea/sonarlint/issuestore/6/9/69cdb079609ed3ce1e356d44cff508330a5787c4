@@ -1,0 +1,16 @@
+
+ 	java:S135M"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8£İÕï¤3J$b0b93e73-947a-49a5-8efb-ba65f7437b27
+ 	java:S135]"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8£İÕï¤3J$b1ce8863-e068-41cc-b8f2-14e81139e7d3
+x
+java:S1066"/Merge this if statement with the enclosing one.(ğŞËùÿÿÿÿ8£İÕï¤3J$b86ede77-2f85-45f0-b259-2f35b109c0a1
+Ê
+java:S2681:"†This line will not be executed conditionally; only the first line of this 4-line block will be. The rest will execute unconditionally.(·´Ì‡8¤İÕï¤3J$9afe4944-a858-4a40-b43d-ecfb22c1b731
+r
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(ìµ›±ûÿÿÿÿ8›ÂŞï¤3
+r
+java:S1450"PRemove the "n" field and declare it as a local variable in the relevant methods.(¬äœûÿÿÿÿ8›ÂŞï¤3
+m	java:S106)"+Replace this use of System.out by a logger.(Ë…»ç8òÙÎï¤3J$5c1b01d5-aed8-4f37-ac34-414b926987b2
+m	java:S106+"+Replace this use of System.out by a logger.(Å¶áç8òÙÎï¤3J$df2a4db4-4442-4142-836e-c1116509a82e
+r	java:S106,"+Replace this use of System.out by a logger.(ÍÕ§§ùÿÿÿÿ8òÙÎï¤3J$0ddf2b95-fc6d-47a8-948f-90d9c91f0e9a
+„
+java:S1126E"AReplace this if-then-else statement by a single return statement.(Æ¢Øù8ØİÕï¤3J$ea4fe542-04d6-4223-af22-54f35f0b89e2
