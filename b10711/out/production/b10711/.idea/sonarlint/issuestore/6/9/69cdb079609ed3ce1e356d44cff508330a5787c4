@@ -1,0 +1,9 @@
+
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 40 to the 15 allowed.(œû¿Ø8˜ÃÁ¥3J$866b4c17-70db-4c9c-bc39-98e5d59438c8
+|
+java:S2864+"4Iterate over the "entrySet" instead of the "keySet".(ùîú ùÿÿÿÿ8šÃÁ¥3J$8f745818-c92b-4246-8ed1-e44cc5d5055f
+†
+java:S1155C">Use isEmpty() to check whether the collection is empty or not.(ß²†Öûÿÿÿÿ8›ÃÁ¥3J$306601b5-d1c5-4bd6-85b2-ad0328db65d4
+k	java:S108J")Either remove or fill this block of code.(ÀŞù8›ÃÁ¥3J$95000902-a281-49f8-86d1-43c4ee6b81b2
+r	java:S106P"+Replace this use of System.out by a logger.( ÅÃÍúÿÿÿÿ8›ÃÁ¥3J$2fa32e30-540d-467c-aead-b2097ff0643d
