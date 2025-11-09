@@ -1,0 +1,8 @@
+
+
+java:S1450"PRemove the "m" field and declare it as a local variable in the relevant methods.(μµ›±ϋÿÿÿÿ8¤’Θ½¦3J$0a0968c8-cd57-4433-a8b5-d6838b81963d
+€
+java:S1854!"8Remove this useless assignment to local variable "time".(¬ΔÒύÿÿÿÿ8§’Θ½¦3J$4789b82e-bda7-4190-89f1-c96ba48fb071
+r	java:S106("+Replace this use of System.out by a logger.(Ύωτωÿÿÿÿ8­’Θ½¦3J$a68af10d-2c7c-42e8-bfb5-06832ccd079a
+
+java:S1210P"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(½α±Σ8°’Θ½¦3J$2096729d-923b-4dc8-822d-e70728a0e561
