@@ -1,0 +1,5 @@
+
+m	java:S1065"+Replace this use of System.out by a logger.(Å¶áç8°´Áã§3J$f78ffbae-8c88-427a-89ca-2095d594237b
+†
+java:S1155G">Use isEmpty() to check whether the collection is empty or not.(ìÚ½µýÿÿÿÿ8±´Áã§3J$5fb65617-a5e8-4388-a41b-2c7acad3c81c
+ƒ	java:S125^"<This block of commented-out lines of code should be removed.(ô÷¦îùÿÿÿÿ8³´Áã§3J$92855f02-7637-4035-ae81-caa3c22611f0
